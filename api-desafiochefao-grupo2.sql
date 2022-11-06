@@ -25,7 +25,7 @@ CREATE TABLE IF NOT EXISTS `api-desafiochefao-grupo2`.`users` (
   `password` VARCHAR(20) NOT NULL,
   `age` INT NULL,
   `experience` INT NULL,
-  `userMusicType` INT NULL,
+  `musicTypeId` INT NULL,
   `levelId` INT NULL,
   PRIMARY KEY (`userId`),
   UNIQUE INDEX `userId_UNIQUE` (`userId` ASC) VISIBLE,
@@ -97,13 +97,10 @@ ENGINE = InnoDB;
 -- Table `api-desafiochefao-grupo2`.`profiles`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `api-desafiochefao-grupo2`.`profiles` (
-  `profileId` INT NOT NULL,
   `userId` INT NOT NULL,
   `musicTypeId` INT NOT NULL,
-  PRIMARY KEY (`profileId`),
   INDEX `fk_users_has_genres_genres1_idx` (`musicTypeId` ASC) VISIBLE,
   INDEX `fk_users_has_genres_users1_idx` (`userId` ASC) VISIBLE,
-  UNIQUE INDEX `profileId_UNIQUE` (`profileId` ASC) VISIBLE,
   UNIQUE INDEX `musicTypeId_UNIQUE` (`musicTypeId` ASC) VISIBLE,
   UNIQUE INDEX `userId_UNIQUE` (`userId` ASC) VISIBLE,
   CONSTRAINT `fk_users_has_genres_users1`

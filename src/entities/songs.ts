@@ -22,9 +22,9 @@ export class Songs {
 
     @ManyToOne(() => Genres, genres => genres.songId)
     @JoinColumn({ name: 'musicTypeId' })
-    musicTypeId: genres[];
+    musicTypeId: Genres[];
 
     @ManyToOne(() => Levels, levels => levels.songId)
-    @JoinColumn({ name: 'musicTypeId' })
-    levelId: levels[];
+    @JoinColumn({ name: 'levelId' })
+    levelId: Levels[];
 }

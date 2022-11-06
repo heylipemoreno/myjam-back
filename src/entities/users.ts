@@ -1,11 +1,14 @@
 import { Levels } from "./levels";
+import { Genres } from "./genres";
 
 import {
     Column,
     Entity,
     PrimaryGeneratedColumn,
     ManyToOne,
-    JoinColumn
+    JoinColumn,
+    ManyToMany,
+    JoinTable
 } from "typeorm";
 
 @Entity('users')
@@ -31,8 +34,22 @@ export class Users {
     @Column({ nullable: true })
     experience: number;
 
-    @Column({ nullable: true })
-    userMusicType: number;
+    @ManyToMany(() => Genres, genres => genres.userId)
+    @JoinTable({
+        name: 'profiles',
+        
+        joinColumn: {
+            name: 'userId',
+            referencedColumnName: 'userId'
+            
+        },
+
+        inverseJoinColumn: {
+            name: 'musicTypeId',
+            referencedColumnName: 'musicTypeId'
+        }
+    })
+    musicTypeId: Genres[];
 
     @ManyToOne(() => Levels, levels => levels.userId)
     @JoinColumn({ name: 'levelId' })

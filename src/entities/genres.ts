@@ -1,25 +1,42 @@
 import { Songs } from "./songs";
+import { Users } from "./users";
 
 import {
     PrimaryGeneratedColumn,
-    Column,
     Entity,
-    ManyToOne,
-    JoinColumn
+    JoinColumn,
+    OneToMany,
+    ManyToMany,
+    JoinTable,
+    Column
 } from "typeorm";
 
-@Entity('levels')
-export class Levels {
+@Entity('genres')
+export class Genres {
     @PrimaryGeneratedColumn()
-    songId: number;
+    musicTypeId: number;
 
     @Column({ unique: true })
-    videoLink: string;
+    userMusicType: string;
 
-    @Column({ unique: true })
-    songContentLink: string;
+    @ManyToMany(() => Users, users => users.musicTypeId)
+    @JoinTable({
+        name: 'profiles',
+        
+        joinColumn: {
+            name: 'musicTypeId',
+            referencedColumnName: 'musicTypeId'
+            
+        },
 
-    @ManyToOne(() => Genres, genres => genres.songId)
-    @JoinColumn({ name: 'musicTypeId' })
-    musicTypeId: genres[];
+        inverseJoinColumn: {
+            name: 'userId',
+            referencedColumnName: 'userId'
+        }
+    })
+    userId: Users[];
+    
+    @OneToMany(() => Songs, songs => songs.musicTypeId)
+    @JoinColumn({ name: 'songId' })
+    songId: Songs[];
 }

@@ -1,4 +1,5 @@
 import { Users } from "./users";
+import { Songs } from "./songs";
 
 import {
     PrimaryColumn,
@@ -19,4 +20,8 @@ export class Levels {
     @OneToMany(() => Users, users => users.levelId)
     @JoinColumn({ name: 'userId' })
     userId: Users[];
+
+    @OneToMany(() => Songs, songs => songs.levelId)
+    @JoinColumn({ name: 'songId' })
+    songId: Songs[];
 }
