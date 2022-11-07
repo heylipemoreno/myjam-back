@@ -14,19 +14,18 @@ import {
 @Entity('genres')
 export class Genres {
     @PrimaryGeneratedColumn()
-    musicTypeId: number;
+    genreId: number;
 
-    @Column({ unique: true })
-    userMusicType: string;
+    @Column()
+    name: string;
 
-    @ManyToMany(() => Users, users => users.musicTypeId)
+    @ManyToMany(() => Users, users => users.genres)
     @JoinTable({
-        name: 'profiles',
+        name: 'users_genres',
         
         joinColumn: {
-            name: 'musicTypeId',
-            referencedColumnName: 'musicTypeId'
-            
+            name: 'genreId',
+            referencedColumnName: 'genreId'
         },
 
         inverseJoinColumn: {
@@ -34,9 +33,9 @@ export class Genres {
             referencedColumnName: 'userId'
         }
     })
-    userId: Users[];
+    users: Users[];
     
-    @OneToMany(() => Songs, songs => songs.musicTypeId)
+    @OneToMany(() => Songs, songs => songs.genreId)
     @JoinColumn({ name: 'songId' })
     songId: Songs[];
 }

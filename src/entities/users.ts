@@ -34,22 +34,21 @@ export class Users {
     @Column({ nullable: true })
     experience: number;
 
-    @ManyToMany(() => Genres, genres => genres.userId)
+    @ManyToMany(() => Genres, genres => genres.users)
     @JoinTable({
-        name: 'profiles',
+        name: 'users_genres',
         
         joinColumn: {
             name: 'userId',
             referencedColumnName: 'userId'
-            
         },
 
         inverseJoinColumn: {
-            name: 'musicTypeId',
-            referencedColumnName: 'musicTypeId'
+            name: 'genreId',
+            referencedColumnName: 'genreId'
         }
     })
-    musicTypeId: Genres[];
+    genres: Genres[];
 
     @ManyToOne(() => Levels, levels => levels.userId)
     @JoinColumn({ name: 'levelId' })
