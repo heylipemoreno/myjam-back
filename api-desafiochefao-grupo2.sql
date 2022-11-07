@@ -29,6 +29,7 @@ CREATE TABLE IF NOT EXISTS `api-desafiochefao-grupo2`.`users` (
   `levelId` INT NULL,
   PRIMARY KEY (`userId`),
   UNIQUE INDEX `userId_UNIQUE` (`userId` ASC) VISIBLE,
+  UNIQUE INDEX `nickname_UNIQUE` (`nickname` ASC) VISIBLE,
   UNIQUE INDEX `email_UNIQUE` (`email` ASC) VISIBLE)
 ENGINE = InnoDB;
 
@@ -39,15 +40,10 @@ ENGINE = InnoDB;
 CREATE TABLE IF NOT EXISTS `api-desafiochefao-grupo2`.`levels` (
   `levelId` INT NOT NULL,
   `totalPoints` INT NOT NULL,
-  `userId` INT NOT NULL,
+  `levelPoints` INT NOT NULL,
   PRIMARY KEY (`levelId`),
-  INDEX `fk_level_users1_idx` (`userId` ASC) VISIBLE,
-  UNIQUE INDEX `userId_UNIQUE` (`userId` ASC) VISIBLE,
-  CONSTRAINT `fk_level_users1`
-    FOREIGN KEY (`userId`)
-    REFERENCES `api-desafiochefao-grupo2`.`users` (`userId`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+  UNIQUE INDEX `levelId_UNIQUE` (`levelId` ASC) VISIBLE,
+  UNIQUE INDEX `levelPoints_UNIQUE` (`levelPoints` ASC) VISIBLE)
 ENGINE = InnoDB;
 
 

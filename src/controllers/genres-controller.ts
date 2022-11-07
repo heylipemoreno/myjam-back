@@ -3,14 +3,14 @@ import { genresRepository } from "../repositories/genres-repository";
 
 export class GenresController {
     async create(req: Request, res: Response) {
-        const { userMusicType } = req.body
+        const { name } = req.body
 
-        if (!userMusicType) {
+        if (!name) {
             return res.status(400).json({ mensage: 'É preciso informar o nome do gênero musical.' })
         }
 
         try {
-            const newGenre = genresRepository.create({ userMusicType })
+            const newGenre = genresRepository.create({ name })
 
             await genresRepository.save(newGenre)
 

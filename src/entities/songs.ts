@@ -21,8 +21,8 @@ export class Songs {
     songContentLink: string;
 
     @ManyToOne(() => Genres, genres => genres.songId)
-    @JoinColumn({ name: 'musicTypeId' })
-    musicTypeId: Genres[];
+    @JoinColumn({ name: 'genreId' })
+    genreId: Genres[];
 
     @ManyToOne(() => Levels, levels => levels.songId)
     @JoinColumn({ name: 'levelId' })

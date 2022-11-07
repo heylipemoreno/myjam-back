@@ -11,8 +11,11 @@ import {
 
 @Entity('levels')
 export class Levels {
-    @PrimaryColumn()
+    @PrimaryColumn({ unique: true })
     levelId: number;
+
+    @Column({ unique: true })
+    levelPoints: number;
 
     @Column()
     totalPoints: number;
