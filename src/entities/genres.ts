@@ -1,41 +1,36 @@
-import { Songs } from "./songs";
-import { Users } from "./users";
-
 import {
-    PrimaryGeneratedColumn,
-    Entity,
-    JoinColumn,
-    OneToMany,
-    ManyToMany,
-    JoinTable,
-    Column
+  Column,
+  Entity,
+  JoinTable,
+  ManyToMany,
+  PrimaryGeneratedColumn,
 } from "typeorm";
+import { Songs } from "./Songs";
+import { Users } from "./Users";
 
-@Entity('genres')
+@Entity("genres", { schema: "api-desafiochefao-grupo2" })
 export class Genres {
-    @PrimaryGeneratedColumn()
-    genreId: number;
+  @PrimaryGeneratedColumn({ type: "int", name: "genreId" })
+  genreId: number;
 
-    @Column()
-    name: string;
+  @Column("varchar", { name: "genreName", length: 45 })
+  genreName: string;
 
-    @ManyToMany(() => Users, users => users.genres)
-    @JoinTable({
-        name: 'users_genres',
-        
-        joinColumn: {
-            name: 'genreId',
-            referencedColumnName: 'genreId'
-        },
+  @ManyToMany(() => Songs, (songs) => songs.genres)
+  @JoinTable({
+    name: "genres_songs",
+    joinColumns: [{ name: "genreId", referencedColumnName: "genreId" }],
+    inverseJoinColumns: [{ name: "songId", referencedColumnName: "songId" }],
+    schema: "api-desafiochefao-grupo2",
+  })
+  songs: Songs[];
 
-        inverseJoinColumn: {
-            name: 'userId',
-            referencedColumnName: 'userId'
-        }
-    })
-    users: Users[];
-    
-    @OneToMany(() => Songs, songs => songs.genreId)
-    @JoinColumn({ name: 'songId' })
-    songId: Songs[];
+  @ManyToMany(() => Users, (users) => users.genres)
+  @JoinTable({
+    name: "users_genres",
+    joinColumns: [{ name: "genreId", referencedColumnName: "genreId" }],
+    inverseJoinColumns: [{ name: "userId", referencedColumnName: "userId" }],
+    schema: "api-desafiochefao-grupo2",
+  })
+  users: Users[];
 }
