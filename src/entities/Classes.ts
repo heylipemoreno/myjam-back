@@ -1,43 +1,34 @@
 import {
-    Column,
-    Entity,
-    Index,
-    JoinColumn,
-    ManyToMany,
-    OneToMany,
-    OneToOne,
-    PrimaryGeneratedColumn,
-  } from "typeorm";
-  import { Chords } from "./Chords";
-  import { Songs } from "./Songs";
-  import { Lessons } from "./Lessons";
-  
-  @Index("fk_classes_songs1_idx", ["classId", "songId"], {})
-  @Entity("classes", { schema: "api-desafiochefao-grupo2" })
-  export class Classes {
-    @PrimaryGeneratedColumn({ type: "int", name: "classId" })
-    classId: number;
-  
-    @Column("int", { primary: true, name: "songId" })
-    songId: number;
-  
-    @Column("varchar", { name: "classVideoLink", nullable: true, length: 255 })
-    classVideoLink: string | null;
-  
-    @ManyToMany(() => Chords, (chords) => chords.classes)
-    chords: Chords[];
-  
-    @OneToOne(() => Songs, (songs) => songs.classes, {
-      onDelete: "NO ACTION",
-      onUpdate: "NO ACTION",
-    })
-    @JoinColumn([
-      { name: "songId", referencedColumnName: "songId" },
-      { name: "classId", referencedColumnName: "classId" },
-    ])
-    songs: Songs;
-  
-    @OneToMany(() => Lessons, (lessons) => lessons.classes)
-    lessons: Lessons[];
-  }
-  
+  Column,
+  Entity,
+  ManyToMany,
+  OneToMany,
+  PrimaryGeneratedColumn,
+} from "typeorm";
+import { Chords } from "./Chords";
+import { Lessons } from "./Lessons";
+import { Songs } from "./Songs";
+
+@Entity("classes", { schema: "api-desafiochefao-grupo2" })
+export class Classes {
+  @PrimaryGeneratedColumn({ type: "int", name: "id" })
+  id: number;
+
+  @Column("varchar", { name: "classVideoLink", nullable: true, length: 255 })
+  classVideoLink: string | null;
+
+  @Column("datetime", { name: "createdAt" })
+  createdAt: Date;
+
+  @Column("datetime", { name: "updatedAt", nullable: true })
+  updatedAt: Date | null;
+
+  @ManyToMany(() => Chords, (chords) => chords.classes)
+  chords: Chords[];
+
+  @OneToMany(() => Lessons, (lessons) => lessons.classes)
+  lessons: Lessons[];
+
+  @OneToMany(() => Songs, (songs) => songs.classes)
+  songs: Songs[];
+}

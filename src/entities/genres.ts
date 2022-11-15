@@ -10,17 +10,23 @@ import { Users } from "./Users";
 
 @Entity("genres", { schema: "api-desafiochefao-grupo2" })
 export class Genres {
-  @PrimaryGeneratedColumn({ type: "int", name: "genreId" })
-  genreId: number;
+  @PrimaryGeneratedColumn({ type: "int", name: "id" })
+  id: number;
 
   @Column("varchar", { name: "genreName", length: 45 })
   genreName: string;
 
+  @Column("datetime", { name: "createdAt" })
+  createdAt: Date;
+
+  @Column("datetime", { name: "updatedAt", nullable: true })
+  updatedAt: Date | null;
+
   @ManyToMany(() => Songs, (songs) => songs.genres)
   @JoinTable({
     name: "genres_songs",
-    joinColumns: [{ name: "genreId", referencedColumnName: "genreId" }],
-    inverseJoinColumns: [{ name: "songId", referencedColumnName: "songId" }],
+    joinColumns: [{ name: "genres_id", referencedColumnName: "id" }],
+    inverseJoinColumns: [{ name: "songs_id", referencedColumnName: "id" }],
     schema: "api-desafiochefao-grupo2",
   })
   songs: Songs[];
@@ -28,8 +34,8 @@ export class Genres {
   @ManyToMany(() => Users, (users) => users.genres)
   @JoinTable({
     name: "users_genres",
-    joinColumns: [{ name: "genreId", referencedColumnName: "genreId" }],
-    inverseJoinColumns: [{ name: "userId", referencedColumnName: "userId" }],
+    joinColumns: [{ name: "genres_id", referencedColumnName: "id" }],
+    inverseJoinColumns: [{ name: "users_id", referencedColumnName: "id" }],
     schema: "api-desafiochefao-grupo2",
   })
   users: Users[];
