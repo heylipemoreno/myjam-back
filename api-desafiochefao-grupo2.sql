@@ -7,10 +7,6 @@ SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,N
 -- -----------------------------------------------------
 -- Schema api-desafiochefao-grupo2
 -- -----------------------------------------------------
-
--- -----------------------------------------------------
--- Schema api-desafiochefao-grupo2
--- -----------------------------------------------------
 CREATE SCHEMA IF NOT EXISTS `api-desafiochefao-grupo2` DEFAULT CHARACTER SET utf8 ;
 USE `api-desafiochefao-grupo2` ;
 

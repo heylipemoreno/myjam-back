@@ -1,5 +1,5 @@
 import { Levels } from "./levels";
-import { Genres } from "./genres";
+import { Genres } from "./Genres";
 
 import {
     Column,
