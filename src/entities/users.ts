@@ -1,56 +1,56 @@
-import { Levels } from "./levels";
-import { Genres } from "./Genres";
-
 import {
     Column,
     Entity,
-    PrimaryGeneratedColumn,
-    ManyToOne,
-    JoinColumn,
+    Index,
     ManyToMany,
-    JoinTable
-} from "typeorm";
-
-@Entity('users')
-export class Users {
-    @PrimaryGeneratedColumn()
+    OneToMany,
+    PrimaryGeneratedColumn,
+  } from "typeorm";
+  import { Lessons } from "./Lessons";
+  import { UsersChords } from "./UsersChords";
+  import { Genres } from "./Genres";
+  import { UsersSongs } from "./UsersSongs";
+  
+  @Index("email_UNIQUE", ["email"], { unique: true })
+  @Entity("users", { schema: "api-desafiochefao-grupo2" })
+  export class Users {
+    @PrimaryGeneratedColumn({ type: "int", name: "userId" })
     userId: number;
-
-    @Column()
+  
+    @Column("varchar", { name: "name", length: 70 })
     name: string;
-
-    @Column({ unique: true })
+  
+    @Column("varchar", { name: "nickname", length: 20 })
     nickname: string;
-
-    @Column({ unique: true })
+  
+    @Column("varchar", { name: "email", unique: true, length: 70 })
     email: string;
-
-    @Column()  
+  
+    @Column("varchar", { name: "password", length: 20 })
     password: string;
-
-    @Column({ nullable: true })
-    age: number;
-
-    @Column({ nullable: true })
-    experience: number;
-
-    @ManyToMany(() => Genres, genres => genres.users)
-    @JoinTable({
-        name: 'users_genres',
-        
-        joinColumn: {
-            name: 'userId',
-            referencedColumnName: 'userId'
-        },
-
-        inverseJoinColumn: {
-            name: 'genreId',
-            referencedColumnName: 'genreId'
-        }
-    })
+  
+    @Column("int", { name: "age", nullable: true })
+    age: number | null;
+  
+    @Column("int", { name: "totalPoints" })
+    totalPoints: number;
+  
+    @Column("int", { name: "qntSongs", nullable: true })
+    qntSongs: number | null;
+  
+    @Column("int", { name: "qtnChords", nullable: true })
+    qtnChords: number | null;
+  
+    @OneToMany(() => Lessons, (lessons) => lessons.user)
+    lessons: Lessons[];
+  
+    @OneToMany(() => UsersChords, (usersChords) => usersChords.user)
+    usersChords: UsersChords[];
+  
+    @ManyToMany(() => Genres, (genres) => genres.users)
     genres: Genres[];
-
-    @ManyToOne(() => Levels, levels => levels.userId)
-    @JoinColumn({ name: 'levelId' })
-    levelId: Levels[];
-}
+  
+    @OneToMany(() => UsersSongs, (usersSongs) => usersSongs.user)
+    usersSongs: UsersSongs[];
+  }
+  
