@@ -41,10 +41,10 @@ export class Users {
   @Column("int", { name: "totalPoints", default: () => 0 })
   totalPoints: number;
 
-  @Column("int", { name: "qtdSongs", nullable: true })
+  @Column("int", { name: "qtdSongs", default: () => 0 })
   qtdSongs: number | null;
 
-  @Column("int", { name: "qtdChords", nullable: true })
+  @Column("int", { name: "qtdChords", default: () => 0 })
   qtdChords: number | null;
 
   @OneToMany(() => Lessons, (lessons) => lessons.users)
