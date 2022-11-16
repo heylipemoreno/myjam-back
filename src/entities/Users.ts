@@ -38,7 +38,7 @@ export class Users {
   @Column("datetime", { name: "udpatedAt", nullable: true })
   udpatedAt: Date | null;
 
-  @Column("int", { name: "totalPoints" })
+  @Column("int", { name: "totalPoints", default: () => 0 })
   totalPoints: number;
 
   @Column("int", { name: "qtdSongs", nullable: true })
