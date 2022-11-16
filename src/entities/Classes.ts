@@ -17,9 +17,8 @@ export class Classes {
   @Column("varchar", { name: "classVideoLink", nullable: true, length: 255 })
   classVideoLink: string | null;
 
-  @Column("datetime", { name: "createdAt" })
+  @Column("datetime", { name: "createdAt", default: () => 'NOW()' })
   createdAt: Date;
-  default: "now()";
 
   @Column("datetime", { name: "updatedAt", nullable: true })
   updatedAt: Date | null;

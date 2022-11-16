@@ -16,9 +16,8 @@ export class Genres {
   @Column("varchar", { name: "genreName", length: 45 })
   genreName: string;
 
-  @Column("datetime", { name: "createdAt" })
+  @Column("datetime", { name: "createdAt", default: () => 'NOW()' })
   createdAt: Date;
-  default: "now()";
 
   @Column("datetime", { name: "updatedAt", nullable: true })
   updatedAt: Date | null;

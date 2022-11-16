@@ -9,9 +9,8 @@ export class Questions {
   @Column("varchar", { name: "questionContent", nullable: true, length: 255 })
   questionContent: string | null;
 
-  @Column("datetime", { name: "createdAt" })
+  @Column("datetime", { name: "createdAt", default: () => 'NOW()' })
   createdAt: Date;
-  default: "now()";
 
   @Column("datetime", { name: "updatedAt", nullable: true })
   updatedAt: Date | null;
