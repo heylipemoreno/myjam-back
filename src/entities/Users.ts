@@ -34,6 +34,7 @@ export class Users {
 
   @Column("datetime", { name: "createdAt" })
   createdAt: Date;
+  default: "now()";
 
   @Column("datetime", { name: "udpatedAt", nullable: true })
   udpatedAt: Date | null;

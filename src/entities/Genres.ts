@@ -18,6 +18,7 @@ export class Genres {
 
   @Column("datetime", { name: "createdAt" })
   createdAt: Date;
+  default: "now()";
 
   @Column("datetime", { name: "updatedAt", nullable: true })
   updatedAt: Date | null;

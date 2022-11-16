@@ -19,6 +19,7 @@ export class Lessons {
 
   @Column("datetime", { name: "completedAt", nullable: true })
   completedAt: Date | null;
+  default: "now()";
 
   @Column("int", { name: "points" })
   points: number;
