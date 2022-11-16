@@ -17,7 +17,7 @@ export class UsersController {
 			return res.status(201).json(newUser)
 		} catch (error) {
 			console.log(error)
-			return res.status(500).json({ message: 'Algo deu errado.' })
+			return res.status(500).json({ message: 'Os campos userName, nickname, email e password são obrigatórios.' })
 		}
 	}
 
