@@ -4,6 +4,7 @@ import {
   JoinTable,
   ManyToMany,
   PrimaryGeneratedColumn,
+  UpdateDateColumn,
 } from "typeorm";
 import { Songs } from "./Songs";
 import { Users } from "./Users";
@@ -19,7 +20,7 @@ export class Genres {
   @Column("datetime", { name: "createdAt", default: () => 'NOW()' })
   createdAt: Date;
 
-  @Column("datetime", { name: "updatedAt", nullable: true })
+  @UpdateDateColumn({ name: "updatedAt", nullable: true })
   updatedAt: Date | null;
 
   @ManyToMany(() => Songs, (songs) => songs.genres)
