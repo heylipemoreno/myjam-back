@@ -20,4 +20,15 @@ export class UsersController {
 			return res.status(500).json({ message: 'Algo deu errado.' })
 		}
 	}
+
+	async list(req: Request, res: Response) {
+		try {
+			const users = await UsersRepository.find()
+
+			return res.json(users)
+		} catch (error) {
+			console.log(error)
+			return res.status(500).json({ message: 'Algo deu errado.' })
+		}
+	}
 }
