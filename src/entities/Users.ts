@@ -5,6 +5,7 @@ import {
   ManyToMany,
   OneToMany,
   PrimaryGeneratedColumn,
+  UpdateDateColumn,
 } from "typeorm";
 import { Lessons } from "./Lessons";
 import { UsersChords } from "./UsersChords";
@@ -35,7 +36,7 @@ export class Users {
   @Column("datetime", { name: "createdAt", default: () => 'NOW()' })
   createdAt: Date;
 
-  @Column("datetime", { name: "udpatedAt", nullable: true })
+  @UpdateDateColumn({ name: "updatedAt", nullable: true })
   udpatedAt: Date | null;
 
   @Column("int", { name: "totalPoints", default: () => 0 })

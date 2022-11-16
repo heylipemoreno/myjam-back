@@ -31,4 +31,33 @@ export class UsersController {
 			return res.status(500).json({ message: 'Algo deu errado.' })
 		}
 	}
+
+	async update(req: Request, res: Response) {
+		const { userName, nickname, email, password, age, totalPoints, qtdSongs, qtdChords } = req.body
+		const { id } = req.params
+
+		try {
+			const user = await UsersRepository.findOneBy({ id: Number(id) })
+
+			await UsersRepository.update(id, {
+				userName,
+				nickname,
+				email,
+				password,
+				age,
+				totalPoints,
+				qtdSongs,
+				qtdChords
+			});
+
+			res.status(200).json(user);
+
+			if (!user) {
+				return res.status(404).json({ message: 'O usuário não existe.' })
+			}
+		} catch (error) {
+			console.log(error)
+			return res.status(500).json({ message: 'Algo deu errado.' })
+		}
+	}
 }

@@ -7,4 +7,6 @@ routes.post('/novousuario', new UsersController().create)
 
 routes.get('/listarusuarios', new UsersController().list)
 
+routes.put('/atualizarusuario/:id', new UsersController().update)
+
 export default routes
