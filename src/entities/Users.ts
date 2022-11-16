@@ -32,9 +32,8 @@ export class Users {
   @Column("int", { name: "age", nullable: true })
   age: number | null;
 
-  @Column("datetime", { name: "createdAt" })
+  @Column("datetime", { name: "createdAt", default: () => 'NOW()' })
   createdAt: Date;
-  default: "now()";
 
   @Column("datetime", { name: "udpatedAt", nullable: true })
   udpatedAt: Date | null;

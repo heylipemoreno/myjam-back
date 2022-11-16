@@ -19,7 +19,6 @@ export class Lessons {
 
   @Column("datetime", { name: "completedAt", nullable: true })
   completedAt: Date | null;
-  default: "now()";
 
   @Column("int", { name: "points" })
   points: number;
@@ -27,7 +26,7 @@ export class Lessons {
   @Column("int", { primary: true, name: "questions_id" })
   questionsId: number;
 
-  @Column("datetime", { name: "createdAt" })
+  @Column("datetime", { name: "createdAt", default: () => 'NOW()' })
   createdAt: Date;
 
   @ManyToOne(() => Classes, (classes) => classes.lessons, {
