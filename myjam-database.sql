@@ -8,19 +8,19 @@ SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,N
 -- Schema mydb
 -- -----------------------------------------------------
 -- -----------------------------------------------------
--- Schema api-desafiochefao-grupo2
+-- Schema myjam-database
 -- -----------------------------------------------------
 
 -- -----------------------------------------------------
--- Schema api-desafiochefao-grupo2
+-- Schema myjam-database
 -- -----------------------------------------------------
-CREATE SCHEMA IF NOT EXISTS `api-desafiochefao-grupo2` DEFAULT CHARACTER SET utf8mb3 ;
-USE `api-desafiochefao-grupo2` ;
+CREATE SCHEMA IF NOT EXISTS `myjam-database` DEFAULT CHARACTER SET utf8mb3 ;
+USE `myjam-database` ;
 
 -- -----------------------------------------------------
--- Table `api-desafiochefao-grupo2`.`users`
+-- Table `myjam-database`.`users`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `api-desafiochefao-grupo2`.`users` (
+CREATE TABLE IF NOT EXISTS `myjam-database`.`users` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `userName` VARCHAR(70) NOT NULL,
   `nickname` VARCHAR(20) NOT NULL,
@@ -39,9 +39,9 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `api-desafiochefao-grupo2`.`chords`
+-- Table `myjam-database`.`chords`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `api-desafiochefao-grupo2`.`chords` (
+CREATE TABLE IF NOT EXISTS `myjam-database`.`chords` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `chordName` VARCHAR(45) NOT NULL,
   `createdAt` DATETIME NOT NULL,
@@ -51,9 +51,9 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `api-desafiochefao-grupo2`.`users_chords`
+-- Table `myjam-database`.`users_chords`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `api-desafiochefao-grupo2`.`users_chords` (
+CREATE TABLE IF NOT EXISTS `myjam-database`.`users_chords` (
   `users_id` INT NOT NULL,
   `chords_id` INT NOT NULL,
   `learnedAt` DATETIME NULL,
@@ -62,21 +62,21 @@ CREATE TABLE IF NOT EXISTS `api-desafiochefao-grupo2`.`users_chords` (
   INDEX `fk_users_has_chords_users_idx` (`users_id` ASC),
   CONSTRAINT `fk_users_has_chords_users`
     FOREIGN KEY (`users_id`)
-    REFERENCES `api-desafiochefao-grupo2`.`users` (`id`)
+    REFERENCES `myjam-database`.`users` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_users_has_chords_chords1`
     FOREIGN KEY (`chords_id`)
-    REFERENCES `api-desafiochefao-grupo2`.`chords` (`id`)
+    REFERENCES `myjam-database`.`chords` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `api-desafiochefao-grupo2`.`genres`
+-- Table `myjam-database`.`genres`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `api-desafiochefao-grupo2`.`genres` (
+CREATE TABLE IF NOT EXISTS `myjam-database`.`genres` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `genreName` VARCHAR(45) NOT NULL,
   `createdAt` DATETIME NOT NULL,
@@ -86,9 +86,9 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `api-desafiochefao-grupo2`.`users_genres`
+-- Table `myjam-database`.`users_genres`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `api-desafiochefao-grupo2`.`users_genres` (
+CREATE TABLE IF NOT EXISTS `myjam-database`.`users_genres` (
   `users_id` INT NOT NULL,
   `genres_id` INT NOT NULL,
   PRIMARY KEY (`users_id`, `genres_id`),
@@ -96,21 +96,21 @@ CREATE TABLE IF NOT EXISTS `api-desafiochefao-grupo2`.`users_genres` (
   INDEX `fk_users_has_genres_users1_idx` (`users_id` ASC),
   CONSTRAINT `fk_users_has_genres_users1`
     FOREIGN KEY (`users_id`)
-    REFERENCES `api-desafiochefao-grupo2`.`users` (`id`)
+    REFERENCES `myjam-database`.`users` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_users_has_genres_genres1`
     FOREIGN KEY (`genres_id`)
-    REFERENCES `api-desafiochefao-grupo2`.`genres` (`id`)
+    REFERENCES `myjam-database`.`genres` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `api-desafiochefao-grupo2`.`classes`
+-- Table `myjam-database`.`classes`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `api-desafiochefao-grupo2`.`classes` (
+CREATE TABLE IF NOT EXISTS `myjam-database`.`classes` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `classVideoLink` VARCHAR(255) NULL,
   `createdAt` DATETIME NOT NULL,
@@ -120,9 +120,9 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `api-desafiochefao-grupo2`.`songs`
+-- Table `myjam-database`.`songs`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `api-desafiochefao-grupo2`.`songs` (
+CREATE TABLE IF NOT EXISTS `myjam-database`.`songs` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `songName` VARCHAR(255) NOT NULL,
   `songVideoLink` VARCHAR(255) NULL,
@@ -134,16 +134,16 @@ CREATE TABLE IF NOT EXISTS `api-desafiochefao-grupo2`.`songs` (
   INDEX `fk_songs_classes1_idx` (`classes_id` ASC),
   CONSTRAINT `fk_songs_classes1`
     FOREIGN KEY (`classes_id`)
-    REFERENCES `api-desafiochefao-grupo2`.`classes` (`id`)
+    REFERENCES `myjam-database`.`classes` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `api-desafiochefao-grupo2`.`genres_songs`
+-- Table `myjam-database`.`genres_songs`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `api-desafiochefao-grupo2`.`genres_songs` (
+CREATE TABLE IF NOT EXISTS `myjam-database`.`genres_songs` (
   `genres_id` INT NOT NULL,
   `songs_id` INT NOT NULL,
   PRIMARY KEY (`genres_id`, `songs_id`),
@@ -151,21 +151,21 @@ CREATE TABLE IF NOT EXISTS `api-desafiochefao-grupo2`.`genres_songs` (
   INDEX `fk_songs_has_genres_songs1_idx` (`songs_id` ASC),
   CONSTRAINT `fk_songs_has_genres_songs1`
     FOREIGN KEY (`songs_id`)
-    REFERENCES `api-desafiochefao-grupo2`.`songs` (`id`)
+    REFERENCES `myjam-database`.`songs` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_songs_has_genres_genres1`
     FOREIGN KEY (`genres_id`)
-    REFERENCES `api-desafiochefao-grupo2`.`genres` (`id`)
+    REFERENCES `myjam-database`.`genres` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `api-desafiochefao-grupo2`.`songs_chords`
+-- Table `myjam-database`.`songs_chords`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `api-desafiochefao-grupo2`.`songs_chords` (
+CREATE TABLE IF NOT EXISTS `myjam-database`.`songs_chords` (
   `songs_id` INT NOT NULL,
   `chords_id` INT NOT NULL,
   PRIMARY KEY (`songs_id`, `chords_id`),
@@ -173,21 +173,21 @@ CREATE TABLE IF NOT EXISTS `api-desafiochefao-grupo2`.`songs_chords` (
   INDEX `fk_songs_has_chords_songs1_idx` (`songs_id` ASC),
   CONSTRAINT `fk_songs_has_chords_songs1`
     FOREIGN KEY (`songs_id`)
-    REFERENCES `api-desafiochefao-grupo2`.`songs` (`id`)
+    REFERENCES `myjam-database`.`songs` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_songs_has_chords_chords1`
     FOREIGN KEY (`chords_id`)
-    REFERENCES `api-desafiochefao-grupo2`.`chords` (`id`)
+    REFERENCES `myjam-database`.`chords` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `api-desafiochefao-grupo2`.`chords_classes`
+-- Table `myjam-database`.`chords_classes`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `api-desafiochefao-grupo2`.`chords_classes` (
+CREATE TABLE IF NOT EXISTS `myjam-database`.`chords_classes` (
   `chords_id` INT NOT NULL,
   `classes_id` INT NOT NULL,
   PRIMARY KEY (`chords_id`, `classes_id`),
@@ -195,21 +195,21 @@ CREATE TABLE IF NOT EXISTS `api-desafiochefao-grupo2`.`chords_classes` (
   INDEX `fk_chords_has_classes_chords1_idx` (`chords_id` ASC),
   CONSTRAINT `fk_chords_has_classes_chords1`
     FOREIGN KEY (`chords_id`)
-    REFERENCES `api-desafiochefao-grupo2`.`chords` (`id`)
+    REFERENCES `myjam-database`.`chords` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_chords_has_classes_classes1`
     FOREIGN KEY (`classes_id`)
-    REFERENCES `api-desafiochefao-grupo2`.`classes` (`id`)
+    REFERENCES `myjam-database`.`classes` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `api-desafiochefao-grupo2`.`questions`
+-- Table `myjam-database`.`questions`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `api-desafiochefao-grupo2`.`questions` (
+CREATE TABLE IF NOT EXISTS `myjam-database`.`questions` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `questionContent` VARCHAR(255) NULL,
   `createdAt` DATETIME NOT NULL,
@@ -219,9 +219,9 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `api-desafiochefao-grupo2`.`lessons`
+-- Table `myjam-database`.`lessons`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `api-desafiochefao-grupo2`.`lessons` (
+CREATE TABLE IF NOT EXISTS `myjam-database`.`lessons` (
   `id` VARCHAR(45) NOT NULL,
   `classes_id` INT NOT NULL,
   `users_id` INT NOT NULL,
@@ -235,17 +235,17 @@ CREATE TABLE IF NOT EXISTS `api-desafiochefao-grupo2`.`lessons` (
   INDEX `fk_lessons_questions1_idx` (`questions_id` ASC),
   CONSTRAINT `fk_classes_has_users_classes1`
     FOREIGN KEY (`classes_id`)
-    REFERENCES `api-desafiochefao-grupo2`.`classes` (`id`)
+    REFERENCES `myjam-database`.`classes` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_classes_has_users_users1`
     FOREIGN KEY (`users_id`)
-    REFERENCES `api-desafiochefao-grupo2`.`users` (`id`)
+    REFERENCES `myjam-database`.`users` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_lessons_questions1`
     FOREIGN KEY (`questions_id`)
-    REFERENCES `api-desafiochefao-grupo2`.`questions` (`id`)
+    REFERENCES `myjam-database`.`questions` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
