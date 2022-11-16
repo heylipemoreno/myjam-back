@@ -5,6 +5,7 @@ import {
   ManyToMany,
   OneToMany,
   PrimaryGeneratedColumn,
+  UpdateDateColumn,
 } from "typeorm";
 import { Classes } from "./Classes";
 import { Songs } from "./Songs";
@@ -21,7 +22,7 @@ export class Chords {
   @Column("datetime", { name: "createdAt", default: () => 'NOW()' })
   createdAt: Date;
 
-  @Column("datetime", { name: "updatedAt", nullable: true })
+  @UpdateDateColumn({ name: "updatedAt", nullable: true })
   updatedAt: Date | null;
 
   @ManyToMany(() => Classes, (classes) => classes.chords)
