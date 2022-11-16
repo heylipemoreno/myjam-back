@@ -7,7 +7,7 @@ import {
   ManyToOne,
   PrimaryGeneratedColumn,
 } from "typeorm";
-import { Genres } from "./genres";
+import { Genres } from "./Genres";
 import { Classes } from "./Classes";
 import { Chords } from "./Chords";
 

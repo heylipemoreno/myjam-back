@@ -8,7 +8,7 @@ import {
 } from "typeorm";
 import { Lessons } from "./Lessons";
 import { UsersChords } from "./UsersChords";
-import { Genres } from "./genres";
+import { Genres } from "./Genres";
 
 @Index("email_UNIQUE", ["email"], { unique: true })
 @Index("nickname_UNIQUE", ["nickname"], { unique: true })
