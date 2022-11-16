@@ -9,4 +9,6 @@ routes.get('/listarusuarios', new UsersController().list)
 
 routes.put('/atualizarusuario/:id', new UsersController().update)
 
+routes.delete('/removerusuario/:id', new UsersController().delete)
+
 export default routes
