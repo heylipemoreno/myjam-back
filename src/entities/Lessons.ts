@@ -9,7 +9,7 @@ import { Questions } from "./Questions";
 @Entity("lessons", { schema: "api-desafiochefao-grupo2" })
 export class Lessons {
   @Column("varchar", { primary: true, name: "id", length: 45 })
-  id: string;
+  id: number;
 
   @Column("int", { primary: true, name: "classes_id" })
   classesId: number;
