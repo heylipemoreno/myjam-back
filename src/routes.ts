@@ -2,26 +2,38 @@ import { Router } from 'express';
 import { ChordsController } from './controllers/ChordsController';
 import { GenresController } from './controllers/GenresController';
 import { UsersController } from './controllers/UsersController';
+import { QuestionsController } from './controllers/QuestionsController';
 
 const routes = Router()
 
-routes.post('/novousuario', new UsersController().create)
-routes.post('/novogenero', new GenresController().create)
-routes.post('/novoacorde', new ChordsController().create)
+//POST
+routes.post('/users', new UsersController().create)
+routes.post('/genres', new GenresController().create)
+routes.post('/chords', new ChordsController().create)
+routes.post('/questions', new QuestionsController().create)
 
-routes.get('/listarusuarios', new UsersController().list)
-routes.get('/listarusuario/:id', new UsersController().listOne)
-routes.get('/listargeneros', new GenresController().list)
-routes.get('/listargenero/:id', new GenresController().listOne)
-routes.get('/listaracordes', new ChordsController().list)
-routes.get('/listaracorde/:id', new ChordsController().listOne)
+//GET ALL
+routes.get('/users', new UsersController().list)
+routes.get('/genres', new GenresController().list)
+routes.get('/chords', new ChordsController().list)
+routes.get('/questions',new QuestionsController().list)
 
-routes.put('/atualizarusuario/:id', new UsersController().update)
-routes.put('/atualizargenero/:id', new GenresController().update)
-routes.put('/atualizaracorde/:id', new ChordsController().update)
+//GET ID
+routes.get('/users/:id', new UsersController().listOne)
+routes.get('/genres/:id', new GenresController().listOne)
+routes.get('/chords/:id', new ChordsController().listOne)
+routes.get('/questions/:id', new QuestionsController().listOne)
 
-routes.delete('/removerusuario/:id', new UsersController().delete)
-routes.delete('/removergenero/:id', new GenresController().delete)
-routes.delete('/removeracorde/:id', new ChordsController().delete)
+//UPDATE
+routes.put('/users/:id', new UsersController().update)
+routes.put('/genres/:id', new GenresController().update)
+routes.put('/chords/:id', new ChordsController().update)
+routes.put('/questions/:id', new QuestionsController().update)
+
+//DELETE
+routes.delete('/users/:id', new UsersController().delete)
+routes.delete('/genres/:id', new GenresController().delete)
+routes.delete('/chords/:id', new ChordsController().delete)
+routes.delete('/questions/:id', new QuestionsController().delete)
 
 export default routes
