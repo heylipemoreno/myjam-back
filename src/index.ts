@@ -9,5 +9,11 @@ AppDataSource.initialize().then(() => {
 
     app.use(routes)
 
+    app.get('/', (request: express.Request, response: express.Response) => {
+        return response.status(200).send('API funcionando corretamente.')
+    })
+
+    console.log('Status: OK [iniciado]')
+
     return app.listen(process.env.PORT)
 })
