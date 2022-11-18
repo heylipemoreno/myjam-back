@@ -3,14 +3,14 @@ import{LessonsRepository}from '../repositories/LessonsRepository';
 
 export class LessonsController{
     async create(req:Request,res:Response){
-        const{classesId,usersId,points}=req.body;
+        const{classesId,points}=req.body;
 
-        if(!classesId && !usersId && !points){
+        if(!classesId && !points){
             return res.status(400).json({message:'Campos obrigatórios!'});
         }
 
         try{
-            const newLesson=LessonsRepository.create({classesId,usersId,points});
+            const newLesson=LessonsRepository.create({classesId,points});
             await LessonsRepository.save(newLesson);
             return res.status(201).json(newLesson);
         }catch(error){
@@ -57,7 +57,6 @@ export class LessonsController{
             }else{
                 await LessonsRepository.update(id,{
                     classesId,
-                    usersId,
                     points
                 });
 

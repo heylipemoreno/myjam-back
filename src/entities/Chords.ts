@@ -8,7 +8,6 @@ import {
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from "typeorm";
-import { Classes } from "./Classes";
 import { Songs } from "./Songs";
 import { UsersChords } from "./UsersChords";
 
@@ -25,15 +24,6 @@ export class Chords {
 
   @UpdateDateColumn({ name: "updatedAt", nullable: true })
   updatedAt: Date | null;
-
-  @ManyToMany(() => Classes, (classes) => classes.chords)
-  @JoinTable({
-    name: "chords_classes",
-    joinColumns: [{ name: "chords_id", referencedColumnName: "id" }],
-    inverseJoinColumns: [{ name: "classes_id", referencedColumnName: "id" }],
-    schema: "myjam-database",
-  })
-  classes: Classes[];
 
   @ManyToMany(() => Songs, (songs) => songs.chords)
   @JoinTable({

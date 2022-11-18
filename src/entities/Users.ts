@@ -8,12 +8,12 @@ import {
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from "typeorm";
-import { Lessons } from "./Lessons";
 import { UsersChords } from "./UsersChords";
+import { Classes } from "./Classes";
 import { Genres } from "./Genres";
 
-@Index("nickname_UNIQUE", ["nickname"], { unique: true })
 @Index("email_UNIQUE", ["email"], { unique: true })
+@Index("nickname_UNIQUE", ["nickname"], { unique: true })
 @Entity("users", { schema: "myjam-database" })
 export class Users {
   @PrimaryGeneratedColumn({ type: "int", name: "id" })
@@ -49,11 +49,11 @@ export class Users {
   @Column("int", { name: "qtdChords", nullable: true })
   qtdChords: number | null;
 
-  @OneToMany(() => Lessons, (lessons) => lessons.users)
-  lessons: Lessons[];
-
   @OneToMany(() => UsersChords, (usersChords) => usersChords.users)
   usersChords: UsersChords[];
+
+  @ManyToMany(() => Classes, (classes) => classes.users)
+  classes: Classes[];
 
   @ManyToMany(() => Genres, (genres) => genres.users)
   genres: Genres[];

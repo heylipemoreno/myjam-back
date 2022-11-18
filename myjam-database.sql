@@ -105,7 +105,6 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `myjam-database`.`classes` (
   `id` INT NOT NULL AUTO_INCREMENT,
-  `classVideoLink` VARCHAR(255) NULL,
   `createdAt` DATETIME NOT NULL,
   `updatedAt` DATETIME NULL,
   `completedAt` DATETIME NULL,
@@ -179,20 +178,17 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `myjam-database`.`chords_classes`
+-- Table `myjam-database`.`lessons`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `myjam-database`.`chords_classes` (
-  `chords_id` INT NOT NULL,
+CREATE TABLE IF NOT EXISTS `myjam-database`.`lessons` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `createdAt` DATETIME NOT NULL,
+  `points` INT NULL,
+  `completedAt` DATETIME NULL,
   `classes_id` INT NOT NULL,
-  PRIMARY KEY (`chords_id`, `classes_id`),
-  INDEX `fk_chords_has_classes_classes1_idx` (`classes_id` ASC),
-  INDEX `fk_chords_has_classes_chords1_idx` (`chords_id` ASC),
-  CONSTRAINT `fk_chords_has_classes_chords1`
-    FOREIGN KEY (`chords_id`)
-    REFERENCES `myjam-database`.`chords` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_chords_has_classes_classes1`
+  PRIMARY KEY (`id`, `classes_id`),
+  INDEX `fk_lessons_classes1_idx` (`classes_id` ASC),
+  CONSTRAINT `fk_lessons_classes1`
     FOREIGN KEY (`classes_id`)
     REFERENCES `myjam-database`.`classes` (`id`)
     ON DELETE NO ACTION
@@ -201,26 +197,22 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `myjam-database`.`lessons`
+-- Table `myjam-database`.`users_classes`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `myjam-database`.`lessons` (
-  `id` INT NOT NULL,
-  `classes_id` INT NOT NULL,
+CREATE TABLE IF NOT EXISTS `myjam-database`.`users_classes` (
   `users_id` INT NOT NULL,
-  `completedAt` DATETIME NULL,
-  `points` INT NOT NULL,
-  `createdAt` DATETIME NOT NULL,
-  PRIMARY KEY (`classes_id`, `users_id`, `id`),
-  INDEX `fk_classes_has_users_users1_idx` (`users_id` ASC),
-  INDEX `fk_classes_has_users_classes1_idx` (`classes_id` ASC),
-  CONSTRAINT `fk_classes_has_users_classes1`
-    FOREIGN KEY (`classes_id`)
-    REFERENCES `myjam-database`.`classes` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_classes_has_users_users1`
+  `classes_id` INT NOT NULL,
+  PRIMARY KEY (`users_id`, `classes_id`),
+  INDEX `fk_users_has_classes_classes1_idx` (`classes_id` ASC),
+  INDEX `fk_users_has_classes_users1_idx` (`users_id` ASC),
+  CONSTRAINT `fk_users_has_classes_users1`
     FOREIGN KEY (`users_id`)
     REFERENCES `myjam-database`.`users` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_users_has_classes_classes1`
+    FOREIGN KEY (`classes_id`)
+    REFERENCES `myjam-database`.`classes` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
@@ -231,18 +223,17 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `myjam-database`.`questions` (
   `id` INT NOT NULL AUTO_INCREMENT,
-  `questionContent` TEXT NULL,
   `createdAt` DATETIME NOT NULL,
   `updatedAt` DATETIME NULL,
-  `lessons_classes_id` INT NOT NULL,
-  `lessons_users_id` INT NOT NULL,
-  `lessons_id` INT NOT NULL,
+  `questionContent` TEXT NULL,
   `completedAt` DATETIME NULL,
-  PRIMARY KEY (`id`, `lessons_classes_id`, `lessons_users_id`, `lessons_id`),
-  INDEX `fk_questions_lessons1_idx` (`lessons_classes_id` ASC, `lessons_users_id` ASC, `lessons_id` ASC),
+  `lessons_id` INT NOT NULL,
+  `lessons_classes_id` INT NOT NULL,
+  PRIMARY KEY (`id`, `lessons_id`, `lessons_classes_id`),
+  INDEX `fk_questions_lessons1_idx` (`lessons_id` ASC, `lessons_classes_id` ASC),
   CONSTRAINT `fk_questions_lessons1`
-    FOREIGN KEY (`lessons_classes_id` , `lessons_users_id` , `lessons_id`)
-    REFERENCES `myjam-database`.`lessons` (`classes_id` , `users_id` , `id`)
+    FOREIGN KEY (`lessons_id` , `lessons_classes_id`)
+    REFERENCES `myjam-database`.`lessons` (`id` , `classes_id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
