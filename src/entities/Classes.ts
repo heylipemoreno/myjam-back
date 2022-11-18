@@ -1,15 +1,17 @@
 import {
   Column,
+  CreateDateColumn,
   Entity,
   ManyToMany,
   OneToMany,
   PrimaryGeneratedColumn,
+  UpdateDateColumn,
 } from "typeorm";
 import { Chords } from "./Chords";
 import { Lessons } from "./Lessons";
 import { Songs } from "./Songs";
 
-@Entity("classes", { schema: "api-desafiochefao-grupo2" })
+@Entity("classes", { schema: "myjam-database" })
 export class Classes {
   @PrimaryGeneratedColumn({ type: "int", name: "id" })
   id: number;
@@ -17,11 +19,14 @@ export class Classes {
   @Column("varchar", { name: "classVideoLink", nullable: true, length: 255 })
   classVideoLink: string | null;
 
-  @Column("datetime", { name: "createdAt", default: () => 'NOW()' })
+  @CreateDateColumn({ name: "createdAt" })
   createdAt: Date;
 
-  @Column("datetime", { name: "updatedAt", nullable: true })
+  @UpdateDateColumn({ name: "updatedAt", nullable: true })
   updatedAt: Date | null;
+
+  @Column("datetime", { name: "completedAt", nullable: true })
+  completedAt: Date | null;
 
   @ManyToMany(() => Chords, (chords) => chords.classes)
   chords: Chords[];

@@ -10,7 +10,7 @@ export class LessonsController{
         }
 
         try{
-            const newLesson=LessonsRepository.create({classesId,usersId,points,questionsId});
+            const newLesson=LessonsRepository.create({classesId,usersId,points});
             await LessonsRepository.save(newLesson);
             return res.status(201).json(newLesson);
         }catch(error){
@@ -58,8 +58,7 @@ export class LessonsController{
                 await LessonsRepository.update(id,{
                     classesId,
                     usersId,
-                    points,
-                    questionsId
+                    points
                 });
 
                 res.status(200).json({message:'Lições atualizadas com sucesso'});
