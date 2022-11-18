@@ -3,14 +3,14 @@ import { SongsRepository } from '../repositories/SongsRepository'
 
 export class SongsController {
 	async create(req: Request, res: Response) {
-		const { songName, songVideoLink, songContentLink} = req.body
+		const { songName, songVideoLink, songContentLink, classesId} = req.body
 
-		if (!songName && !songVideoLink && !songContentLink) {
-			return res.status(400).json({ message: 'Os campos songName, songVideoLink, songContentLink e classes_id são obrigatórios.' })
+		if (!songName && !songVideoLink && !songContentLink && !classesId) {
+			return res.status(400).json({ message: 'Os campos songName, songVideoLink, songContentLink e classesId são obrigatórios.' })
 		}
 
 		try {
-			const newSong = SongsRepository.create({ songName, songVideoLink, songContentLink})
+			const newSong = SongsRepository.create({ songName, songVideoLink, songContentLink, classesId})
 
 			await SongsRepository.save(newSong)
 
@@ -51,7 +51,7 @@ export class SongsController {
 	}
 
 	async update(req: Request, res: Response) {
-		const { songName, songVideoLink, songContentLink, classes_id } = req.body
+		const { songName, songVideoLink, songContentLink, classesId } = req.body
 		const { id } = req.params
 
 		try {
@@ -63,7 +63,8 @@ export class SongsController {
 				await SongsRepository.update(id, {
 					songName,
 					songVideoLink,
-					songContentLink
+					songContentLink,
+					classesId
 				});
 	
 				res.status(200).json({ message: 'Os dados da música foram atualizados com sucesso.' });

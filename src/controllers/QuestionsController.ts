@@ -3,12 +3,12 @@ import { QuestionsRepository } from "../repositories/QuestionsRepository";
 
 export class QuestionsController {
     async create(req: Request, res: Response) {
-        const { questionContent } = req.body;
+        const { questionContent, lessonsId, lessonsClassesId } = req.body;
         if (!questionContent) {
             return res.status(400).send({ message: 'O conteúdo da questão é obrigatório!' })
         }
         try {
-            const newQuestion = QuestionsRepository.create({ questionContent });
+            const newQuestion = QuestionsRepository.create({ questionContent, lessonsId, lessonsClassesId });
             await QuestionsRepository.save(newQuestion);
             res.status(201).send(newQuestion);
         } catch (error) {
@@ -39,7 +39,7 @@ export class QuestionsController {
         }
     }
     async update(req: Request, res: Response) {
-        const { questionContent } = req.body
+        const { questionContent, lessonsId, lessonsClassesId } = req.body
         const { id } = req.params
         try {
             const question = await QuestionsRepository.findOneBy({ id: Number(id) });
@@ -47,7 +47,9 @@ export class QuestionsController {
                 return res.status(404).send({ message: `Não foi encontrado nenhuma questão com o ID:${id}` })
             }
             await QuestionsRepository.update(id, {
-                questionContent
+                questionContent,
+                lessonsId,
+                lessonsClassesId
             })
             res.status(200).send({ message: `Questão atalizada com sucesso!`, conteudo: questionContent });
         } catch (error) {

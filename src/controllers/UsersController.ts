@@ -3,14 +3,14 @@ import { UsersRepository } from '../repositories/UsersRepository'
 
 export class UsersController {
 	async create(req: Request, res: Response) {
-		const { userName, nickname, email, password } = req.body
+		const { userName, nickname, email, password, age } = req.body
 
-		if (!userName && !nickname && !email && !password) {
-			return res.status(400).json({ message: 'Os campos userName, nickname, email e password são obrigatórios.' })
+		if (!userName && !nickname && !email && !password && !age) {
+			return res.status(400).json({ message: 'Os campos userName, nickname, email, password e age são obrigatórios.' })
 		}
 
 		try {
-			const newUser = UsersRepository.create({ userName, nickname, email, password })
+			const newUser = UsersRepository.create({ userName, nickname, email, password, age })
 
 			await UsersRepository.save(newUser)
 
