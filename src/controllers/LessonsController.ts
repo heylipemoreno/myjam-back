@@ -3,9 +3,9 @@ import{LessonsRepository}from '../repositories/LessonsRepository';
 
 export class LessonsController{
     async create(req:Request,res:Response){
-        const{classesId,usersId,points,questionsId}=req.body;
+        const{classesId,usersId,points}=req.body;
 
-        if(!classesId && !usersId && !points && !questionsId){
+        if(!classesId && !usersId && !points){
             return res.status(400).json({message:'Campos obrigatórios!'});
         }
 
@@ -46,7 +46,7 @@ export class LessonsController{
     }
 
     async update(req:Request,res:Response){
-        const{classesId,usersId,points,questionsId}=req.body;
+        const{classesId,usersId,points}=req.body;
         const{id}=req.params;
 
         try{
