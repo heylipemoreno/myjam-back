@@ -3,6 +3,10 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "engines": {
+        "node": "16.15",
+        "npm": "8.11"
+  },
   "scripts": {
     "build": "tsc",
     "dev": "nodemon --exec ts-node ./src/index.ts",
