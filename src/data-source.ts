@@ -14,3 +14,17 @@ export const AppDataSource = new DataSource ({
     entities: [`${__dirname}/**/entities/*.{ts,js}`],
     migrations: [`${__dirname}/**/migrations/*.{ts,js}`]
 })
+
+if(process.env.NODE_ENV === 'producion'){
+    Object.assign(
+        AppDataSource,
+        {
+            dialectOptions: {
+                ssl: {
+                    require: true,
+                    rejectUnauthorized: false
+                }
+            }
+        }
+    )
+}
