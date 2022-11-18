@@ -4,7 +4,7 @@ import { Users } from "./Users";
 
 @Index("fk_users_has_chords_chords1_idx", ["chordsId"], {})
 @Index("fk_users_has_chords_users_idx", ["usersId"], {})
-@Entity("users_chords", { schema: "api-desafiochefao-grupo2" })
+@Entity("users_chords", { schema: "myjam-database" })
 export class UsersChords {
   @Column("int", { primary: true, name: "users_id" })
   usersId: number;

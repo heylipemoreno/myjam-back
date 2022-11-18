@@ -1,5 +1,6 @@
 import {
   Column,
+  CreateDateColumn,
   Entity,
   JoinTable,
   ManyToMany,
@@ -11,7 +12,7 @@ import { Classes } from "./Classes";
 import { Songs } from "./Songs";
 import { UsersChords } from "./UsersChords";
 
-@Entity("chords", { schema: "api-desafiochefao-grupo2" })
+@Entity("chords", { schema: "myjam-database" })
 export class Chords {
   @PrimaryGeneratedColumn({ type: "int", name: "id" })
   id: number;
@@ -19,7 +20,7 @@ export class Chords {
   @Column("varchar", { name: "chordName", length: 45 })
   chordName: string;
 
-  @Column("datetime", { name: "createdAt", default: () => 'NOW()' })
+  @CreateDateColumn({ name: "createdAt" })
   createdAt: Date;
 
   @UpdateDateColumn({ name: "updatedAt", nullable: true })
@@ -30,7 +31,7 @@ export class Chords {
     name: "chords_classes",
     joinColumns: [{ name: "chords_id", referencedColumnName: "id" }],
     inverseJoinColumns: [{ name: "classes_id", referencedColumnName: "id" }],
-    schema: "api-desafiochefao-grupo2",
+    schema: "myjam-database",
   })
   classes: Classes[];
 
@@ -39,7 +40,7 @@ export class Chords {
     name: "songs_chords",
     joinColumns: [{ name: "chords_id", referencedColumnName: "id" }],
     inverseJoinColumns: [{ name: "songs_id", referencedColumnName: "id" }],
-    schema: "api-desafiochefao-grupo2",
+    schema: "myjam-database",
   })
   songs: Songs[];
 

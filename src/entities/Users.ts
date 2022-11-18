@@ -1,5 +1,6 @@
 import {
   Column,
+  CreateDateColumn,
   Entity,
   Index,
   ManyToMany,
@@ -11,9 +12,9 @@ import { Lessons } from "./Lessons";
 import { UsersChords } from "./UsersChords";
 import { Genres } from "./Genres";
 
-@Index("email_UNIQUE", ["email"], { unique: true })
 @Index("nickname_UNIQUE", ["nickname"], { unique: true })
-@Entity("users", { schema: "api-desafiochefao-grupo2" })
+@Index("email_UNIQUE", ["email"], { unique: true })
+@Entity("users", { schema: "myjam-database" })
 export class Users {
   @PrimaryGeneratedColumn({ type: "int", name: "id" })
   id: number;
@@ -33,19 +34,19 @@ export class Users {
   @Column("int", { name: "age", nullable: true })
   age: number | null;
 
-  @Column("datetime", { name: "createdAt", default: () => 'NOW()' })
+  @CreateDateColumn({ name: "createdAt" })
   createdAt: Date;
 
   @UpdateDateColumn({ name: "updatedAt", nullable: true })
-  udpatedAt: Date | null;
+  updatedAt: Date | null;
 
-  @Column("int", { name: "totalPoints", default: () => 0 })
+  @Column("int", { name: "totalPoints" })
   totalPoints: number;
 
-  @Column("int", { name: "qtdSongs", default: () => 0 })
+  @Column("int", { name: "qtdSongs", nullable: true })
   qtdSongs: number | null;
 
-  @Column("int", { name: "qtdChords", default: () => 0 })
+  @Column("int", { name: "qtdChords", nullable: true })
   qtdChords: number | null;
 
   @OneToMany(() => Lessons, (lessons) => lessons.users)

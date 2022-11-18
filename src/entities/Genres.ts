@@ -1,5 +1,6 @@
 import {
   Column,
+  CreateDateColumn,
   Entity,
   JoinTable,
   ManyToMany,
@@ -9,7 +10,7 @@ import {
 import { Songs } from "./Songs";
 import { Users } from "./Users";
 
-@Entity("genres", { schema: "api-desafiochefao-grupo2" })
+@Entity("genres", { schema: "myjam-database" })
 export class Genres {
   @PrimaryGeneratedColumn({ type: "int", name: "id" })
   id: number;
@@ -17,7 +18,7 @@ export class Genres {
   @Column("varchar", { name: "genreName", length: 45 })
   genreName: string;
 
-  @Column("datetime", { name: "createdAt", default: () => 'NOW()' })
+  @CreateDateColumn({ name: "createdAt" })
   createdAt: Date;
 
   @UpdateDateColumn({ name: "updatedAt", nullable: true })
@@ -28,7 +29,7 @@ export class Genres {
     name: "genres_songs",
     joinColumns: [{ name: "genres_id", referencedColumnName: "id" }],
     inverseJoinColumns: [{ name: "songs_id", referencedColumnName: "id" }],
-    schema: "api-desafiochefao-grupo2",
+    schema: "myjam-database",
   })
   songs: Songs[];
 
@@ -37,7 +38,7 @@ export class Genres {
     name: "users_genres",
     joinColumns: [{ name: "genres_id", referencedColumnName: "id" }],
     inverseJoinColumns: [{ name: "users_id", referencedColumnName: "id" }],
-    schema: "api-desafiochefao-grupo2",
+    schema: "myjam-database",
   })
   users: Users[];
 }

@@ -1,18 +1,20 @@
 import {
   Column,
+  CreateDateColumn,
   Entity,
   Index,
   JoinColumn,
   ManyToMany,
   ManyToOne,
   PrimaryGeneratedColumn,
+  UpdateDateColumn,
 } from "typeorm";
 import { Genres } from "./Genres";
 import { Classes } from "./Classes";
 import { Chords } from "./Chords";
 
 @Index("fk_songs_classes1_idx", ["classesId"], {})
-@Entity("songs", { schema: "api-desafiochefao-grupo2" })
+@Entity("songs", { schema: "myjam-database" })
 export class Songs {
   @PrimaryGeneratedColumn({ type: "int", name: "id" })
   id: number;
@@ -29,10 +31,10 @@ export class Songs {
   @Column("int", { primary: true, name: "classes_id" })
   classesId: number;
 
-  @Column("datetime", { name: "createdAt", default: () => 'NOW()' })
+  @CreateDateColumn({ name: "createdAt" })
   createdAt: Date;
 
-  @Column("datetime", { name: "updatedAt", nullable: true })
+  @UpdateDateColumn({ name: "updatedAt", nullable: true })
   updatedAt: Date | null;
 
   @ManyToMany(() => Genres, (genres) => genres.songs)

@@ -1,14 +1,21 @@
-import { Column, Entity, Index, JoinColumn, ManyToOne } from "typeorm";
+import {
+  Column,
+  CreateDateColumn,
+  Entity,
+  Index,
+  JoinColumn,
+  ManyToOne,
+  OneToMany,
+} from "typeorm";
 import { Classes } from "./Classes";
 import { Users } from "./Users";
 import { Questions } from "./Questions";
 
-@Index("fk_classes_has_users_classes1_idx", ["classesId"], {})
 @Index("fk_classes_has_users_users1_idx", ["usersId"], {})
-@Index("fk_lessons_questions1_idx", ["questionsId"], {})
-@Entity("lessons", { schema: "api-desafiochefao-grupo2" })
+@Index("fk_classes_has_users_classes1_idx", ["classesId"], {})
+@Entity("lessons", { schema: "myjam-database" })
 export class Lessons {
-  @Column("varchar", { primary: true, name: "id", length: 45 })
+  @Column("int", { primary: true, name: "id" })
   id: number;
 
   @Column("int", { primary: true, name: "classes_id" })
@@ -23,10 +30,7 @@ export class Lessons {
   @Column("int", { name: "points" })
   points: number;
 
-  @Column("int", { primary: true, name: "questions_id" })
-  questionsId: number;
-
-  @Column("datetime", { name: "createdAt", default: () => 'NOW()' })
+  @CreateDateColumn({ name: "createdAt" })
   createdAt: Date;
 
   @ManyToOne(() => Classes, (classes) => classes.lessons, {
@@ -43,10 +47,6 @@ export class Lessons {
   @JoinColumn([{ name: "users_id", referencedColumnName: "id" }])
   users: Users;
 
-  @ManyToOne(() => Questions, (questions) => questions.lessons, {
-    onDelete: "NO ACTION",
-    onUpdate: "NO ACTION",
-  })
-  @JoinColumn([{ name: "questions_id", referencedColumnName: "id" }])
-  questions: Questions;
+  @OneToMany(() => Questions, (questions) => questions.lessons)
+  questions: Questions[];
 }

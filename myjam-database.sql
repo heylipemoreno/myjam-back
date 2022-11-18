@@ -5,13 +5,6 @@ SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION';
 
 -- -----------------------------------------------------
--- Schema mydb
--- -----------------------------------------------------
--- -----------------------------------------------------
--- Schema myjam-database
--- -----------------------------------------------------
-
--- -----------------------------------------------------
 -- Schema myjam-database
 -- -----------------------------------------------------
 CREATE SCHEMA IF NOT EXISTS `myjam-database` DEFAULT CHARACTER SET utf8mb3 ;
@@ -28,7 +21,7 @@ CREATE TABLE IF NOT EXISTS `myjam-database`.`users` (
   `password` VARCHAR(20) NOT NULL,
   `age` INT NULL,
   `createdAt` DATETIME NOT NULL,
-  `udpatedAt` DATETIME NULL,
+  `updatedAt` DATETIME NULL,
   `totalPoints` INT NOT NULL,
   `qtdSongs` INT NULL,
   `qtdChords` INT NULL,
@@ -115,6 +108,7 @@ CREATE TABLE IF NOT EXISTS `myjam-database`.`classes` (
   `classVideoLink` VARCHAR(255) NULL,
   `createdAt` DATETIME NOT NULL,
   `updatedAt` DATETIME NULL,
+  `completedAt` DATETIME NULL,
   PRIMARY KEY (`id`))
 ENGINE = InnoDB;
 
@@ -207,32 +201,18 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `myjam-database`.`questions`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `myjam-database`.`questions` (
-  `id` INT NOT NULL AUTO_INCREMENT,
-  `questionContent` VARCHAR(255) NULL,
-  `createdAt` DATETIME NOT NULL,
-  `updatedAt` DATETIME NULL,
-  PRIMARY KEY (`id`))
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
 -- Table `myjam-database`.`lessons`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `myjam-database`.`lessons` (
-  `id` VARCHAR(45) NOT NULL,
+  `id` INT NOT NULL,
   `classes_id` INT NOT NULL,
   `users_id` INT NOT NULL,
   `completedAt` DATETIME NULL,
   `points` INT NOT NULL,
-  `questions_id` INT NOT NULL,
   `createdAt` DATETIME NOT NULL,
-  PRIMARY KEY (`classes_id`, `users_id`, `id`, `questions_id`),
+  PRIMARY KEY (`classes_id`, `users_id`, `id`),
   INDEX `fk_classes_has_users_users1_idx` (`users_id` ASC),
   INDEX `fk_classes_has_users_classes1_idx` (`classes_id` ASC),
-  INDEX `fk_lessons_questions1_idx` (`questions_id` ASC),
   CONSTRAINT `fk_classes_has_users_classes1`
     FOREIGN KEY (`classes_id`)
     REFERENCES `myjam-database`.`classes` (`id`)
@@ -242,10 +222,27 @@ CREATE TABLE IF NOT EXISTS `myjam-database`.`lessons` (
     FOREIGN KEY (`users_id`)
     REFERENCES `myjam-database`.`users` (`id`)
     ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_lessons_questions1`
-    FOREIGN KEY (`questions_id`)
-    REFERENCES `myjam-database`.`questions` (`id`)
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `myjam-database`.`questions`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `myjam-database`.`questions` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `questionContent` TEXT NULL,
+  `createdAt` DATETIME NOT NULL,
+  `updatedAt` DATETIME NULL,
+  `lessons_classes_id` INT NOT NULL,
+  `lessons_users_id` INT NOT NULL,
+  `lessons_id` INT NOT NULL,
+  `completedAt` DATETIME NULL,
+  PRIMARY KEY (`id`, `lessons_classes_id`, `lessons_users_id`, `lessons_id`),
+  INDEX `fk_questions_lessons1_idx` (`lessons_classes_id` ASC, `lessons_users_id` ASC, `lessons_id` ASC),
+  CONSTRAINT `fk_questions_lessons1`
+    FOREIGN KEY (`lessons_classes_id` , `lessons_users_id` , `lessons_id`)
+    REFERENCES `myjam-database`.`lessons` (`classes_id` , `users_id` , `id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
