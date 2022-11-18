@@ -8,16 +8,16 @@ export class UsersController {
 		if (!userName && !nickname && !email && !password && !age) {
 			return res.status(400).json({ message: 'Os campos userName, nickname, email, password e age são obrigatórios.' })
 		}
-
+		const totalPoints = 0;
 		try {
-			const newUser = UsersRepository.create({ userName, nickname, email, password, age })
+			const newUser = UsersRepository.create({ userName, nickname, email, password, age, totalPoints })
 
 			await UsersRepository.save(newUser)
 
 			return res.status(201).json(newUser)
 		} catch (error) {
 			console.log(error)
-			return res.status(500).json({ message: 'Os campos userName, nickname, email e password são obrigatórios.' })
+			return res.status(500).json({ message: 'Houve um erro ao fazer requisição com o servidor.' })
 		}
 	}
 
@@ -28,7 +28,7 @@ export class UsersController {
 			res.status(200).json(users);
 		} catch (error) {
 			console.log(error)
-			return res.status(500).json({ message: 'Algo deu errado.' })
+			return res.status(500).json({ message: 'Houve um erro ao fazer requisição com o servidor.' })
 		}
 	}
 
@@ -46,7 +46,7 @@ export class UsersController {
 
 		} catch (error) {
 			console.log(error)
-			return res.status(500).json({ message: 'Algo deu errado.' })
+			return res.status(500).json({ message: 'Houve um erro ao fazer requisição com o servidor.' })
 		}
 	}
 
@@ -58,7 +58,7 @@ export class UsersController {
 			const user = await UsersRepository.findOneBy({ id: Number(id) })
 
 			if (!user) {
-				return res.status(404).json({ message: 'O usuário não existe.' })
+				return res.status(404).json({ message: 'Houve um erro ao fazer requisição com o servidor.' })
 			} else {
 				await UsersRepository.update(id, {
 					userName,
@@ -76,7 +76,7 @@ export class UsersController {
 
 		} catch (error) {
 			console.log(error)
-			return res.status(500).json({ message: 'Algo deu errado.' })
+			return res.status(500).json({ message: 'Houve um erro ao fazer requisição com o servidor.' })
 		}
 	}
 
@@ -96,7 +96,7 @@ export class UsersController {
 					
 		} catch (error) {
 			console.log(error)
-			return res.status(500).json({ message: 'Algo deu errado.' })
+			return res.status(500).json({ message: 'Houve um erro ao fazer requisição com o servidor.' })
 		}		
 	}
 }

@@ -6,7 +6,8 @@ class ValidationMiddleware {
             userName: Joi.string().required(),
             nickname: Joi.string().required(),
             email: Joi.string().email().required(),
-            password: Joi.string().required()
+            password: Joi.string().required(),
+            age: Joi.number().required()
         })
     });
 
@@ -18,19 +19,22 @@ class ValidationMiddleware {
 
     classes = validate({
         body: Joi.object({
-
+            className: Joi.string().required()
         })
     });
 
     lessons = validate({
         body: Joi.object({
-
+            classesId: Joi.number().required(), 
+            points: Joi.number().required()
         })
     });
 
     questions = validate({
         body: Joi.object({
-            questionContent: Joi.string().required()
+            questionContent: Joi.string().required(),
+            lessonsId: Joi.number().required(), 
+            lessonsClassesId: Joi.number().required()
         })
     })
 
@@ -42,7 +46,10 @@ class ValidationMiddleware {
 
     songs = validate({
         body: Joi.object({
-
+            songName: Joi.string().required(),
+            songVideoLink: Joi.string().required(),
+            songContentLink: Joi.string().required(),
+            classesId: Joi.number().required()
         })
     })
 
