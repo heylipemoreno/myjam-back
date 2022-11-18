@@ -17,6 +17,9 @@ export class Classes {
   @PrimaryGeneratedColumn({ type: "int", name: "id" })
   id: number;
 
+  @Column("varchar", { name: "className", length: 45 })
+  className: string;
+
   @CreateDateColumn({ name: "createdAt" })
   createdAt: Date;
 
