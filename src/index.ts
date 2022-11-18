@@ -4,6 +4,8 @@ import { AppDataSource } from './data-source'
 import routes from './routes'
 import errorsMiddleware from './middlewares/errorsMiddleware'
 
+const port = process.env.PORT || 8000
+
 AppDataSource.initialize().then(() => {
     const app = express()
 
@@ -18,5 +20,5 @@ AppDataSource.initialize().then(() => {
 
     console.log('Status: OK [iniciado]')
 
-    return app.listen(process.env.PORT)
+    return app.listen(port)
 })
