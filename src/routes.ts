@@ -7,6 +7,7 @@ import { QuestionsController } from './controllers/QuestionsController';
 import { LessonsController } from './controllers/LessonsController';
 import { ClassesController } from './controllers/ClassesController';
 import { SongsController } from './controllers/SongsController';
+import { LoginController } from './controllers/LoginController';
 
 const routes = Router()
 
@@ -29,7 +30,7 @@ routes.get('/classes', new ClassesController().list)
 routes.get('/songs', new SongsController().list)
 
 //LOGIN
-
+routes.post('/users/login', new LoginController().login)
 
 //GET ID
 routes.get('/users/:id', new UsersController().listOne)
