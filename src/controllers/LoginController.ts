@@ -18,11 +18,11 @@ export class LoginController {
             })
 
             if (!user) {
-                res.status(404).send('Credenciais não encontrada.')
+                res.status(404).send(constants.LOGIN.CONTROLLER.EMAIL_INCORRECT)
             }
 
             if (!bcrypt.compareSync(password, user.password)) {
-                res.status(401).send('Senha incorreta.')
+                res.status(401).send(constants.LOGIN.CONTROLLER.PASSWORD_INCORRECT)
             }
 
             const token = jtw.sign({
@@ -40,7 +40,7 @@ export class LoginController {
             })
         } catch (error) {
             console.log(error)
-            res.status(500).send('error error error')
+            res.status(500).send(constants.LOGIN.ERROR)
         }
     }
 }
