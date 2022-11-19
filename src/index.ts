@@ -1,8 +1,10 @@
 import express from 'express'
 import cors from 'cors'
-import { AppDataSource } from './data-source'
+import { AppDataSource } from './config/database/data-source'
 import routes from './routes'
 import errorsMiddleware from './middlewares/errorsMiddleware'
+import { Console } from 'console'
+import constants from './config/constants/constants'
 
 const port = process.env.PORT || 8000
 
@@ -15,10 +17,10 @@ AppDataSource.initialize().then(() => {
     app.use(errorsMiddleware)
 
     app.get('/', (request: express.Request, response: express.Response) => {
-        return response.status(200).send('API funcionando corretamente.')
+        return response.status(200).send(constants.APP.MESSAGES.ROUTE_TEST)
     })
 
-    console.log('Status: OK [iniciado]')
-
-    return app.listen(port)
+    return app.listen(port, ()=>{
+        console.log(constants.APP.MESSAGES.STATUS.OK)
+    })
 })
