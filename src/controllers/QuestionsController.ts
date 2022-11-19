@@ -1,11 +1,12 @@
-import { request, Request, Response } from "express";
+import { Request, Response } from "express";
+import constants from "../config/constants/constants";
 import { QuestionsRepository } from "../repositories/QuestionsRepository";
 
 export class QuestionsController {
     async create(req: Request, res: Response) {
         const { questionContent, lessonsId, lessonsClassesId } = req.body;
         if (!questionContent) {
-            return res.status(400).send({ message: 'O conteúdo da questão é obrigatório!' })
+            return res.status(400).send(constants.ERROR.MESSAGE.VALIDATION)
         }
         try {
             const newQuestion = QuestionsRepository.create({ questionContent, lessonsId, lessonsClassesId });
@@ -13,7 +14,7 @@ export class QuestionsController {
             res.status(201).send(newQuestion);
         } catch (error) {
             console.log(error)
-            return res.status(500).send({ error: 'Houve um problema ao tentar criar uma nova questão.' })
+            return res.status(500).send(constants.CRUD.ERROR)
         }
     }
     async list(req: Request, res: Response) {
@@ -22,7 +23,7 @@ export class QuestionsController {
             res.status(200).send(questions);
         } catch (error) {
             console.log(error)
-            return res.status(500).send({ error: 'Houve um problema ao tentar criar uma nova questão.' })
+            return res.status(500).send(constants.CRUD.ERROR)
         }
     }
     async listOne(req: Request, res: Response) {
@@ -30,12 +31,12 @@ export class QuestionsController {
         try {
             const question = await QuestionsRepository.findOneBy({ id: Number(id) });
             if (!question) {
-                return res.status(404).send({ message: `Não foi encontrado nenhuma questão com o ID:${id}` });
+                return res.status(404).send(constants.CRUD.QUESTIONS.NOT_FOUND);
             }
             res.status(200).send(question);
         } catch (error) {
             console.log(error)
-            return res.status(500).send({ error: 'Houve um problema ao tentar criar uma nova questão.' })
+            return res.status(500).send(constants.CRUD.ERROR)
         }
     }
     async update(req: Request, res: Response) {
@@ -44,17 +45,17 @@ export class QuestionsController {
         try {
             const question = await QuestionsRepository.findOneBy({ id: Number(id) });
             if (!question) {
-                return res.status(404).send({ message: `Não foi encontrado nenhuma questão com o ID:${id}` })
+                return res.status(404).send(constants.CRUD.QUESTIONS.NOT_FOUND)
             }
             await QuestionsRepository.update(id, {
                 questionContent,
                 lessonsId,
                 lessonsClassesId
             })
-            res.status(200).send({ message: `Questão atalizada com sucesso!`, conteudo: questionContent });
+            res.status(200).send({ message: constants.CRUD.QUESTIONS.UPDATE, conteudo: questionContent });
         } catch (error) {
             console.log(error)
-            return res.status(500).send({ error: 'Houve um problema ao tentar criar uma nova questão.' })
+            return res.status(500).send(constants.CRUD.ERROR)
         }
     }
     async delete(req: Request, res: Response) {
@@ -64,7 +65,7 @@ export class QuestionsController {
             res.status(204).send();
         } catch (error) {
             console.log(error)
-            return res.status(500).send({ error: 'Houve um problema ao tentar criar uma nova questão.' })
+            return res.status(500).send(constants.CRUD.ERROR)
         }
     }
 }

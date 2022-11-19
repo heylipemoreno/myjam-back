@@ -1,4 +1,5 @@
 import { Request, Response } from 'express'
+import constants from '../config/constants/constants'
 import { ClassesRepository } from '../repositories/ClassesRepository'
 
 export class ClassesController {
@@ -6,7 +7,7 @@ export class ClassesController {
         const { className } = req.body
 
 		if (!className) {
-			return res.status(400).json({ message: 'É obrigatório informar o nome da aula desejada.' })
+			return res.status(400).json(constants.ERROR.MESSAGE.VALIDATION)
 		}
 		
 		try {
@@ -17,7 +18,7 @@ export class ClassesController {
 			return res.status(201).json(newClass)
 		} catch (error) {
 			console.log(error)
-			return res.status(500).json({ message: 'Algo deu errado.' })
+			return res.status(500).json(constants.CRUD.ERROR)
 		}
 	}
 
@@ -28,7 +29,7 @@ export class ClassesController {
 			res.status(200).json(classes);
 		} catch (error) {
 			console.log(error)
-			return res.status(500).json({ message: 'Algo deu errado.' })
+			return res.status(500).json(constants.CRUD.ERROR)
 		}
 	}
 
@@ -39,14 +40,14 @@ export class ClassesController {
 			const classes = await ClassesRepository.findOneBy({ id: Number(id) })
 
 			if (!classes) {
-				return res.status(404).json({ message: 'Esta aula não está registrada.' })
+				return res.status(404).json(constants.ERROR.MESSAGE.VALIDATION)
 			} else {
 				res.status(200).json(classes);
 			}
 
 		} catch (error) {
 			console.log(error)
-			return res.status(500).json({ message: 'Algo deu errado.' })
+			return res.status(500).json(constants.CRUD.ERROR)
 		}
 	}
 
@@ -58,18 +59,18 @@ export class ClassesController {
 			const classes = await ClassesRepository.findOneBy({ id: Number(id) })
 
 			if (!classes) {
-				return res.status(404).json({ message: 'Esta aula não está registrada.' })
+				return res.status(404).json(constants.CRUD.CLASSES.NOT_FOUND)
 			} else {
 				await ClassesRepository.update(id, {
 					className
 				});
 	
-				res.status(200).json({ message: 'Esta aula foi atualizada com sucesso.' });
+				res.status(200).json(constants.CRUD.CLASSES.UPDATE);
 			}
 
 		} catch (error) {
 			console.log(error)
-			return res.status(500).json({ message: 'Algo deu errado.' })
+			return res.status(500).json(constants.CRUD.ERROR)
 		}
 	}
 
@@ -80,16 +81,16 @@ export class ClassesController {
 			const classes = await ClassesRepository.findOneBy({ id: Number(id) })
 
 			if (!classes) {
-				return res.status(404).json({ message: 'Esta aula não está registrada.' })
+				return res.status(404).json(constants.CRUD.CLASSES.NOT_FOUND)
 			} else {
 				await ClassesRepository.delete({ id: Number(id) })
 
-				res.status(200).json({ message: 'Esta aula foi removida com sucesso.' })
+				res.status(204).json()
 			}
 					
 		} catch (error) {
 			console.log(error)
-			return res.status(500).json({ message: 'Algo deu errado.' })
+			return res.status(500).json(constants.CRUD.ERROR)
 		}		
 	}
 }
