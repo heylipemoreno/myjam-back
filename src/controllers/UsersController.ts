@@ -1,8 +1,10 @@
 import { Request, Response } from 'express'
 import { UsersRepository } from '../repositories/UsersRepository'
+import bcrypt from 'bcryptjs'
 
 export class UsersController {
 	async create(req: Request, res: Response) {
+		req.body.password = bcrypt.hashSync(req.body.password,10);
 		const { userName, nickname, email, password, age } = req.body
 
 		if (!userName && !nickname && !email && !password && !age) {
