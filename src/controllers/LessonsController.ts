@@ -1,4 +1,5 @@
 import { Request, Response } from 'express';
+import constants from '../config/constants/constants';
 import { LessonsRepository } from '../repositories/LessonsRepository';
 
 export class LessonsController {
@@ -6,7 +7,7 @@ export class LessonsController {
         const { classesId, points } = req.body;
 
         if (!classesId && !points) {
-            return res.status(400).json({ message: 'Campos obrigatórios!' });
+            return res.status(400).json(constants.ERROR.MESSAGE.VALIDATION);
         }
 
         try {
@@ -15,7 +16,7 @@ export class LessonsController {
             return res.status(201).json(newLesson);
         } catch (error) {
             console.log(error);
-            return res.status(500).json({ message: 'Algo deu errado.' });
+            return res.status(500).json(constants.CRUD.ERROR);
         }
     }
 
@@ -25,7 +26,7 @@ export class LessonsController {
             res.status(200).json(lessons);
         } catch (error) {
             console.log(error);
-            return res.status(500).json({ message: 'Algo deu errado.' });
+            return res.status(500).json(constants.CRUD.ERROR);
         }
     }
 
@@ -35,13 +36,13 @@ export class LessonsController {
             const lesson = await LessonsRepository.findOneBy({ id: Number(id) });
 
             if (!lesson) {
-                return res.status(404).json({ message: 'A lição não exisste.' });
+                return res.status(404).json(constants.CRUD.LESSONS.NOT_FOUND);
             } else {
                 res.status(200).json(lesson);
             }
         } catch (error) {
             console.log(error);
-            return res.status(500).json({ message: 'A lição não existe.' });
+            return res.status(500).json(constants.CRUD.ERROR);
         }
     }
 
@@ -53,18 +54,18 @@ export class LessonsController {
             const lesson = await LessonsRepository.findOneBy({ id: Number(id) });
 
             if (!lesson) {
-                return res.status(404).json({ message: 'A lição não existe.' });
+                return res.status(404).json(constants.CRUD.LESSONS.NOT_FOUND);
             } else {
                 await LessonsRepository.update(id, {
                     classesId,
                     points
                 });
 
-                res.status(200).json({ message: 'Lições atualizadas com sucesso' });
+                res.status(200).json(constants.CRUD.LESSONS.UPDATE);
             }
         } catch (error) {
             console.log(error);
-            return res.status(500).json({ message: 'Algo deu errado' });
+            return res.status(500).json(constants.CRUD.ERROR);
         }
     }
 
@@ -76,7 +77,7 @@ export class LessonsController {
             res.status(204).json();
         } catch (error) {
             console.log(error);
-            return res.status(500).json({ error: 'Algo deu errado.' });
+            return res.status(500).json(constants.CRUD.ERROR);
         }
     }
 }

@@ -1,4 +1,5 @@
 import { Request, Response } from 'express'
+import constants from '../config/constants/constants'
 import { GenresRepository } from '../repositories/GenresRepository'
 
 export class GenresController {
@@ -6,7 +7,7 @@ export class GenresController {
 		const { genreName } = req.body
 
 		if (!genreName) {
-			return res.status(400).json({ message: 'É obrigatório informar o nome do gênero musical desejado.' })
+			return res.status(400).json(constants.ERROR.MESSAGE.VALIDATION)
 		}
 
 		try {
@@ -17,7 +18,7 @@ export class GenresController {
 			return res.status(201).json(newGenre)
 		} catch (error) {
 			console.log(error)
-			return res.status(500).json({ message: 'Algo deu errado.' })
+			return res.status(500).json(constants.CRUD.ERROR)
 		}
 	}
 
@@ -28,7 +29,7 @@ export class GenresController {
 			res.status(200).json(genres);
 		} catch (error) {
 			console.log(error)
-			return res.status(500).json({ message: 'Algo deu errado.' })
+			return res.status(500).json(constants.CRUD.ERROR)
 		}
 	}
 
@@ -39,14 +40,14 @@ export class GenresController {
 			const genre = await GenresRepository.findOneBy({ id: Number(id) })
 
 			if (!genre) {
-				return res.status(404).json({ message: 'Este gênero musical não está registrado.' })
+				return res.status(404).json(constants.CRUD.GENRES.NOT_FOUND)
 			} else {
 				res.status(200).json(genre);
 			}
 
 		} catch (error) {
 			console.log(error)
-			return res.status(500).json({ message: 'Algo deu errado.' })
+			return res.status(500).json(constants.CRUD.ERROR)
 		}
 	}
 
@@ -58,18 +59,18 @@ export class GenresController {
 			const genre = await GenresRepository.findOneBy({ id: Number(id) })
 
 			if (!genre) {
-				return res.status(404).json({ message: 'Este gênero musical não está registrado.' })
+				return res.status(404).json(constants.CRUD.GENRES.NOT_FOUND)
 			} else {
 				await GenresRepository.update(id, {
 					genreName
 				});
 	
-				res.status(200).json({ message: 'O gênero musical foi atualizado com sucesso.' });
+				res.status(200).json(constants.CRUD.GENRES.UPDATE);
 			}
 
 		} catch (error) {
 			console.log(error)
-			return res.status(500).json({ message: 'Algo deu errado.' })
+			return res.status(500).json(constants.CRUD.ERROR)
 		}
 	}
 
@@ -80,16 +81,16 @@ export class GenresController {
 			const genre = await GenresRepository.findOneBy({ id: Number(id) })
 
 			if (!genre) {
-				return res.status(404).json({ message: 'Este gênero musical não está registrado.' })
+				return res.status(404).json(constants.CRUD.GENRES.NOT_FOUND)
 			} else {
 				await GenresRepository.delete({ id: Number(id) })
 
-				res.status(200).json({ message: 'Este gênero musical foi removido com sucesso.' })
+				res.status(204).json()
 			}
 					
 		} catch (error) {
 			console.log(error)
-			return res.status(500).json({ message: 'Algo deu errado.' })
+			return res.status(500).json(constants.CRUD.ERROR)
 		}		
 	}
 }

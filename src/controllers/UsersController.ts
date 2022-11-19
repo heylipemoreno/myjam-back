@@ -1,6 +1,7 @@
 import { Request, Response } from 'express'
 import { UsersRepository } from '../repositories/UsersRepository'
 import bcrypt from 'bcryptjs'
+import constants from '../config/constants/constants';
 
 export class UsersController {
 	async create(req: Request, res: Response) {
@@ -8,7 +9,7 @@ export class UsersController {
 		const { userName, nickname, email, password, age } = req.body
 
 		if (!userName && !nickname && !email && !password && !age) {
-			return res.status(400).json({ message: 'Os campos userName, nickname, email, password e age são obrigatórios.' })
+			return res.status(400).json(constants.ERROR.MESSAGE.VALIDATION);
 		}
 		const totalPoints = 0;
 		try {
@@ -19,7 +20,7 @@ export class UsersController {
 			return res.status(201).json(newUser)
 		} catch (error) {
 			console.log(error)
-			return res.status(500).json({ message: 'Houve um erro ao fazer requisição com o servidor.' })
+			return res.status(500).json(constants.CRUD.ERROR)
 		}
 	}
 
@@ -30,7 +31,7 @@ export class UsersController {
 			res.status(200).json(users);
 		} catch (error) {
 			console.log(error)
-			return res.status(500).json({ message: 'Houve um erro ao fazer requisição com o servidor.' })
+			return res.status(500).json(constants.CRUD.ERROR)
 		}
 	}
 
@@ -41,14 +42,14 @@ export class UsersController {
 			const user = await UsersRepository.findOneBy({ id: Number(id) })
 
 			if (!user) {
-				return res.status(404).json({ message: 'O usuário não existe.' })
+				return res.status(404).json(constants.CRUD.USERS.NOT_FOUND)
 			} else {
 				res.status(200).json(user);
 			}
 
 		} catch (error) {
 			console.log(error)
-			return res.status(500).json({ message: 'Houve um erro ao fazer requisição com o servidor.' })
+			return res.status(500).json(constants.CRUD.ERROR)
 		}
 	}
 
@@ -60,7 +61,7 @@ export class UsersController {
 			const user = await UsersRepository.findOneBy({ id: Number(id) })
 
 			if (!user) {
-				return res.status(404).json({ message: 'Houve um erro ao fazer requisição com o servidor.' })
+				return res.status(404).json(constants.CRUD.USERS.NOT_FOUND)
 			} else {
 				await UsersRepository.update(id, {
 					userName,
@@ -73,12 +74,12 @@ export class UsersController {
 					qtdChords
 				});
 	
-				res.status(200).json({ message: 'Os dados do usuário foram atualizados com sucesso.' });
+				res.status(200).json(constants.CRUD.USERS.UPDATE);
 			}
 
 		} catch (error) {
 			console.log(error)
-			return res.status(500).json({ message: 'Houve um erro ao fazer requisição com o servidor.' })
+			return res.status(500).json(constants.CRUD.ERROR)
 		}
 	}
 
@@ -89,16 +90,16 @@ export class UsersController {
 			const user = await UsersRepository.findOneBy({ id: Number(id) })
 
 			if (!user) {
-				return res.status(404).json({ message: 'O usuário não existe.' })
+				return res.status(404).json(constants.CRUD.USERS.NOT_FOUND)
 			} else {
 				await UsersRepository.delete({ id: Number(id) })
 
-				res.status(200).json({ message: 'O usuário foi removido com sucesso.' })
+				res.status(204).send()
 			}
 					
 		} catch (error) {
 			console.log(error)
-			return res.status(500).json({ message: 'Houve um erro ao fazer requisição com o servidor.' })
+			return res.status(500).json(constants.CRUD.ERROR)
 		}		
 	}
 }

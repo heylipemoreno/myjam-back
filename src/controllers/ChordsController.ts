@@ -1,4 +1,5 @@
 import { Request, Response } from 'express'
+import constants from '../config/constants/constants'
 import { ChordsRepository } from '../repositories/ChordsRepository'
 
 export class ChordsController {
@@ -6,7 +7,7 @@ export class ChordsController {
 		const { chordName } = req.body
 
 		if (!chordName) {
-			return res.status(400).json({ message: 'É obrigatório informar o nome do acorde desejado.' })
+			return res.status(400).json(constants.ERROR.MESSAGE.VALIDATION)
 		}
 
 		try {
@@ -17,7 +18,7 @@ export class ChordsController {
 			return res.status(201).json(newChord)
 		} catch (error) {
 			console.log(error)
-			return res.status(500).json({ message: 'Algo deu errado.' })
+			return res.status(500).json(constants.CRUD.ERROR)
 		}
 	}
 
@@ -28,25 +29,25 @@ export class ChordsController {
 			res.status(200).json(chords);
 		} catch (error) {
 			console.log(error)
-			return res.status(500).json({ message: 'Algo deu errado.' })
+			return res.status(500).json(constants.CRUD.ERROR)
 		}
 	}
 
 	async listOne(req: Request, res: Response) {
 		const { id } = req.params
-		
+
 		try {
 			const chord = await ChordsRepository.findOneBy({ id: Number(id) })
 
 			if (!chord) {
-				return res.status(404).json({ message: 'Este acorde não está registrado.' })
+				return res.status(404).json(constants.CRUD.CHORDS.NOT_FOUND)
 			} else {
 				res.status(200).json(chord);
 			}
 
 		} catch (error) {
 			console.log(error)
-			return res.status(500).json({ message: 'Algo deu errado.' })
+			return res.status(500).json(constants.CRUD.ERROR)
 		}
 	}
 
@@ -58,18 +59,18 @@ export class ChordsController {
 			const chord = await ChordsRepository.findOneBy({ id: Number(id) })
 
 			if (!chord) {
-				return res.status(404).json({ message: 'Este acorde não está registrado.' })
+				return res.status(404).json(constants.CRUD.CHORDS.NOT_FOUND)
 			} else {
 				await ChordsRepository.update(id, {
 					chordName
 				});
-	
-				res.status(200).json({ message: 'O acorde foi atualizado com sucesso.' });
+
+				res.status(200).json(constants.CRUD.CHORDS.UPDATE);
 			}
 
 		} catch (error) {
 			console.log(error)
-			return res.status(500).json({ message: 'Algo deu errado.' })
+			return res.status(500).json(constants.CRUD.ERROR)
 		}
 	}
 
@@ -80,16 +81,16 @@ export class ChordsController {
 			const chord = await ChordsRepository.findOneBy({ id: Number(id) })
 
 			if (!chord) {
-				return res.status(404).json({ message: 'Este acorde não está registrado.' })
+				return res.status(404).json(constants.CRUD.CHORDS.NOT_FOUND)
 			} else {
 				await ChordsRepository.delete({ id: Number(id) })
 
-				res.status(200).json({ message: 'Este acorde foi removido com sucesso.' })
+				res.status(204).json()
 			}
-					
+
 		} catch (error) {
 			console.log(error)
-			return res.status(500).json({ message: 'Algo deu errado.' })
-		}		
+			return res.status(500).json(constants.CRUD.ERROR)
+		}
 	}
 }

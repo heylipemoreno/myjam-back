@@ -1,4 +1,5 @@
 import { Request, Response } from 'express'
+import constants from '../config/constants/constants'
 import { SongsRepository } from '../repositories/SongsRepository'
 
 export class SongsController {
@@ -6,7 +7,7 @@ export class SongsController {
 		const { songName, songVideoLink, songContentLink, classesId} = req.body
 
 		if (!songName && !songVideoLink && !songContentLink && !classesId) {
-			return res.status(400).json({ message: 'Os campos songName, songVideoLink, songContentLink e classesId são obrigatórios.' })
+			return res.status(400).json(constants.ERROR.MESSAGE.VALIDATION)
 		}
 
 		try {
@@ -17,7 +18,7 @@ export class SongsController {
 			return res.status(201).json(newSong)
 		} catch (error) {
 			console.log(error)
-			return res.status(500).json({ message: 'Algo deu errado.' })
+			return res.status(500).json(constants.CRUD.ERROR)
 		}
 	}
 
@@ -28,7 +29,7 @@ export class SongsController {
 			res.status(200).json(songs);
 		} catch (error) {
 			console.log(error)
-			return res.status(500).json({ message: 'Algo deu errado.' })
+			return res.status(500).json(constants.CRUD.ERROR)
 		}
 	}
 
@@ -39,14 +40,14 @@ export class SongsController {
 			const song = await SongsRepository.findOneBy({ id: Number(id) })
 
 			if (!song) {
-				return res.status(404).json({ message: 'Esta música não está registrada.' })
+				return res.status(404).json(constants.CRUD.SONGS.NOT_FOUND)
 			} else {
 				res.status(200).json(song);
 			}
 
 		} catch (error) {
 			console.log(error)
-			return res.status(500).json({ message: 'Algo deu errado.' })
+			return res.status(500).json(constants.CRUD.ERROR)
 		}
 	}
 
@@ -58,7 +59,7 @@ export class SongsController {
 			const song = await SongsRepository.findOneBy({ id: Number(id) })
 
 			if (!song) {
-				return res.status(404).json({ message: 'Esta música não está registrada.' })
+				return res.status(404).json(constants.CRUD.SONGS.NOT_FOUND)
 			} else {
 				await SongsRepository.update(id, {
 					songName,
@@ -67,12 +68,12 @@ export class SongsController {
 					classesId
 				});
 	
-				res.status(200).json({ message: 'Os dados da música foram atualizados com sucesso.' });
+				res.status(200).json(constants.CRUD.SONGS.UPDATE);
 			}
 
 		} catch (error) {
 			console.log(error)
-			return res.status(500).json({ message: 'Algo deu errado.' })
+			return res.status(500).json(constants.CRUD.ERROR)
 		}
 	}
 
@@ -83,16 +84,16 @@ export class SongsController {
 			const song = await SongsRepository.findOneBy({ id: Number(id) })
 
 			if (!song) {
-				return res.status(404).json({ message: 'Esta música não está registrada.' })
+				return res.status(404).json(constants.CRUD.SONGS.NOT_FOUND)
 			} else {
 				await SongsRepository.delete({ id: Number(id) })
 
-				res.status(200).json({ message: 'A música foi removida com sucesso.' })
+				res.status(204).json()
 			}
 					
 		} catch (error) {
 			console.log(error)
-			return res.status(500).json({ message: 'Algo deu errado.' })
+			return res.status(500).json(constants.CRUD.ERROR)
 		}		
 	}
 }

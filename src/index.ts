@@ -16,7 +16,7 @@ AppDataSource.initialize().then(() => {
     app.use(errorsMiddleware)
 
     app.get('/', (request: express.Request, response: express.Response) => {
-        return response.status(200).send(constants.APP.MESSAGES.ROUTE_TEST)
+        return response.status(200).send(`API working correctly [Running in Port:${port}]`)
     })
 
     return app.listen(port, ()=>{
