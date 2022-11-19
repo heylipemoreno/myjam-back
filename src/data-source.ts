@@ -15,7 +15,7 @@ export const AppDataSource = new DataSource ({
     migrations: [`${__dirname}/**/migrations/*.{ts,js}`]
 })
 
-if(process.env.NODE_ENV === 'producion'){
+if(process.env.NODE_ENV === 'production'){
     Object.assign(
         AppDataSource,
         {
