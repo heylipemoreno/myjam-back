@@ -1,9 +1,8 @@
 import express from 'express'
 import cors from 'cors'
-import { AppDataSource } from './config/database/data-source'
+import { AppDataSource } from './data-source'
 import routes from './routes'
 import errorsMiddleware from './middlewares/errorsMiddleware'
-import { Console } from 'console'
 import constants from './config/constants/constants'
 
 const port = process.env.PORT || 8000
