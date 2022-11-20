@@ -4,18 +4,6 @@ import bcrypt from 'bcryptjs'
 import constants from '../config/constants/constants';
 
 export class UsersController {
-	async create(req: Request, res: Response) {
-		req.body.password = bcrypt.hashSync(req.body.password,10);
-		const { userName, email, password } = req.body;
-		try {
-			const newUser = UsersRepository.create({ userName, email, password })
-			await UsersRepository.save(newUser)
-			return res.status(201).json(newUser)
-		} catch (error) {
-			console.log(error)
-			return res.status(500).json(constants.CRUD.ERROR)
-		}
-	}
 
 	async list(req: Request, res: Response) {
 		try {
@@ -43,6 +31,9 @@ export class UsersController {
 	}
 
 	async update(req: Request, res: Response) {
+		if(req.body.password){
+			req.body.password = bcrypt.hashSync(req.body.password, 10);
+		}
 		const { userName, email, password, totalPoints, qtdSongs, qtdChords } = req.body
 		const { id } = req.params
 		try {
@@ -79,6 +70,6 @@ export class UsersController {
 		} catch (error) {
 			console.log(error)
 			return res.status(500).json(constants.CRUD.ERROR)
-		}		
+		}
 	}
 }

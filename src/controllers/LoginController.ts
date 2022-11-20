@@ -19,10 +19,7 @@ export class LoginController {
                 res.status(401).send(constants.LOGIN.CONTROLLER.PASSWORD_INCORRECT)
             }
             const token = jtw.sign({
-                id: user.id,
-                userName: user.userName,
-                qtdSongs: user.qtdSongs,
-                qtdChords: user.qtdChords
+                id: user.id
             }, secretKey, {
                 expiresIn: '1 day'
             })
