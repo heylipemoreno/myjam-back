@@ -4,10 +4,8 @@ class ValidationMiddleware {
     users = validate({
         body: Joi.object({
             userName: Joi.string().required(),
-            nickname: Joi.string().required(),
             email: Joi.string().email().required(),
-            password: Joi.string().required(),
-            age: Joi.number().required()
+            password: Joi.string().required()
         })
     });
 
@@ -25,16 +23,15 @@ class ValidationMiddleware {
 
     lessons = validate({
         body: Joi.object({
-            classesId: Joi.number().required(), 
-            points: Joi.number().required()
+            lessonName: Joi.string().required()
         })
     });
 
     questions = validate({
         body: Joi.object({
             questionContent: Joi.string().required(),
-            lessonsId: Joi.number().required(), 
-            lessonsClassesId: Joi.number().required()
+            questionAnswer:Joi.string().required(),
+            lessonsId: Joi.number().required()
         })
     })
 

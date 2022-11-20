@@ -10,37 +10,31 @@ import {
 } from "typeorm";
 import { Lessons } from "./Lessons";
 
-@Index("fk_questions_lessons1_idx", ["lessonsId", "lessonsClassesId"], {})
-@Entity("questions", { schema: "myjam-database" })
+@Index("fk_questions_lessons1_idx", ["lessonsId"], {})
+@Entity("questions", { schema: "myjam_database" })
 export class Questions {
   @PrimaryGeneratedColumn({ type: "int", name: "id" })
   id: number;
 
+  @Column("text", { name: "questionContent" })
+  questionContent: string;
+
+  @Column("varchar", { name: "questionAnswer", length: 100 })
+  questionAnswer: string;
+
   @CreateDateColumn({ name: "createdAt" })
   createdAt: Date;
 
-  @UpdateDateColumn({ name: "updatedAt", nullable: true })
-  updatedAt: Date | null;
+  @UpdateDateColumn({ name: "updatedAt" })
+  updatedAt: Date;
 
-  @Column("text", { name: "questionContent", nullable: true })
-  questionContent: string | null;
-
-  @Column("datetime", { name: "completedAt", nullable: true })
-  completedAt: Date | null;
-
-  @Column("int", { primary: true, name: "lessons_id" })
+  @Column("int", { name: "lessons_id" })
   lessonsId: number;
-
-  @Column("int", { primary: true, name: "lessons_classes_id" })
-  lessonsClassesId: number;
 
   @ManyToOne(() => Lessons, (lessons) => lessons.questions, {
     onDelete: "NO ACTION",
     onUpdate: "NO ACTION",
   })
-  @JoinColumn([
-    { name: "lessons_id", referencedColumnName: "id" },
-    { name: "lessons_classes_id", referencedColumnName: "classesId" },
-  ])
+  @JoinColumn([{ name: "lessons_id", referencedColumnName: "id" }])
   lessons: Lessons;
 }

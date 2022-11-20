@@ -6,14 +6,13 @@ import constants from '../config/constants/constants';
 export class UsersController {
 	async create(req: Request, res: Response) {
 		req.body.password = bcrypt.hashSync(req.body.password,10);
-		const { userName, nickname, email, password, age } = req.body
+		const { userName, email, password } = req.body
 
-		if (!userName && !nickname && !email && !password && !age) {
+		if (!userName && !email && !password) {
 			return res.status(400).json(constants.ERROR.MESSAGE.VALIDATION);
 		}
-		const totalPoints = 0;
 		try {
-			const newUser = UsersRepository.create({ userName, nickname, email, password, age, totalPoints })
+			const newUser = UsersRepository.create({ userName, email, password })
 
 			await UsersRepository.save(newUser)
 
@@ -54,7 +53,7 @@ export class UsersController {
 	}
 
 	async update(req: Request, res: Response) {
-		const { userName, nickname, email, password, age, totalPoints, qtdSongs, qtdChords } = req.body
+		const { userName, email, password, totalPoints, qtdSongs, qtdChords } = req.body
 		const { id } = req.params
 
 		try {
@@ -65,10 +64,8 @@ export class UsersController {
 			} else {
 				await UsersRepository.update(id, {
 					userName,
-					nickname,
 					email,
 					password,
-					age,
 					totalPoints,
 					qtdSongs,
 					qtdChords

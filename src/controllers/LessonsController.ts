@@ -4,14 +4,14 @@ import { LessonsRepository } from '../repositories/LessonsRepository';
 
 export class LessonsController {
     async create(req: Request, res: Response) {
-        const { classesId, points } = req.body;
+        const { lessonName } = req.body;
 
-        if (!classesId && !points) {
+        if (!lessonName) {
             return res.status(400).json(constants.ERROR.MESSAGE.VALIDATION);
         }
 
         try {
-            const newLesson = LessonsRepository.create({ classesId, points });
+            const newLesson = LessonsRepository.create({ lessonName });
             await LessonsRepository.save(newLesson);
             return res.status(201).json(newLesson);
         } catch (error) {
@@ -47,7 +47,7 @@ export class LessonsController {
     }
 
     async update(req: Request, res: Response) {
-        const { classesId, points } = req.body;
+        const { lessonName } = req.body;
         const { id } = req.params;
 
         try {
@@ -57,8 +57,7 @@ export class LessonsController {
                 return res.status(404).json(constants.CRUD.LESSONS.NOT_FOUND);
             } else {
                 await LessonsRepository.update(id, {
-                    classesId,
-                    points
+                    lessonName
                 });
 
                 res.status(200).json(constants.CRUD.LESSONS.UPDATE);
