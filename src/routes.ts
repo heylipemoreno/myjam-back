@@ -8,11 +8,13 @@ import { LessonsController } from './controllers/LessonsController';
 import { ClassesController } from './controllers/ClassesController';
 import { SongsController } from './controllers/SongsController';
 import { LoginController } from './controllers/LoginController';
+import { RegisterController } from './controllers/RegisterController';
+import { UsersQuestionsRepository } from './repositories/UsersQuestionsRepository';
 
 const routes = Router()
 
 //POST
-routes.post('/users', validationMiddleware.users, new UsersController().create)
+// criação de usuário virou register
 routes.post('/genres', validationMiddleware.genres, new GenresController().create)
 routes.post('/chords', validationMiddleware.chords, new ChordsController().create)
 routes.post('/questions', validationMiddleware.questions, new QuestionsController().create)
@@ -32,6 +34,10 @@ routes.get('/songs', new SongsController().list)
 //LOGIN
 routes.post('/users/login', new LoginController().login)
 
+//REGISTER
+routes.post('/users/register', validationMiddleware.register, new RegisterController().register);
+routes.post('/users/questions', validationMiddleware.registerQuestions, new RegisterController().question)
+
 //GET ID
 routes.get('/users/:id', new UsersController().listOne)
 routes.get('/genres/:id', new GenresController().listOne)
@@ -42,7 +48,7 @@ routes.get('/classes/:id', new ClassesController().listOne)
 routes.get('/songs/:id', new SongsController().listOne)
 
 //UPDATE
-routes.put('/users/:id', validationMiddleware.users, new UsersController().update)
+routes.put('/users/:id', new UsersController().update)
 routes.put('/genres/:id', validationMiddleware.genres, new GenresController().update)
 routes.put('/chords/:id', validationMiddleware.chords, new ChordsController().update)
 routes.put('/questions/:id', validationMiddleware.questions, new QuestionsController().update)

@@ -1,13 +1,23 @@
 import { validate, Joi } from 'express-validation'
 
 class ValidationMiddleware {
-    users = validate({
+    register = validate({
         body: Joi.object({
             userName: Joi.string().required(),
             email: Joi.string().email().required(),
             password: Joi.string().required()
         })
     });
+
+    registerQuestions = validate({
+        body: Joi.object({
+            instrumentId: Joi.number().required(),
+            experienceId: Joi.number().required(),
+            practiceId: Joi.number().required(),
+            styleId: Joi.number().required(),
+            learnId: Joi.number().required()
+        })
+    })
 
     genres = validate({
         body: Joi.object({
@@ -30,7 +40,7 @@ class ValidationMiddleware {
     questions = validate({
         body: Joi.object({
             questionContent: Joi.string().required(),
-            questionAnswer:Joi.string().required(),
+            questionAnswer: Joi.string().required(),
             lessonsId: Joi.number().required()
         })
     })
