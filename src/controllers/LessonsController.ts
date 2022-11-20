@@ -5,11 +5,6 @@ import { LessonsRepository } from '../repositories/LessonsRepository';
 export class LessonsController {
     async create(req: Request, res: Response) {
         const { lessonName } = req.body;
-
-        if (!lessonName) {
-            return res.status(400).json(constants.ERROR.MESSAGE.VALIDATION);
-        }
-
         try {
             const newLesson = LessonsRepository.create({ lessonName });
             await LessonsRepository.save(newLesson);
@@ -34,7 +29,6 @@ export class LessonsController {
         const { id } = req.params;
         try {
             const lesson = await LessonsRepository.findOneBy({ id: Number(id) });
-
             if (!lesson) {
                 return res.status(404).json(constants.CRUD.LESSONS.NOT_FOUND);
             } else {
@@ -49,17 +43,14 @@ export class LessonsController {
     async update(req: Request, res: Response) {
         const { lessonName } = req.body;
         const { id } = req.params;
-
         try {
             const lesson = await LessonsRepository.findOneBy({ id: Number(id) });
-
             if (!lesson) {
                 return res.status(404).json(constants.CRUD.LESSONS.NOT_FOUND);
             } else {
                 await LessonsRepository.update(id, {
                     lessonName
                 });
-
                 res.status(200).json(constants.CRUD.LESSONS.UPDATE);
             }
         } catch (error) {
