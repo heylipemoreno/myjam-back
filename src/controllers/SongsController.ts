@@ -4,17 +4,10 @@ import { SongsRepository } from '../repositories/SongsRepository'
 
 export class SongsController {
 	async create(req: Request, res: Response) {
-		const { songName, songVideoLink, songContentLink, classesId} = req.body
-
-		if (!songName && !songVideoLink && !songContentLink && !classesId) {
-			return res.status(400).json(constants.ERROR.MESSAGE.VALIDATION)
-		}
-
+		const { songName, songVideoLink, songContentLink, classesId} = req.body;
 		try {
 			const newSong = SongsRepository.create({ songName, songVideoLink, songContentLink, classesId})
-
 			await SongsRepository.save(newSong)
-
 			return res.status(201).json(newSong)
 		} catch (error) {
 			console.log(error)
@@ -25,7 +18,6 @@ export class SongsController {
 	async list(req: Request, res: Response) {
 		try {
 			const songs = await SongsRepository.find()
-
 			res.status(200).json(songs);
 		} catch (error) {
 			console.log(error)
@@ -35,16 +27,13 @@ export class SongsController {
 
 	async listOne(req: Request, res: Response) {
 		const { id } = req.params
-		
 		try {
 			const song = await SongsRepository.findOneBy({ id: Number(id) })
-
 			if (!song) {
 				return res.status(404).json(constants.CRUD.SONGS.NOT_FOUND)
 			} else {
 				res.status(200).json(song);
 			}
-
 		} catch (error) {
 			console.log(error)
 			return res.status(500).json(constants.CRUD.ERROR)
@@ -54,10 +43,8 @@ export class SongsController {
 	async update(req: Request, res: Response) {
 		const { songName, songVideoLink, songContentLink, classesId } = req.body
 		const { id } = req.params
-
 		try {
 			const song = await SongsRepository.findOneBy({ id: Number(id) })
-
 			if (!song) {
 				return res.status(404).json(constants.CRUD.SONGS.NOT_FOUND)
 			} else {
@@ -67,10 +54,8 @@ export class SongsController {
 					songContentLink,
 					classesId
 				});
-	
 				res.status(200).json(constants.CRUD.SONGS.UPDATE);
 			}
-
 		} catch (error) {
 			console.log(error)
 			return res.status(500).json(constants.CRUD.ERROR)
@@ -79,18 +64,14 @@ export class SongsController {
 
 	async delete(req: Request, res: Response) {
 		const { id } = req.params
-
 		try {
 			const song = await SongsRepository.findOneBy({ id: Number(id) })
-
 			if (!song) {
 				return res.status(404).json(constants.CRUD.SONGS.NOT_FOUND)
 			} else {
 				await SongsRepository.delete({ id: Number(id) })
-
 				res.status(204).json()
 			}
-					
 		} catch (error) {
 			console.log(error)
 			return res.status(500).json(constants.CRUD.ERROR)

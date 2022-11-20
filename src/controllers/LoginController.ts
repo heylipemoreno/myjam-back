@@ -7,23 +7,17 @@ import constants from "../config/constants/constants";
 
 export class LoginController {
     async login(req: Request, res: Response) {
-        const { email, password } = req.body
-        if (!email && !password) {
-            res.status(400).send(constants.ERROR.MESSAGE.VALIDATION);
-        }
+        const { email, password } = req.body;
         try {
             const user = await UsersRepository.findOneOrFail({
                 where: { email }
             })
-
             if (!user) {
                 res.status(404).send(constants.LOGIN.CONTROLLER.EMAIL_INCORRECT)
             }
-
             if (!bcrypt.compareSync(password, user.password)) {
                 res.status(401).send(constants.LOGIN.CONTROLLER.PASSWORD_INCORRECT)
             }
-
             const token = jtw.sign({
                 id: user.id,
                 userName: user.userName,
@@ -32,7 +26,6 @@ export class LoginController {
             }, secretKey, {
                 expiresIn: '1 day'
             })
-
             res.status(200).send({
                 User: user,
                 Token: token

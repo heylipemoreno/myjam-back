@@ -5,9 +5,6 @@ import { QuestionsRepository } from "../repositories/QuestionsRepository";
 export class QuestionsController {
     async create(req: Request, res: Response) {
         const { questionContent, questionAnswer } = req.body;
-        if (!questionContent) {
-            return res.status(400).send(constants.ERROR.MESSAGE.VALIDATION)
-        }
         try {
             const newQuestion = QuestionsRepository.create({ questionContent, questionAnswer });
             await QuestionsRepository.save(newQuestion);
@@ -17,6 +14,7 @@ export class QuestionsController {
             return res.status(500).send(constants.CRUD.ERROR)
         }
     }
+
     async list(req: Request, res: Response) {
         try {
             const questions = await QuestionsRepository.find();
@@ -26,6 +24,7 @@ export class QuestionsController {
             return res.status(500).send(constants.CRUD.ERROR)
         }
     }
+
     async listOne(req: Request, res: Response) {
         const { id } = req.params;
         try {
@@ -39,6 +38,7 @@ export class QuestionsController {
             return res.status(500).send(constants.CRUD.ERROR)
         }
     }
+
     async update(req: Request, res: Response) {
         const { questionContent, questionAnswer } = req.body
         const { id } = req.params
@@ -57,6 +57,7 @@ export class QuestionsController {
             return res.status(500).send(constants.CRUD.ERROR)
         }
     }
+    
     async delete(req: Request, res: Response) {
         const { id } = req.params;
         try {
