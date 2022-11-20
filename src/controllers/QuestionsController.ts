@@ -4,12 +4,12 @@ import { QuestionsRepository } from "../repositories/QuestionsRepository";
 
 export class QuestionsController {
     async create(req: Request, res: Response) {
-        const { questionContent, lessonsId, lessonsClassesId } = req.body;
+        const { questionContent, questionAnswer } = req.body;
         if (!questionContent) {
             return res.status(400).send(constants.ERROR.MESSAGE.VALIDATION)
         }
         try {
-            const newQuestion = QuestionsRepository.create({ questionContent, lessonsId, lessonsClassesId });
+            const newQuestion = QuestionsRepository.create({ questionContent, questionAnswer });
             await QuestionsRepository.save(newQuestion);
             res.status(201).send(newQuestion);
         } catch (error) {
@@ -40,7 +40,7 @@ export class QuestionsController {
         }
     }
     async update(req: Request, res: Response) {
-        const { questionContent, lessonsId, lessonsClassesId } = req.body
+        const { questionContent, questionAnswer } = req.body
         const { id } = req.params
         try {
             const question = await QuestionsRepository.findOneBy({ id: Number(id) });
@@ -49,8 +49,7 @@ export class QuestionsController {
             }
             await QuestionsRepository.update(id, {
                 questionContent,
-                lessonsId,
-                lessonsClassesId
+                questionAnswer
             })
             res.status(200).send({ message: constants.CRUD.QUESTIONS.UPDATE, conteudo: questionContent });
         } catch (error) {

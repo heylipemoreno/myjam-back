@@ -4,17 +4,17 @@ import {
   Entity,
   Index,
   JoinColumn,
-  ManyToMany,
   ManyToOne,
+  OneToMany,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from "typeorm";
-import { Genres } from "./Genres";
+import { GenresSongs } from "./GenresSongs";
 import { Classes } from "./Classes";
-import { Chords } from "./Chords";
+import { SongsChords } from "./SongsChords";
 
 @Index("fk_songs_classes1_idx", ["classesId"], {})
-@Entity("songs", { schema: "myjam-database" })
+@Entity("songs", { schema: "myjam_database" })
 export class Songs {
   @PrimaryGeneratedColumn({ type: "int", name: "id" })
   id: number;
@@ -28,17 +28,17 @@ export class Songs {
   @Column("varchar", { name: "songContentLink", nullable: true, length: 255 })
   songContentLink: string | null;
 
-  @Column("int", { primary: true, name: "classes_id" })
+  @Column("int", { name: "classes_id" })
   classesId: number;
-
+  
   @CreateDateColumn({ name: "createdAt" })
   createdAt: Date;
 
-  @UpdateDateColumn({ name: "updatedAt", nullable: true })
-  updatedAt: Date | null;
+  @UpdateDateColumn({ name: "updatedAt" })
+  updatedAt: Date;
 
-  @ManyToMany(() => Genres, (genres) => genres.songs)
-  genres: Genres[];
+  @OneToMany(() => GenresSongs, (genresSongs) => genresSongs.songs)
+  genresSongs: GenresSongs[];
 
   @ManyToOne(() => Classes, (classes) => classes.songs, {
     onDelete: "NO ACTION",
@@ -47,6 +47,6 @@ export class Songs {
   @JoinColumn([{ name: "classes_id", referencedColumnName: "id" }])
   classes: Classes;
 
-  @ManyToMany(() => Chords, (chords) => chords.songs)
-  chords: Chords[];
+  @OneToMany(() => SongsChords, (songsChords) => songsChords.songs)
+  songsChords: SongsChords[];
 }

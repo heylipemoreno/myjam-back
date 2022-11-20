@@ -1,5 +1,4 @@
 import { Request, Response } from "express";
-import { Users } from "../entities/Users";
 import { UsersRepository } from "../repositories/UsersRepository";
 import bcrypt from 'bcryptjs';
 import * as jtw from 'jsonwebtoken';

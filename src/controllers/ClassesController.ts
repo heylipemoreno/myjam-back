@@ -4,14 +4,14 @@ import { ClassesRepository } from '../repositories/ClassesRepository'
 
 export class ClassesController {
 	async create(req: Request, res: Response) {
-        const { className } = req.body
+        const { classeName } = req.body
 
-		if (!className) {
+		if (!classeName) {
 			return res.status(400).json(constants.ERROR.MESSAGE.VALIDATION)
 		}
 		
 		try {
-			const newClass = ClassesRepository.create({ className })
+			const newClass = ClassesRepository.create({ classeName })
             
 			await ClassesRepository.save(newClass)
 
@@ -52,7 +52,7 @@ export class ClassesController {
 	}
 
 	async update(req: Request, res: Response) {
-		const { className } = req.body
+		const { classeName } = req.body
 		const { id } = req.params
 
 		try {
@@ -62,7 +62,7 @@ export class ClassesController {
 				return res.status(404).json(constants.CRUD.CLASSES.NOT_FOUND)
 			} else {
 				await ClassesRepository.update(id, {
-					className
+					classeName
 				});
 	
 				res.status(200).json(constants.CRUD.CLASSES.UPDATE);

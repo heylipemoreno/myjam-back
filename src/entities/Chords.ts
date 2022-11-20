@@ -1,38 +1,23 @@
-import {
-  Column,
-  CreateDateColumn,
-  Entity,
-  JoinTable,
-  ManyToMany,
-  OneToMany,
-  PrimaryGeneratedColumn,
-  UpdateDateColumn,
-} from "typeorm";
-import { Songs } from "./Songs";
+import { Column, CreateDateColumn, Entity, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
+import { SongsChords } from "./SongsChords";
 import { UsersChords } from "./UsersChords";
 
-@Entity("chords", { schema: "myjam-database" })
+@Entity("chords", { schema: "myjam_database" })
 export class Chords {
   @PrimaryGeneratedColumn({ type: "int", name: "id" })
   id: number;
 
-  @Column("varchar", { name: "chordName", length: 45 })
+  @Column("varchar", { name: "chordName", length: 60 })
   chordName: string;
 
   @CreateDateColumn({ name: "createdAt" })
   createdAt: Date;
 
-  @UpdateDateColumn({ name: "updatedAt", nullable: true })
-  updatedAt: Date | null;
+  @UpdateDateColumn({ name: "updatedAt" })
+  updatedAt: Date;
 
-  @ManyToMany(() => Songs, (songs) => songs.chords)
-  @JoinTable({
-    name: "songs_chords",
-    joinColumns: [{ name: "chords_id", referencedColumnName: "id" }],
-    inverseJoinColumns: [{ name: "songs_id", referencedColumnName: "id" }],
-    schema: "myjam-database",
-  })
-  songs: Songs[];
+  @OneToMany(() => SongsChords, (songsChords) => songsChords.chords)
+  songsChords: SongsChords[];
 
   @OneToMany(() => UsersChords, (usersChords) => usersChords.chords)
   usersChords: UsersChords[];

@@ -1,44 +1,24 @@
-import {
-  Column,
-  CreateDateColumn,
-  Entity,
-  JoinTable,
-  ManyToMany,
-  PrimaryGeneratedColumn,
-  UpdateDateColumn,
-} from "typeorm";
-import { Songs } from "./Songs";
-import { Users } from "./Users";
+import { Column, CreateDateColumn, Entity, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
+import { GenresSongs } from "./GenresSongs";
+import { UsersGenres } from "./UsersGenres";
 
-@Entity("genres", { schema: "myjam-database" })
+@Entity("genres", { schema: "myjam_database" })
 export class Genres {
   @PrimaryGeneratedColumn({ type: "int", name: "id" })
   id: number;
 
-  @Column("varchar", { name: "genreName", length: 45 })
+  @Column("varchar", { name: "genreName", length: 60 })
   genreName: string;
 
   @CreateDateColumn({ name: "createdAt" })
   createdAt: Date;
 
-  @UpdateDateColumn({ name: "updatedAt", nullable: true })
-  updatedAt: Date | null;
+  @UpdateDateColumn({ name: "updatedAt" })
+  updatedAt: Date;
 
-  @ManyToMany(() => Songs, (songs) => songs.genres)
-  @JoinTable({
-    name: "genres_songs",
-    joinColumns: [{ name: "genres_id", referencedColumnName: "id" }],
-    inverseJoinColumns: [{ name: "songs_id", referencedColumnName: "id" }],
-    schema: "myjam-database",
-  })
-  songs: Songs[];
+  @OneToMany(() => GenresSongs, (genresSongs) => genresSongs.genres)
+  genresSongs: GenresSongs[];
 
-  @ManyToMany(() => Users, (users) => users.genres)
-  @JoinTable({
-    name: "users_genres",
-    joinColumns: [{ name: "genres_id", referencedColumnName: "id" }],
-    inverseJoinColumns: [{ name: "users_id", referencedColumnName: "id" }],
-    schema: "myjam-database",
-  })
-  users: Users[];
+  @OneToMany(() => UsersGenres, (usersGenres) => usersGenres.genres)
+  usersGenres: UsersGenres[];
 }

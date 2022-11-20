@@ -3,58 +3,54 @@ import {
   CreateDateColumn,
   Entity,
   Index,
-  ManyToMany,
   OneToMany,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from "typeorm";
 import { UsersChords } from "./UsersChords";
-import { Classes } from "./Classes";
-import { Genres } from "./Genres";
+import { UsersClasses } from "./UsersClasses";
+import { UsersGenres } from "./UsersGenres";
+import { UsersQuestions } from "./UsersQuestions";
 
 @Index("email_UNIQUE", ["email"], { unique: true })
-@Index("nickname_UNIQUE", ["nickname"], { unique: true })
-@Entity("users", { schema: "myjam-database" })
+@Entity("users", { schema: "myjam_database" })
 export class Users {
   @PrimaryGeneratedColumn({ type: "int", name: "id" })
   id: number;
 
-  @Column("varchar", { name: "userName", length: 70 })
+  @Column("varchar", { name: "userName", length: 100 })
   userName: string;
 
-  @Column("varchar", { name: "nickname", unique: true, length: 20 })
-  nickname: string;
-
-  @Column("varchar", { name: "email", unique: true, length: 70 })
+  @Column("varchar", { name: "email", unique: true, length: 150 })
   email: string;
 
-  @Column("varchar", { name: "password", length: 20 })
+  @Column("varchar", { name: "password", length: 100 })
   password: string;
-
-  @Column("int", { name: "age", nullable: true })
-  age: number | null;
 
   @CreateDateColumn({ name: "createdAt" })
   createdAt: Date;
 
-  @UpdateDateColumn({ name: "updatedAt", nullable: true })
-  updatedAt: Date | null;
+  @UpdateDateColumn({ name: "updatedAt" })
+  updatedAt: Date;
 
-  @Column("int", { name: "totalPoints" })
-  totalPoints: number;
+  @Column("int", { name: "totalPoints", nullable: true, default: () => "'0'" })
+  totalPoints: number | null;
 
-  @Column("int", { name: "qtdSongs", nullable: true })
+  @Column("int", { name: "qtdSongs", nullable: true, default: () => "'0'" })
   qtdSongs: number | null;
 
-  @Column("int", { name: "qtdChords", nullable: true })
+  @Column("int", { name: "qtdChords", nullable: true, default: () => "'0'" })
   qtdChords: number | null;
 
   @OneToMany(() => UsersChords, (usersChords) => usersChords.users)
   usersChords: UsersChords[];
 
-  @ManyToMany(() => Classes, (classes) => classes.users)
-  classes: Classes[];
+  @OneToMany(() => UsersClasses, (usersClasses) => usersClasses.users)
+  usersClasses: UsersClasses[];
 
-  @ManyToMany(() => Genres, (genres) => genres.users)
-  genres: Genres[];
+  @OneToMany(() => UsersGenres, (usersGenres) => usersGenres.users)
+  usersGenres: UsersGenres[];
+
+  @OneToMany(() => UsersQuestions, (usersQuestions) => usersQuestions.users)
+  usersQuestions: UsersQuestions[];
 }

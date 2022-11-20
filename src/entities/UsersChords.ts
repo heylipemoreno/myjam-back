@@ -1,15 +1,25 @@
-import { Column, Entity, Index, JoinColumn, ManyToOne } from "typeorm";
+import {
+  Column,
+  Entity,
+  Index,
+  JoinColumn,
+  ManyToOne,
+  PrimaryGeneratedColumn,
+} from "typeorm";
 import { Chords } from "./Chords";
 import { Users } from "./Users";
 
 @Index("fk_users_has_chords_chords1_idx", ["chordsId"], {})
 @Index("fk_users_has_chords_users_idx", ["usersId"], {})
-@Entity("users_chords", { schema: "myjam-database" })
+@Entity("users_chords", { schema: "myjam_database" })
 export class UsersChords {
-  @Column("int", { primary: true, name: "users_id" })
+  @PrimaryGeneratedColumn({ type: "int", name: "id" })
+  id: number;
+
+  @Column("int", { name: "users_id" })
   usersId: number;
 
-  @Column("int", { primary: true, name: "chords_id" })
+  @Column("int", { name: "chords_id" })
   chordsId: number;
 
   @Column("datetime", { name: "learnedAt", nullable: true })

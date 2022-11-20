@@ -2,45 +2,45 @@ import {
   Column,
   CreateDateColumn,
   Entity,
-  JoinTable,
-  ManyToMany,
+  Index,
+  JoinColumn,
+  ManyToOne,
   OneToMany,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from "typeorm";
 import { Lessons } from "./Lessons";
 import { Songs } from "./Songs";
-import { Users } from "./Users";
+import { UsersClasses } from "./UsersClasses";
 
-@Entity("classes", { schema: "myjam-database" })
+@Index("fk_classes_lessons1_idx", ["lessonsId"], {})
+@Entity("classes", { schema: "myjam_database" })
 export class Classes {
   @PrimaryGeneratedColumn({ type: "int", name: "id" })
   id: number;
 
-  @Column("varchar", { name: "className", length: 45 })
-  className: string;
+  @Column("varchar", { name: "classeName", length: 100 })
+  classeName: string;
 
   @CreateDateColumn({ name: "createdAt" })
   createdAt: Date;
 
-  @UpdateDateColumn({ name: "updatedAt", nullable: true })
-  updatedAt: Date | null;
+  @UpdateDateColumn({ name: "updatedAt" })
+  updatedAt: Date;
 
-  @Column("datetime", { name: "completedAt", nullable: true })
-  completedAt: Date | null;
+  @Column("int", { name: "lessons_id" })
+  lessonsId: number;
 
-  @OneToMany(() => Lessons, (lessons) => lessons.classes)
-  lessons: Lessons[];
+  @ManyToOne(() => Lessons, (lessons) => lessons.classes, {
+    onDelete: "NO ACTION",
+    onUpdate: "NO ACTION",
+  })
+  @JoinColumn([{ name: "lessons_id", referencedColumnName: "id" }])
+  lessons: Lessons;
 
   @OneToMany(() => Songs, (songs) => songs.classes)
   songs: Songs[];
 
-  @ManyToMany(() => Users, (users) => users.classes)
-  @JoinTable({
-    name: "users_classes",
-    joinColumns: [{ name: "classes_id", referencedColumnName: "id" }],
-    inverseJoinColumns: [{ name: "users_id", referencedColumnName: "id" }],
-    schema: "myjam-database",
-  })
-  users: Users[];
+  @OneToMany(() => UsersClasses, (usersClasses) => usersClasses.classes)
+  usersClasses: UsersClasses[];
 }
