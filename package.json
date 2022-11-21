@@ -12,7 +12,7 @@
     "start": "node --unhandled-rejections=strict -r dotenv/config ./dist/index.js",
     "dev": "nodemon --exec ts-node ./src/index.ts",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "migration:generate": "typeorm-ts-node-commonjs -d ./src/data-source.ts migration:generate ./src/migrations/default",
+    "migration:generate": "typeorm-ts-node-commonjs -d ./src/data-source.ts migration:generate ./src/migrations/myjam_database_generated",
     "migration:run": "typeorm-ts-node-commonjs -d ./src/data-source.ts migration:run"
   },
   "keywords": [],

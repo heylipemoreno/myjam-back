@@ -9,7 +9,6 @@ import { ClassesController } from './controllers/ClassesController';
 import { SongsController } from './controllers/SongsController';
 import { LoginController } from './controllers/LoginController';
 import { RegisterController } from './controllers/RegisterController';
-import { UsersQuestionsRepository } from './repositories/UsersQuestionsRepository';
 
 const routes = Router()
 
@@ -37,6 +36,9 @@ routes.post('/users/login', new LoginController().login)
 //REGISTER
 routes.post('/users/register', validationMiddleware.register, new RegisterController().register);
 routes.post('/users/questions', validationMiddleware.registerQuestions, new RegisterController().question)
+
+//LIST LESSON WITH ALL QUESTIONS
+routes.get('/lessons/questions', new LessonsController().listWithQuestions)
 
 //GET ID
 routes.get('/users/:id', new UsersController().listOne)
