@@ -31,7 +31,10 @@ export default {
         },
         LESSONS: {
             NOT_FOUND: 'Não foi encontrado nenhuma lição com esse ID',
-            UPDATE: 'Lições atualizadas com sucesso'
+            UPDATE: 'Lições atualizadas com sucesso',
+            QUESTIONS: {
+                NOT_FOUND: 'A lição informada não contém questões cadastradas'
+            }
         },
         GENRES: {
             NOT_FOUND: 'Este gênero musical não está registrado',

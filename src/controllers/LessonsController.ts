@@ -1,6 +1,7 @@
 import { Request, Response } from 'express';
 import constants from '../config/constants/constants';
 import { LessonsRepository } from '../repositories/LessonsRepository';
+import { QuestionsRepository } from '../repositories/QuestionsRepository';
 
 export class LessonsController {
     async create(req: Request, res: Response) {
@@ -59,12 +60,36 @@ export class LessonsController {
         }
     }
 
-
     async delete(req: Request, res: Response) {
         const { id } = req.params;
         try {
             const lessons = await LessonsRepository.delete({ id: Number(id) });
             res.status(204).json();
+        } catch (error) {
+            console.log(error);
+            return res.status(500).json(constants.CRUD.ERROR);
+        }
+    }
+
+    async listWithQuestions(req: Request, res: Response) {
+        const { id } = req.params;
+        try {
+            const lesson = await LessonsRepository.findOneBy({ id: Number(id) });
+            if (!lesson) {
+                return res.status(404).json(constants.CRUD.LESSONS.NOT_FOUND);
+            }
+            const questions = await QuestionsRepository.find({
+                where: {
+                    lessonsId: Number(id)
+                }
+            })
+            if (!questions) {
+                res.status(404).send(constants.CRUD.LESSONS.QUESTIONS.NOT_FOUND)
+            }
+            res.status(200).send({
+                Lesson: lesson,
+                Questions: questions
+            })
         } catch (error) {
             console.log(error);
             return res.status(500).json(constants.CRUD.ERROR);
