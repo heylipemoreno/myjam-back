@@ -1,7 +1,10 @@
 import { Request, Response } from 'express';
 import constants from '../config/constants/constants';
+import { ChordsRepository } from '../repositories/ChordsRepository';
 import { LessonsRepository } from '../repositories/LessonsRepository';
 import { QuestionsRepository } from '../repositories/QuestionsRepository';
+import { SongsChordsRepository } from '../repositories/SongsChordsRepository';
+import { SongsRepository } from '../repositories/SongsRepository';
 
 export class LessonsController {
     async create(req: Request, res: Response) {
@@ -87,10 +90,47 @@ export class LessonsController {
             if (!questions) {
                 res.status(404).send(constants.CRUD.LESSONS.QUESTIONS.NOT_FOUND)
             }
-            res.status(200).send({
-                Lesson: lesson,
-                Questions: questions
-            })
+
+            let questionOfMusic = [];
+            let lessonContent;
+
+            for (let index = 0; index < questions.length; index++) {
+                const element = questions[index];
+                if (element.isExplication === 0) {
+                    const song = await SongsRepository.findOneBy({
+                        id: Number(element.songsId)
+                    })
+                    if (!song) {
+                        res.status(404).send(constants.CRUD.SONGS.NOT_FOUND)
+                    }
+                    const songsChords = await SongsChordsRepository.findBy({ songsId: Number(song?.id) })
+                    for (let count = 0; count < songsChords.length; count++) {
+                        const element = songsChords[count];
+                        const chords = await ChordsRepository.findOneBy({ id: Number(element.chordsId) })
+                        questionOfMusic[count] = chords
+                    }
+                    if (element.questionTemplate === 'lesson_chord') {
+                        lessonContent = {
+                            Lesson: lesson,
+                            Questions: questions,
+                            Chords: questionOfMusic
+                        }
+                    } else if (element.questionTemplate === 'lesson_song') {
+                        lessonContent = {
+                            Lesson: lesson,
+                            Questions: questions,
+                            Song: song,
+                            Chords: questionOfMusic
+                        }
+                    }
+                } else {
+                    lessonContent = {
+                        Lesson: lesson,
+                        Questions: questions
+                    }
+                }
+            }
+            res.status(200).send(lessonContent)
         } catch (error) {
             console.log(error);
             return res.status(500).json(constants.CRUD.ERROR);

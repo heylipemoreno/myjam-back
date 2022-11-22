@@ -8,6 +8,7 @@ import { LessonsController } from './controllers/LessonsController';
 import { SongsController } from './controllers/SongsController';
 import { LoginController } from './controllers/LoginController';
 import { RegisterController } from './controllers/RegisterController';
+import { Auth } from './middlewares/authMiddleware';
 
 const routes = Router()
 
@@ -27,15 +28,19 @@ routes.get('/questions', new QuestionsController().list)
 routes.get('/lessons', new LessonsController().list)
 routes.get('/songs', new SongsController().list)
 
+//REGISTER
+routes.post('/users/register', validationMiddleware.register, new RegisterController().register);
+routes.post('/users/questions', Auth, validationMiddleware.registerQuestions, new RegisterController().question)
+
 //LOGIN
 routes.post('/users/login', validationMiddleware.login, new LoginController().login)
 
-//REGISTER
-routes.post('/users/register', validationMiddleware.register, new RegisterController().register);
-routes.post('/users/questions', validationMiddleware.registerQuestions, new RegisterController().question)
+//RECOVERY PASS
+routes.post('/users/password/forgot', new LoginController().forgotPassword)
+routes.post('/users/password/recover', new LoginController().recoverPassword)
 
 //LIST LESSON WITH ALL QUESTIONS
-routes.get('/lessons/questions/:id', validationMiddleware.registerQuestions, new LessonsController().listWithQuestions)
+routes.get('/lessons/:id/questions', new LessonsController().listWithQuestions)
 
 //GET ID
 routes.get('/users/:id', new UsersController().listOne)
