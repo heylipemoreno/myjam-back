@@ -1,11 +1,11 @@
 import * as nodemailer from 'nodemailer';
-import { recoverPassword } from '../../viewes/recoveryPassMail';
+import { recoverPasswordMail, recoverPasswordText } from '../../viewes/recoveryPassMail';
 import { welcomeMail } from '../../viewes/welcomeMail';
 
 class Mail {
 
     sendMail(userName: string, userEmail: string, type: string, token?: string) {
-        let content, subject;
+        let content, subject, text;
 
         if (!token) {
             token = ''
@@ -17,8 +17,9 @@ class Mail {
                 subject = `Bem Vindo, ${userName}.`;
                 break;
             case 'recovery':
-                content = recoverPassword(userName, token);
-                subject = `Recuperar a senha.`
+                content = recoverPasswordMail(userName, token);
+                subject = `Recuperar a senha.`;
+                text = recoverPasswordText(userName, token)
                 break;
             default:
                 break;
@@ -28,7 +29,7 @@ class Mail {
             from: process.env.MAIL_EMAIL,
             to: userEmail,
             subject: subject,
-            text: 'Testando envio FORA SPAM',
+            text: text,
             html: content
         }
 

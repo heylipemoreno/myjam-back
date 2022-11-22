@@ -37,7 +37,7 @@ routes.post('/users/login', validationMiddleware.login, new LoginController().lo
 
 //RECOVERY PASS
 routes.post('/users/password/forgot', new LoginController().forgotPassword)
-routes.post('/users/password/recover', new LoginController().recoverPassword)
+routes.post('/users/password/recover',Auth, new LoginController().recoverPassword)
 
 //LIST LESSON WITH ALL QUESTIONS
 routes.get('/lessons/:id/questions', new LessonsController().listWithQuestions)

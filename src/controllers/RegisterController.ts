@@ -32,7 +32,7 @@ export class RegisterController {
 
     async question(request: Request, response: Response) {
         const { instrumentId, experienceId, practiceId, styleId, learnId } = request.body;
-        const usersId = request.body.infoToken.id;
+        const usersId = request.body.info.id;
         try {
             const newUserQuestion = UsersQuestionsRepository.create({ instrumentId, experienceId, practiceId, styleId, learnId, usersId })
             await UsersQuestionsRepository.save(newUserQuestion);
