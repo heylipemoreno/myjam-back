@@ -51,35 +51,37 @@ Você também pode analisar o modelo de banco de dados utilizado [clicando aqui]
 
 ## ▶️ **Instalação**
 
-```bash
-# Clone este repositório:
-$ git clone https://github.com/heylipemoreno/myjam-back
+Clone este repositório:<br>
+`$ git clone https://github.com/heylipemoreno/myjam-back`
 
-# Acesse a pasta do projeto no terminal/cmd:
-$ cd myjam-back
+Acesse a pasta do projeto no terminal/cmd:<br>
+`$ cd myjam-back`
 
-# Instale as dependências:
-$ npm install
+Instale as dependências:<br>
+`$ npm install`
 
-# Crie e ajuste o arquivo .env a partir do .env.example e substituindo o conteúdo entre as aspas:
+Crie o arquivo **.env** a partir do **.env.example** e substitua o conteúdo entre as aspas:<br>
+>DB_HOST = "Local do servidor (ex.: localhost)"<br>
+>DB_PORT = "Número da porta utilizada pelo MySQL (ex.: 3306)"<br>
+>DB_USER = "Nome do usuário no MySQL (ex.: root)"<br>
+>DB_PASS = "Senha do usuário no MySQL (deixe em branco caso não haja senha)"<br>
+>DB_NAME = "Nome do banco de dados (ex.: myjam_database_code)"<br>
+>PORT = "Número da porta para rodar a API (ex.: 8000)"<br>
 
-DB_HOST = "Local do servidor (ex.: localhost)"
-DB_PORT = "Número da porta utilizada pelo MySQL (ex.: 3306)"
-DB_USER = "Nome do usuário no MySQL (ex.: root)"
-DB_PASS = "Senha do usuário no MySQL (deixe em branco caso não haja senha)"
-DB_NAME = "Nome do banco de dados (ex.: myjam_database_code)"
-PORT = "Número da porta para rodar a API (ex.: 8000)"
-SECRET_KEY= "Palavra à sua escolha que será a chave para encriptação"
-CLEARDB_DATABASE_URL =
-MAIL_EMAIL =
-MAIL_PASSWORD =
+Transpile o código:<br>
+`$ tsc`
 
-# Transpile o código:
-$ tsc
+Faça a migration:<br>
+`$ npm run migration:generate`
 
-# Crie a migration:
-$ npm run migration:generate
+Crie o banco de dados:<br>
+`$ npm run migration:run`
 
-# Rode o banco de dados:
-$ npm run migration:run
-```
+Rode a API:<br>
+`$ npm run dev`
+
+---
+
+## 📄 **Documentação**
+
+Acesse a documentação completa da aplicação clicando aqui.
