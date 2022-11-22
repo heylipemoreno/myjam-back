@@ -35,7 +35,7 @@ routes.post('/users/register', validationMiddleware.register, new RegisterContro
 routes.post('/users/questions', validationMiddleware.registerQuestions, new RegisterController().question)
 
 //LIST LESSON WITH ALL QUESTIONS
-routes.get('/lessons/questions', validationMiddleware.registerQuestions, new LessonsController().listWithQuestions)
+routes.get('/lessons/questions/:id', validationMiddleware.registerQuestions, new LessonsController().listWithQuestions)
 
 //GET ID
 routes.get('/users/:id', new UsersController().listOne)
