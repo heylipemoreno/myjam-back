@@ -6,21 +6,21 @@ import {
   ManyToOne,
   PrimaryGeneratedColumn,
 } from "typeorm";
-import { Classes } from "./Classes";
+import { Lessons } from "./Lessons";
 import { Users } from "./Users";
 
-@Index("fk_users_has_classes_classes1_idx", ["classesId"], {})
+@Index("fk_users_classes_lessons1_idx", ["lessonsId"], {})
 @Index("fk_users_has_classes_users1_idx", ["usersId"], {})
-@Entity("users_classes", { schema: "myjam_database" })
-export class UsersClasses {
+@Entity("users_lessons", { schema: "myjam_database" })
+export class UsersLessons {
   @PrimaryGeneratedColumn({ type: "int", name: "id" })
   id: number;
 
   @Column("int", { name: "users_id" })
   usersId: number;
 
-  @Column("int", { name: "classes_id" })
-  classesId: number;
+  @Column("int", { name: "lessons_id" })
+  lessonsId: number;
 
   @Column("datetime", { name: "completedAt", nullable: true })
   completedAt: Date | null;
@@ -28,14 +28,14 @@ export class UsersClasses {
   @Column("int", { name: "points", nullable: true, default: () => "'100'" })
   points: number | null;
 
-  @ManyToOne(() => Classes, (classes) => classes.usersClasses, {
+  @ManyToOne(() => Lessons, (lessons) => lessons.usersLessons, {
     onDelete: "NO ACTION",
     onUpdate: "NO ACTION",
   })
-  @JoinColumn([{ name: "classes_id", referencedColumnName: "id" }])
-  classes: Classes;
+  @JoinColumn([{ name: "lessons_id", referencedColumnName: "id" }])
+  lessons: Lessons;
 
-  @ManyToOne(() => Users, (users) => users.usersClasses, {
+  @ManyToOne(() => Users, (users) => users.usersLessons, {
     onDelete: "NO ACTION",
     onUpdate: "NO ACTION",
   })

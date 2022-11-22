@@ -10,6 +10,12 @@ export class Chords {
   @Column("varchar", { name: "chordName", length: 60 })
   chordName: string;
 
+  @Column("varchar", { name: "chordImageLink", length: 300 })
+  chordImageLink: string;
+
+  @Column("varchar", { name: "chordSoundLink", length: 300 })
+  chordSoundLink: string;
+
   @CreateDateColumn({ name: "createdAt" })
   createdAt: Date;
 

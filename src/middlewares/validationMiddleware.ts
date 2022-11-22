@@ -25,38 +25,40 @@ class ValidationMiddleware {
         })
     });
 
-    classes = validate({
-        body: Joi.object({
-            className: Joi.string().required()
-        })
-    });
-
     lessons = validate({
         body: Joi.object({
-            lessonName: Joi.string().required()
+            lessonName: Joi.string().required(),
+            lessonImageLink: Joi.string().required()
         })
     });
 
     questions = validate({
         body: Joi.object({
+            questionTitle: Joi.string().required(),
+            questionImageLink: Joi.string().required(),
             questionContent: Joi.string().required(),
-            questionAnswer: Joi.string().required(),
-            lessonsId: Joi.number().required()
+            questionOptions: Joi.string().required(),
+            questionOptionCorrect: Joi.string().required(),
+            questionTemplate: Joi.string().required(),
+            isExplication: Joi.number().required(),
+            lessonsId: Joi.number().required(),
+            songsId: Joi.number()
         })
     })
 
     chords = validate({
         body: Joi.object({
-            chordName: Joi.string().required()
+            chordName: Joi.string().required(),
+            chordImageLink: Joi.string().required(),
+            chordSoundLink: Joi.string().required()
         })
     })
 
     songs = validate({
         body: Joi.object({
             songName: Joi.string().required(),
-            songVideoLink: Joi.string().required(),
-            songContentLink: Joi.string().required(),
-            classesId: Joi.number().required()
+            songLink: Joi.string(),
+            songContent: Joi.string().required()
         })
     })
 

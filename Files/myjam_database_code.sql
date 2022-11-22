@@ -27,6 +27,7 @@ CREATE TABLE IF NOT EXISTS `myjam_database`.`users` (
   `totalPoints` INT NULL DEFAULT 0,
   `qtdSongs` INT NULL DEFAULT 0,
   `qtdChords` INT NULL DEFAULT 0,
+  `questionsCompleted` TINYINT NOT NULL DEFAULT 0,
   PRIMARY KEY (`id`),
   UNIQUE INDEX `email_UNIQUE` (`email` ASC) VISIBLE)
 ENGINE = InnoDB;
@@ -38,6 +39,8 @@ ENGINE = InnoDB;
 CREATE TABLE IF NOT EXISTS `myjam_database`.`chords` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `chordName` VARCHAR(60) NOT NULL,
+  `chordImageLink` VARCHAR(300) NOT NULL,
+  `chordSoundLink` VARCHAR(300) NOT NULL,
   `createdAt` DATETIME NOT NULL,
   `updatedAt` DATETIME NOT NULL,
   PRIMARY KEY (`id`))
@@ -104,54 +107,16 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `myjam_database`.`lessons`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `myjam_database`.`lessons` (
-  `id` INT NOT NULL AUTO_INCREMENT,
-  `lessonName` VARCHAR(100) NOT NULL,
-  `createdAt` DATETIME NOT NULL,
-  `updatedAt` DATETIME NOT NULL,
-  PRIMARY KEY (`id`))
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
--- Table `myjam_database`.`classes`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `myjam_database`.`classes` (
-  `id` INT NOT NULL AUTO_INCREMENT,
-  `classeName` VARCHAR(100) NOT NULL,
-  `createdAt` DATETIME NOT NULL,
-  `updatedAt` DATETIME NOT NULL,
-  `lessons_id` INT NOT NULL,
-  PRIMARY KEY (`id`),
-  INDEX `fk_classes_lessons1_idx` (`lessons_id` ASC) VISIBLE,
-  CONSTRAINT `fk_classes_lessons1`
-    FOREIGN KEY (`lessons_id`)
-    REFERENCES `myjam_database`.`lessons` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
 -- Table `myjam_database`.`songs`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `myjam_database`.`songs` (
   `id` INT NOT NULL AUTO_INCREMENT,
-  `songName` VARCHAR(255) NOT NULL,
-  `songVideoLink` VARCHAR(255) NULL,
-  `songContentLink` VARCHAR(255) NULL,
-  `classes_id` INT NOT NULL,
+  `songName` VARCHAR(100) NOT NULL,
+  `songLink` VARCHAR(300) NULL,
+  `songContent` TEXT NOT NULL,
   `createdAt` DATETIME NOT NULL,
   `updatedAt` DATETIME NOT NULL,
-  PRIMARY KEY (`id`),
-  INDEX `fk_songs_classes1_idx` (`classes_id` ASC) VISIBLE,
-  CONSTRAINT `fk_songs_classes1`
-    FOREIGN KEY (`classes_id`)
-    REFERENCES `myjam_database`.`classes` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+  PRIMARY KEY (`id`))
 ENGINE = InnoDB;
 
 
@@ -202,43 +167,36 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `myjam_database`.`users_classes`
+-- Table `myjam_database`.`lessons`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `myjam_database`.`users_classes` (
+CREATE TABLE IF NOT EXISTS `myjam_database`.`lessons` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `lessonName` VARCHAR(100) NOT NULL,
+  `lessonImageLink` VARCHAR(300) NOT NULL,
+  `createdAt` DATETIME NOT NULL,
+  `updatedAt` DATETIME NOT NULL,
+  PRIMARY KEY (`id`))
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `myjam_database`.`users_lessons`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `myjam_database`.`users_lessons` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `users_id` INT NOT NULL,
-  `classes_id` INT NOT NULL,
+  `lessons_id` INT NOT NULL,
   `completedAt` DATETIME NULL,
   `points` INT NULL DEFAULT 100,
   PRIMARY KEY (`id`),
-  INDEX `fk_users_has_classes_classes1_idx` (`classes_id` ASC) VISIBLE,
   INDEX `fk_users_has_classes_users1_idx` (`users_id` ASC) VISIBLE,
+  INDEX `fk_users_classes_lessons1_idx` (`lessons_id` ASC) VISIBLE,
   CONSTRAINT `fk_users_has_classes_users1`
     FOREIGN KEY (`users_id`)
     REFERENCES `myjam_database`.`users` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
-  CONSTRAINT `fk_users_has_classes_classes1`
-    FOREIGN KEY (`classes_id`)
-    REFERENCES `myjam_database`.`classes` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
--- Table `myjam_database`.`questions`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `myjam_database`.`questions` (
-  `id` INT NOT NULL AUTO_INCREMENT,
-  `questionContent` TEXT NOT NULL,
-  `questionAnswer` VARCHAR(100) NOT NULL,
-  `createdAt` DATETIME NOT NULL,
-  `updatedAt` DATETIME NOT NULL,
-  `lessons_id` INT NOT NULL,
-  PRIMARY KEY (`id`),
-  INDEX `fk_questions_lessons1_idx` (`lessons_id` ASC) VISIBLE,
-  CONSTRAINT `fk_questions_lessons1`
+  CONSTRAINT `fk_users_classes_lessons1`
     FOREIGN KEY (`lessons_id`)
     REFERENCES `myjam_database`.`lessons` (`id`)
     ON DELETE NO ACTION
@@ -342,6 +300,38 @@ CREATE TABLE IF NOT EXISTS `myjam_database`.`users_questions` (
   CONSTRAINT `fk_users_questions_learn1`
     FOREIGN KEY (`learn_id`)
     REFERENCES `myjam_database`.`learn` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `myjam_database`.`questions`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `myjam_database`.`questions` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `questionTitle` VARCHAR(100) NOT NULL,
+  `questionImageLink` VARCHAR(300) NULL,
+  `questionContent` TEXT NULL,
+  `questionOptions` VARCHAR(300) NOT NULL,
+  `questionOptionCorrect` VARCHAR(100) NOT NULL,
+  `questionTemplate` VARCHAR(100) NOT NULL,
+  `isExplication` TINYINT NULL,
+  `createdAt` DATETIME NOT NULL,
+  `updatedAt` DATETIME NOT NULL,
+  `lessons_id` INT NOT NULL,
+  `songs_id` INT NOT NULL,
+  PRIMARY KEY (`id`),
+  INDEX `fk_questions_lessons1_idx` (`lessons_id` ASC) VISIBLE,
+  INDEX `fk_questions_songs1_idx` (`songs_id` ASC) VISIBLE,
+  CONSTRAINT `fk_questions_lessons1`
+    FOREIGN KEY (`lessons_id`)
+    REFERENCES `myjam_database`.`lessons` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_questions_songs1`
+    FOREIGN KEY (`songs_id`)
+    REFERENCES `myjam_database`.`songs` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;

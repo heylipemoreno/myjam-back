@@ -13,12 +13,12 @@ import { Practice } from "./Practice";
 import { Style } from "./Style";
 import { Users } from "./Users";
 
-@Index("fk_users_questions_practice1_idx", ["practiceId"], {})
-@Index("fk_users_questions_instrument1_idx", ["instrumentId"], {})
 @Index("fk_users_questions_experience1_idx", ["experienceId"], {})
-@Index("fk_users_questions_users1_idx", ["usersId"], {})
-@Index("fk_users_questions_style1_idx", ["styleId"], {})
+@Index("fk_users_questions_instrument1_idx", ["instrumentId"], {})
 @Index("fk_users_questions_learn1_idx", ["learnId"], {})
+@Index("fk_users_questions_practice1_idx", ["practiceId"], {})
+@Index("fk_users_questions_style1_idx", ["styleId"], {})
+@Index("fk_users_questions_users1_idx", ["usersId"], {})
 @Entity("users_questions", { schema: "myjam_database" })
 export class UsersQuestions {
   @PrimaryGeneratedColumn({ type: "int", name: "id" })
