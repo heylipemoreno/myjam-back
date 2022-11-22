@@ -12,13 +12,14 @@ export class RegisterController {
         request.body.password = bcrypt.hashSync(request.body.password, 10);
         const { userName, email, password } = request.body;
         try {
-            const newUser = UsersRepository.create({ userName, email, password });
+            let newUser = UsersRepository.create({ userName, email, password });
             await UsersRepository.save(newUser);
             const token = jtw.sign({
                 id: newUser.id
             }, secretKey, {
                 expiresIn: '1 day'
             });
+            newUser.password = 'Secret'
             response.status(201).send({
                 RegisteredUser: newUser,
                 Token: token
