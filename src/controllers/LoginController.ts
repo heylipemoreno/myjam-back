@@ -62,13 +62,14 @@ export class LoginController {
     }
 
     async recoverPassword(req: Request, res: Response) {
+        req.body.password = bcrypt.hashSync(req.body.password, 10);
         const { password } = req.body
-        const { id } = req.body.infoToken
+        const info = req.body.info
         try {
             const user = await UsersRepository.findOneOrFail({
-                where: { id }
+                where: { id: info.id }
             })
-            await UsersRepository.update(id, { password })
+            await UsersRepository.update(user.id, { password })
             res.status(200).send({
                 Message: 'Senha atualizada com sucesso!'
             })
