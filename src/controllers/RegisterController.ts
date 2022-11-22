@@ -5,6 +5,7 @@ import bcrypt from 'bcryptjs';
 import * as jtw from 'jsonwebtoken';
 import { secretKey } from "../config/secret/secret";
 import constants from "../config/constants/constants";
+import mail from "../services/mail/mail";
 
 export class RegisterController {
     async register(request: Request, response: Response) {
@@ -18,7 +19,7 @@ export class RegisterController {
             }, secretKey, {
                 expiresIn: '1 day'
             });
-            return response.status(201).send({
+            response.status(201).send({
                 RegisteredUser: newUser,
                 Token: token
             })
@@ -32,7 +33,7 @@ export class RegisterController {
         const { instrumentId, experienceId, practiceId, styleId, learnId } = request.body;
         const usersId = request.body.infoToken.id;
         try {
-            const newUserQuestion = UsersQuestionsRepository.create({instrumentId,experienceId,practiceId,styleId,learnId,usersId})
+            const newUserQuestion = UsersQuestionsRepository.create({ instrumentId, experienceId, practiceId, styleId, learnId, usersId })
             await UsersQuestionsRepository.save(newUserQuestion);
             response.status(201).send({
                 RegisteredQuestions: newUserQuestion
