@@ -8,8 +8,8 @@ import {
   UpdateDateColumn,
 } from "typeorm";
 import { UsersChords } from "./UsersChords";
-import { UsersClasses } from "./UsersClasses";
 import { UsersGenres } from "./UsersGenres";
+import { UsersLessons } from "./UsersLessons";
 import { UsersQuestions } from "./UsersQuestions";
 
 @Index("email_UNIQUE", ["email"], { unique: true })
@@ -42,14 +42,17 @@ export class Users {
   @Column("int", { name: "qtdChords", nullable: true, default: () => "'0'" })
   qtdChords: number | null;
 
+  @Column("tinyint", { name: "questionsCompleted", default: () => "'0'" })
+  questionsCompleted: number;
+
   @OneToMany(() => UsersChords, (usersChords) => usersChords.users)
   usersChords: UsersChords[];
 
-  @OneToMany(() => UsersClasses, (usersClasses) => usersClasses.users)
-  usersClasses: UsersClasses[];
-
   @OneToMany(() => UsersGenres, (usersGenres) => usersGenres.users)
   usersGenres: UsersGenres[];
+
+  @OneToMany(() => UsersLessons, (usersLessons) => usersLessons.users)
+  usersLessons: UsersLessons[];
 
   @OneToMany(() => UsersQuestions, (usersQuestions) => usersQuestions.users)
   usersQuestions: UsersQuestions[];

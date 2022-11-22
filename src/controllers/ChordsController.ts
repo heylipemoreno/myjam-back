@@ -4,9 +4,9 @@ import { ChordsRepository } from '../repositories/ChordsRepository'
 
 export class ChordsController {
 	async create(req: Request, res: Response) {
-		const { chordName } = req.body
+		const { chordName, chordImageLink, chordSoundLink } = req.body
 		try {
-			const newChord = ChordsRepository.create({ chordName })
+			const newChord = ChordsRepository.create({ chordName, chordImageLink, chordSoundLink })
 			await ChordsRepository.save(newChord)
 			return res.status(201).json(newChord)
 		} catch (error) {
@@ -41,7 +41,7 @@ export class ChordsController {
 	}
 
 	async update(req: Request, res: Response) {
-		const { chordName } = req.body
+		const { chordName, chordImageLink, chordSoundLink } = req.body
 		const { id } = req.params
 		try {
 			const chord = await ChordsRepository.findOneBy({ id: Number(id) })
@@ -49,7 +49,9 @@ export class ChordsController {
 				return res.status(404).json(constants.CRUD.CHORDS.NOT_FOUND)
 			} else {
 				await ChordsRepository.update(id, {
-					chordName
+					chordName, 
+					chordImageLink, 
+					chordSoundLink
 				});
 				res.status(200).json(constants.CRUD.CHORDS.UPDATE);
 			}

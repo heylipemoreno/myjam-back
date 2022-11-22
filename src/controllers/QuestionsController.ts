@@ -4,9 +4,9 @@ import { QuestionsRepository } from "../repositories/QuestionsRepository";
 
 export class QuestionsController {
     async create(req: Request, res: Response) {
-        const { questionContent, questionAnswer } = req.body;
+        const { questionTitle, questionImageLink, questionContent, questionOptions, questionOptionCorrect, questionTemplate, isExplication, lessonsId, songsId } = req.body;
         try {
-            const newQuestion = QuestionsRepository.create({ questionContent, questionAnswer });
+            const newQuestion = QuestionsRepository.create({ questionTitle, questionImageLink, questionContent, questionOptions, questionOptionCorrect, questionTemplate, isExplication, lessonsId, songsId });
             await QuestionsRepository.save(newQuestion);
             res.status(201).send(newQuestion);
         } catch (error) {
@@ -40,7 +40,7 @@ export class QuestionsController {
     }
 
     async update(req: Request, res: Response) {
-        const { questionContent, questionAnswer } = req.body
+        const { questionTitle, questionImageLink, questionContent, questionOptions, questionOptionCorrect, questionTemplate, isExplication, lessonsId, songsId } = req.body
         const { id } = req.params
         try {
             const question = await QuestionsRepository.findOneBy({ id: Number(id) });
@@ -48,8 +48,15 @@ export class QuestionsController {
                 return res.status(404).send(constants.CRUD.QUESTIONS.NOT_FOUND)
             }
             await QuestionsRepository.update(id, {
-                questionContent,
-                questionAnswer
+                questionTitle, 
+                questionImageLink, 
+                questionContent, 
+                questionOptions, 
+                questionOptionCorrect, 
+                questionTemplate, 
+                isExplication, 
+                lessonsId, 
+                songsId
             })
             res.status(200).send({ message: constants.CRUD.QUESTIONS.UPDATE, conteudo: questionContent });
         } catch (error) {

@@ -4,9 +4,9 @@ import { SongsRepository } from '../repositories/SongsRepository'
 
 export class SongsController {
 	async create(req: Request, res: Response) {
-		const { songName, songVideoLink, songContentLink, classesId} = req.body;
+		const { songName, songLink, songContent } = req.body;
 		try {
-			const newSong = SongsRepository.create({ songName, songVideoLink, songContentLink, classesId})
+			const newSong = SongsRepository.create({ songName, songLink, songContent })
 			await SongsRepository.save(newSong)
 			return res.status(201).json(newSong)
 		} catch (error) {
@@ -41,7 +41,7 @@ export class SongsController {
 	}
 
 	async update(req: Request, res: Response) {
-		const { songName, songVideoLink, songContentLink, classesId } = req.body
+		const { songName, songLink, songContent } = req.body
 		const { id } = req.params
 		try {
 			const song = await SongsRepository.findOneBy({ id: Number(id) })
@@ -49,10 +49,9 @@ export class SongsController {
 				return res.status(404).json(constants.CRUD.SONGS.NOT_FOUND)
 			} else {
 				await SongsRepository.update(id, {
-					songName,
-					songVideoLink,
-					songContentLink,
-					classesId
+					songName, 
+					songLink, 
+					songContent
 				});
 				res.status(200).json(constants.CRUD.SONGS.UPDATE);
 			}
@@ -75,6 +74,6 @@ export class SongsController {
 		} catch (error) {
 			console.log(error)
 			return res.status(500).json(constants.CRUD.ERROR)
-		}		
+		}
 	}
 }

@@ -9,8 +9,8 @@ import {
 import { Chords } from "./Chords";
 import { Songs } from "./Songs";
 
-@Index("fk_songs_has_chords_songs1_idx", ["songsId"], {})
 @Index("fk_songs_chords_chords1_idx", ["chordsId"], {})
+@Index("fk_songs_has_chords_songs1_idx", ["songsId"], {})
 @Entity("songs_chords", { schema: "myjam_database" })
 export class SongsChords {
   @PrimaryGeneratedColumn({ type: "int", name: "id" })

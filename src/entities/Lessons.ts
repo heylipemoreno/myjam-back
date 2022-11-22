@@ -1,6 +1,6 @@
 import { Column, CreateDateColumn, Entity, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
-import { Classes } from "./Classes";
 import { Questions } from "./Questions";
+import { UsersLessons } from "./UsersLessons";
 
 @Entity("lessons", { schema: "myjam_database" })
 export class Lessons {
@@ -10,15 +10,18 @@ export class Lessons {
   @Column("varchar", { name: "lessonName", length: 100 })
   lessonName: string;
 
+  @Column("varchar", { name: "lessonImageLink", length: 300 })
+  lessonImageLink: string;
+
   @CreateDateColumn({ name: "createdAt" })
   createdAt: Date;
 
   @UpdateDateColumn({ name: "updatedAt" })
   updatedAt: Date;
 
-  @OneToMany(() => Classes, (classes) => classes.lessons)
-  classes: Classes[];
-
   @OneToMany(() => Questions, (questions) => questions.lessons)
   questions: Questions[];
+
+  @OneToMany(() => UsersLessons, (usersLessons) => usersLessons.lessons)
+  usersLessons: UsersLessons[];
 }

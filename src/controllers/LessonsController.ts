@@ -5,9 +5,9 @@ import { QuestionsRepository } from '../repositories/QuestionsRepository';
 
 export class LessonsController {
     async create(req: Request, res: Response) {
-        const { lessonName } = req.body;
+        const { lessonName, lessonImageLink } = req.body;
         try {
-            const newLesson = LessonsRepository.create({ lessonName });
+            const newLesson = LessonsRepository.create({ lessonName, lessonImageLink });
             await LessonsRepository.save(newLesson);
             return res.status(201).json(newLesson);
         } catch (error) {
@@ -42,7 +42,7 @@ export class LessonsController {
     }
 
     async update(req: Request, res: Response) {
-        const { lessonName } = req.body;
+        const { lessonName, lessonImageLink } = req.body;
         const { id } = req.params;
         try {
             const lesson = await LessonsRepository.findOneBy({ id: Number(id) });
@@ -50,7 +50,8 @@ export class LessonsController {
                 return res.status(404).json(constants.CRUD.LESSONS.NOT_FOUND);
             } else {
                 await LessonsRepository.update(id, {
-                    lessonName
+                    lessonName,
+                    lessonImageLink
                 });
                 res.status(200).json(constants.CRUD.LESSONS.UPDATE);
             }

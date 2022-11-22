@@ -34,7 +34,7 @@ export class UsersController {
 		if(req.body.password){
 			req.body.password = bcrypt.hashSync(req.body.password, 10);
 		}
-		const { userName, email, password, totalPoints, qtdSongs, qtdChords } = req.body
+		const { userName, email, password, totalPoints, qtdSongs, qtdChords, questionCompleted } = req.body
 		const { id } = req.params
 		try {
 			const user = await UsersRepository.findOneBy({ id: Number(id) })
@@ -47,7 +47,8 @@ export class UsersController {
 					password,
 					totalPoints,
 					qtdSongs,
-					qtdChords
+					qtdChords,
+					questionCompleted
 				});
 				res.status(200).json(constants.CRUD.USERS.UPDATE);
 			}
