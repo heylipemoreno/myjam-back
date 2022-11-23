@@ -6,8 +6,8 @@ export class Instrument {
   @PrimaryGeneratedColumn({ type: "int", name: "id" })
   id: number;
 
-  @Column("varchar", { name: "instrumentName", length: 100 })
-  instrumentName: string;
+  @Column("varchar", { name: "instrumentOption", length: 100 })
+  instrumentOption: string;
 
   @OneToMany(
     () => UsersQuestions,

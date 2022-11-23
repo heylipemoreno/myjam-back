@@ -6,8 +6,8 @@ export class Learn {
   @PrimaryGeneratedColumn({ type: "int", name: "id" })
   id: number;
 
-  @Column("varchar", { name: "learnDesc", length: 100 })
-  learnDesc: string;
+  @Column("varchar", { name: "learnOption", length: 100 })
+  learnOption: string;
 
   @OneToMany(() => UsersQuestions, (usersQuestions) => usersQuestions.learn)
   usersQuestions: UsersQuestions[];

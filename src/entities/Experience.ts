@@ -6,8 +6,8 @@ export class Experience {
   @PrimaryGeneratedColumn({ type: "int", name: "id" })
   id: number;
 
-  @Column("varchar", { name: "experienceDesc", length: 100 })
-  experienceDesc: string;
+  @Column("varchar", { name: "experienceOption", length: 100 })
+  experienceOption: string;
 
   @OneToMany(
     () => UsersQuestions,
