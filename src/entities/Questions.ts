@@ -36,8 +36,8 @@ export class Questions {
   @Column("varchar", { name: "questionTemplate", length: 100 })
   questionTemplate: string;
 
-  @Column("tinyint", { name: "isExplication", nullable: true })
-  isExplication: number | null;
+  @Column("tinyint", { name: "isExplanation", nullable: true })
+  isExplanation: number | null;
 
   @CreateDateColumn({ name: "createdAt" })
   createdAt: Date;

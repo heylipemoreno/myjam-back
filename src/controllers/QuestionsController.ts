@@ -4,9 +4,9 @@ import { QuestionsRepository } from "../repositories/QuestionsRepository";
 
 export class QuestionsController {
     async create(req: Request, res: Response) {
-        const { questionTitle, questionImageLink, questionContent, questionOptions, questionOptionCorrect, questionTemplate, isExplication, lessonsId, songsId } = req.body;
+        const { questionTitle, questionImageLink, questionContent, questionOptions, questionOptionCorrect, questionTemplate, isExplanation, lessonsId, songsId } = req.body;
         try {
-            const newQuestion = QuestionsRepository.create({ questionTitle, questionImageLink, questionContent, questionOptions, questionOptionCorrect, questionTemplate, isExplication, lessonsId, songsId });
+            const newQuestion = QuestionsRepository.create({ questionTitle, questionImageLink, questionContent, questionOptions, questionOptionCorrect, questionTemplate, isExplanation, lessonsId, songsId });
             await QuestionsRepository.save(newQuestion);
             res.status(201).send(newQuestion);
         } catch (error) {
@@ -40,7 +40,7 @@ export class QuestionsController {
     }
 
     async update(req: Request, res: Response) {
-        const { questionTitle, questionImageLink, questionContent, questionOptions, questionOptionCorrect, questionTemplate, isExplication, lessonsId, songsId } = req.body
+        const { questionTitle, questionImageLink, questionContent, questionOptions, questionOptionCorrect, questionTemplate, isExplanation, lessonsId, songsId } = req.body
         const { id } = req.params
         try {
             const question = await QuestionsRepository.findOneBy({ id: Number(id) });
@@ -54,7 +54,7 @@ export class QuestionsController {
                 questionOptions, 
                 questionOptionCorrect, 
                 questionTemplate, 
-                isExplication, 
+                isExplanation, 
                 lessonsId, 
                 songsId
             })

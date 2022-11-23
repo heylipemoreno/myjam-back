@@ -68,6 +68,18 @@ class ValidationMiddleware {
             password: Joi.string().required()
         })
     })
+
+    forgot = validate({
+        body: Joi.object({
+            email: Joi.string().email().required()
+        })
+    })
+
+    recover = validate({
+        body: Joi.object({
+            password: Joi.string().email().required()
+        })
+    })
 }
 
 export default new ValidationMiddleware();

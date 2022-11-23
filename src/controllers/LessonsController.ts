@@ -5,6 +5,7 @@ import { LessonsRepository } from '../repositories/LessonsRepository';
 import { QuestionsRepository } from '../repositories/QuestionsRepository';
 import { SongsChordsRepository } from '../repositories/SongsChordsRepository';
 import { SongsRepository } from '../repositories/SongsRepository';
+import { UsersLessonsRepository } from '../repositories/UsersLessonsRepository';
 
 export class LessonsController {
     async create(req: Request, res: Response) {
@@ -77,10 +78,23 @@ export class LessonsController {
 
     async listWithQuestions(req: Request, res: Response) {
         const { id } = req.params;
+        const info = req.body.info;
         try {
             const lesson = await LessonsRepository.findOneBy({ id: Number(id) });
             if (!lesson) {
                 return res.status(404).json(constants.CRUD.LESSONS.NOT_FOUND);
+            }
+            const relacion = await UsersLessonsRepository.findOneBy({
+                usersId: Number(info.id),
+                lessonsId: Number(lesson?.id)
+            })
+            if (!relacion) {
+                await UsersLessonsRepository.create({
+                    usersId: info.id,
+                    lessonsId: lesson.id,
+                    completedAt: null,
+                    points: 100
+                })
             }
             const questions = await QuestionsRepository.find({
                 where: {
@@ -96,7 +110,7 @@ export class LessonsController {
 
             for (let index = 0; index < questions.length; index++) {
                 const element = questions[index];
-                if (element.isExplication === 0) {
+                if (element.isExplanation === 0) {
                     const song = await SongsRepository.findOneBy({
                         id: Number(element.songsId)
                     })
