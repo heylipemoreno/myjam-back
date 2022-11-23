@@ -28,6 +28,12 @@ routes.get('/questions', new QuestionsController().list)
 routes.get('/lessons', new LessonsController().list)
 routes.get('/songs', new SongsController().list)
 
+// ***********************************************
+
+//SERVICE BY TOKEN
+routes.get('/users/onboarding', Auth, new UsersController().listOnboarding)
+routes.put('/users/completed/lessons/:id', Auth, new UsersController().completedLesson)
+
 //REGISTER
 routes.post('/users/register', validationMiddleware.register, new RegisterController().register);
 routes.post('/users/questions', Auth, validationMiddleware.registerQuestions, new RegisterController().question)
@@ -36,11 +42,13 @@ routes.post('/users/questions', Auth, validationMiddleware.registerQuestions, ne
 routes.post('/users/login', validationMiddleware.login, new LoginController().login)
 
 //RECOVERY PASS
-routes.post('/users/password/forgot', new LoginController().forgotPassword)
-routes.post('/users/password/recover',Auth, new LoginController().recoverPassword)
+routes.post('/users/password/forgot', validationMiddleware.forgot, new LoginController().forgotPassword)
+routes.post('/users/password/recover', Auth, validationMiddleware.recover, new LoginController().recoverPassword)
 
 //LIST LESSON WITH ALL QUESTIONS
-routes.get('/lessons/:id/questions', new LessonsController().listWithQuestions)
+routes.get('/lessons/:id/questions', Auth, new LessonsController().listWithQuestions)
+
+// ***********************************************
 
 //GET ID
 routes.get('/users/:id', new UsersController().listOne)
@@ -65,9 +73,5 @@ routes.delete('/chords/:id', new ChordsController().delete)
 routes.delete('/questions/:id', new QuestionsController().delete)
 routes.delete('/lessons/:id', new LessonsController().delete)
 routes.delete('/songs/:id', new SongsController().delete)
-
-
-//ATUALIZAÇÕES
-
 
 export default routes

@@ -50,7 +50,7 @@ export class LoginController {
                 expiresIn: '600000'
             })
 
-            mail.sendMail(user.userName, user.email, 'recovery', token)
+            // mail.sendMail(user.userName, user.email, 'recovery', token)
 
             res.status(200).send({
                 Message: `E-mail enviado! Favor olhar na caixa de Spam ou Lixo Eletrônico.`
