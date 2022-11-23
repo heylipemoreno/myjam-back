@@ -8,7 +8,7 @@ export default {
     },
     ERROR: {
         TYPE: {
-            UNAUTHORIZED_EROOR: 'UnauthorizedError',
+            UNAUTHORIZED_ERROR: 'UnauthorizedError',
             VALIDATION_ERROR: 'ValidationError'
         },
         MESSAGE: {

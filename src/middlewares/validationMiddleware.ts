@@ -40,7 +40,7 @@ class ValidationMiddleware {
             questionOptions: Joi.string().required(),
             questionOptionCorrect: Joi.string().required(),
             questionTemplate: Joi.string().required(),
-            isExplication: Joi.number().required(),
+            isExplanation: Joi.number().required(),
             lessonsId: Joi.number().required(),
             songsId: Joi.number()
         })
