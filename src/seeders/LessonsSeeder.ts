@@ -9,23 +9,23 @@ export class LessonsSeeder implements Seeder {
         const lessonData = [{
             id: 1,
             lessonName: "Violão 1",
-            lessonImageLink: ""
+            lessonImageLink: "https://i.imgur.com/QzyeK9g.png"
         }, {
             id: 2,
             lessonName: "Violão 2",
-            lessonImageLink: ""
+            lessonImageLink: "https://i.imgur.com/QzyeK9g.png"
         }, {
             id: 3,
             lessonName: "Violão 3",
-            lessonImageLink: ""
+            lessonImageLink: "https://i.imgur.com/QzyeK9g.png"
         }, {
             id: 4,
             lessonName: "Violão 4",
-            lessonImageLink: ""
+            lessonImageLink: "https://i.imgur.com/QzyeK9g.png"
         }, {
             id: 5,
             lessonName: "Violão 5",
-            lessonImageLink: ""
+            lessonImageLink: "https://i.imgur.com/QzyeK9g.png"
         }]
 
         for (let index = 0; index < lessonData.length; index++) {

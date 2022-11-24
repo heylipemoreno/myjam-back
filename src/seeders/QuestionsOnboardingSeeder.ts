@@ -19,18 +19,28 @@ export class QuestionsOnboardingSeeder implements Seeder {
         //Seeders
         const instrumentData = [{
             id: 1,
+            instrumentImageLink:"https://i.imgur.com/Han3DyU.png",
+            instrumentHoverImageLink:"https://i.imgur.com/n2sO8Yz.png",
             instrumentOption: "Violão"
         }, {
             id: 2,
+            instrumentImageLink:"https://i.imgur.com/oKDejCl.png",
+            instrumentHoverImageLink:"",
             instrumentOption: "Guitarra"
         }, {
             id: 3,
+            instrumentImageLink:"https://i.imgur.com/JvHpONM.png",
+            instrumentHoverImageLink:"",
             instrumentOption: "Baixo"
         }, {
             id: 4,
+            instrumentImageLink:"https://i.imgur.com/gSdHIto.png",
+            instrumentHoverImageLink:"",
             instrumentOption: "Teclado"
         }, {
             id: 5,
+            instrumentImageLink:"https://i.imgur.com/GgJ6h4Y.png",
+            instrumentHoverImageLink:"",
             instrumentOption: "Bateria"
         }]
 

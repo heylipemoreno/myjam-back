@@ -31,8 +31,8 @@ routes.get('/songs', new SongsController().list)
 // ***********************************************
 
 //SERVICE BY TOKEN
-routes.get('/users/onboarding', Auth, new UsersController().listOnboarding)
-routes.put('/users/completed/lessons/:id', Auth, new UsersController().completedLesson)
+routes.get('/users/listlessons', Auth, new UsersController().listOnboarding)
+routes.put('/users/lessons/:id/completed', Auth, new UsersController().completedLesson)
 
 //REGISTER
 routes.post('/users/register', validationMiddleware.register, new RegisterController().register);

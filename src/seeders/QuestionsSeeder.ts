@@ -10,12 +10,7 @@ export class QuestionsSeeder implements Seeder {
             id: 1,
             questionTitle: 'As partes do violão',
             questionImageLink: '',
-            questionContent: `
-            É o cabeçote. Nele ficam as tarraxas pra afinação e, além disso, faz parte da sustentação do braço. /
-            Tarraxas: São as responsáveis pela afinação das cordas. /
-            Casas: No violão, cada casa de cada corda é uma nota. Elas são divididas pelos trastes. Em alguns pontos elas são a mesma. Falamos disso depois. /
-            Traste: Diferente dos da vida real, o traste do violão é responsável por dividir e sustentar as notas. /
-            Todas essas partes juntas compõem o braço do violão.`,
+            questionContent: '["Nossa primeira etapa, vamos focar no braço, que é a mais importante.","É o cabeçote. Nele ficam as tarraxas pra afinação e, além disso, faz parte da sustentação do braço.","Tarraxas: São as responsáveis pela afinação das cordas.","Casas: No violão, cada casa de cada corda é uma nota. Elas são divididas pelos trastes. Em alguns pontos elas são a mesma. Falamos disso depois.","Traste: Diferente dos da vida real, o traste do violão é responsável por dividir e sustentar as notas.","Todas essas partes juntas compõem o braço do violão."]',
             questionOptions: '',
             questionOptionCorrect: '',
             questionTemplate: 'introduction_1',
@@ -25,7 +20,7 @@ export class QuestionsSeeder implements Seeder {
         }, {
             id: 2,
             questionTitle: 'Qual o nome desta parte?',
-            questionImageLink: '',
+            questionImageLink: 'https://i.imgur.com/AwTkuZJ.png',
             questionContent: null,
             questionOptions: '["Cabeçote","Braço","Tarraxa"]',
             questionOptionCorrect: '',
@@ -69,7 +64,7 @@ export class QuestionsSeeder implements Seeder {
         }, {
             id: 6,
             questionTitle: 'Contagem dos dedos',
-            questionImageLink: '',
+            questionImageLink: 'https://i.imgur.com/DpyvyUx.png',
             questionContent: '',
             questionOptions: '',
             questionOptionCorrect: '',
@@ -80,7 +75,7 @@ export class QuestionsSeeder implements Seeder {
         }, {
             id: 7,
             questionTitle: 'Contagem das cordas',
-            questionImageLink: '',
+            questionImageLink: 'https://i.imgur.com/Bk8rqgd.png',
             questionContent: 'As cordas do violão são contadas de baixo pra cima. Da mais fina pra a mais grossa.',
             questionOptions: '',
             questionOptionCorrect: '',
@@ -91,7 +86,7 @@ export class QuestionsSeeder implements Seeder {
         }, {
             id: 8,
             questionTitle: 'Contagem das casas',
-            questionImageLink: '',
+            questionImageLink: 'https://i.imgur.com/kSlyrPl.png',
             questionContent: '',
             questionOptions: '',
             questionOptionCorrect: '',
@@ -124,7 +119,7 @@ export class QuestionsSeeder implements Seeder {
         }, {
             id: 11,
             questionTitle: 'Qual dedo está na corda 2?',
-            questionImageLink: '',
+            questionImageLink: 'https://i.imgur.com/i7DAWR3.png',
             questionContent: null,
             questionOptions: '["1","2","4"]',
             questionOptionCorrect: '',
@@ -134,6 +129,17 @@ export class QuestionsSeeder implements Seeder {
             songsId: 1
         }, {
             id: 12,
+            questionTitle: 'Em qual corda e casa está o dedo 4?',
+            questionImageLink: 'https://i.imgur.com/i7DAWR3.png',
+            questionContent: null,
+            questionOptions: '["Corda 2, Casa 5","Corda 5, Casa 2","Corda 6, Casa 3"]',
+            questionOptionCorrect: '',
+            questionTemplate: 'question_image',
+            isExplanation: 1,
+            lessonsId: 2,
+            songsId: 1
+        }, {
+            id: 13,
             questionTitle: 'Como ler a tal da cifra?',
             questionImageLink: '',
             questionContent: '',
@@ -144,9 +150,9 @@ export class QuestionsSeeder implements Seeder {
             lessonsId: 3,
             songsId: 1
         }, {
-            id: 13,
+            id: 14,
             questionTitle: 'Qual a posição do dedo 2?',
-            questionImageLink: '',
+            questionImageLink: 'https://i.imgur.com/JFzAj59.png',
             questionContent: null,
             questionOptions: '["Corda 3, Casa 4" , "Corda 4, Casa 2" , "Corda 2, Casa 1"]',
             questionOptionCorrect: '',
@@ -155,9 +161,9 @@ export class QuestionsSeeder implements Seeder {
             lessonsId: 3,
             songsId: 1
         }, {
-            id: 14,
+            id: 15,
             questionTitle: 'Quantos dedos são usados nesse acorde?',
-            questionImageLink: '',
+            questionImageLink: 'https://i.imgur.com/Gd6H6Qv.png',
             questionContent: null,
             questionOptions: '["2" , "3" , "4]',
             questionOptionCorrect: '',
@@ -166,9 +172,9 @@ export class QuestionsSeeder implements Seeder {
             lessonsId: 3,
             songsId: 1
         }, {
-            id: 15,
+            id: 16,
             questionTitle: 'Qual é a casa em que ficam os dedos 2 e 3?',
-            questionImageLink: '',
+            questionImageLink: 'https://i.imgur.com/tf6YAD0.png',
             questionContent: null,
             questionOptions: '["2" , "4" , "1"]',
             questionOptionCorrect: '',
@@ -177,9 +183,9 @@ export class QuestionsSeeder implements Seeder {
             lessonsId: 3,
             songsId: 1
         }, {
-            id: 16,
+            id: 17,
             questionTitle: 'Qual corda você vai apertar com o dedo 1',
-            questionImageLink: '',
+            questionImageLink: 'https://i.imgur.com/2KpXhDE.png',
             questionContent: null,
             questionOptions: '["3" , "2" , "3"]',
             questionOptionCorrect: '',
@@ -188,20 +194,9 @@ export class QuestionsSeeder implements Seeder {
             lessonsId: 3,
             songsId: 1
         }, {
-            id: 17,
-            questionTitle: 'C (Dó Maior)',
-            questionImageLink: '',
-            questionContent: '["Pressione as cordas indicadas","Use o dedão como apoio pra reduzir o esforço"]',
-            questionOptions: '',
-            questionOptionCorrect: '',
-            questionTemplate: 'lesson_chord',
-            isExplanation: 0,
-            lessonsId: 4,
-            songsId: 1
-        }, {
             id: 18,
-            questionTitle: 'G (Sol Maior)',
-            questionImageLink: '',
+            questionTitle: 'C (Dó Maior)',
+            questionImageLink: 'https://i.imgur.com/JFzAj59.png',
             questionContent: '["Pressione as cordas indicadas","Use o dedão como apoio pra reduzir o esforço"]',
             questionOptions: '',
             questionOptionCorrect: '',
@@ -211,8 +206,8 @@ export class QuestionsSeeder implements Seeder {
             songsId: 1
         }, {
             id: 19,
-            questionTitle: 'Am (Lá Menor)',
-            questionImageLink: '',
+            questionTitle: 'G (Sol Maior)',
+            questionImageLink: 'https://i.imgur.com/Gd6H6Qv.png',
             questionContent: '["Pressione as cordas indicadas","Use o dedão como apoio pra reduzir o esforço"]',
             questionOptions: '',
             questionOptionCorrect: '',
@@ -222,8 +217,8 @@ export class QuestionsSeeder implements Seeder {
             songsId: 1
         }, {
             id: 20,
-            questionTitle: 'F (Fá Menor)',
-            questionImageLink: '',
+            questionTitle: 'Am (Lá Menor)',
+            questionImageLink: 'https://i.imgur.com/tf6YAD0.png',
             questionContent: '["Pressione as cordas indicadas","Use o dedão como apoio pra reduzir o esforço"]',
             questionOptions: '',
             questionOptionCorrect: '',
@@ -233,6 +228,17 @@ export class QuestionsSeeder implements Seeder {
             songsId: 1
         }, {
             id: 21,
+            questionTitle: 'F (Fá Menor)',
+            questionImageLink: 'https://i.imgur.com/2KpXhDE.png',
+            questionContent: '["Pressione as cordas indicadas","Use o dedão como apoio pra reduzir o esforço"]',
+            questionOptions: '',
+            questionOptionCorrect: '',
+            questionTemplate: 'lesson_chord',
+            isExplanation: 0,
+            lessonsId: 4,
+            songsId: 1
+        }, {
+            id: 22,
             questionTitle: 'Por onde andei - Nando Reis',
             questionImageLink: null,
             questionContent: null,

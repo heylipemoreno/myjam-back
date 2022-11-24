@@ -6,6 +6,12 @@ export class Instrument {
   @PrimaryGeneratedColumn({ type: "int", name: "id" })
   id: number;
 
+  @Column("varchar", { name: "instrumentImageLink", length: 300 })
+  instrumentImageLink: string;
+
+  @Column("varchar", { name: "instrumentHoverImageLink", length: 300 })
+  instrumentHoverImageLink: string;
+
   @Column("varchar", { name: "instrumentOption", length: 100 })
   instrumentOption: string;
 
