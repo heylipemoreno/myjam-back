@@ -77,7 +77,7 @@ class ValidationMiddleware {
 
     recover = validate({
         body: Joi.object({
-            password: Joi.string().email().required()
+            password: Joi.string().required()
         })
     })
 }
