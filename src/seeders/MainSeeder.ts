@@ -5,6 +5,7 @@ import { GenresSeeder } from "./GenresSeeder";
 import { LessonsSeeder } from "./LessonsSeeder";
 import { QuestionsOnboardingSeeder } from "./QuestionsOnboardingSeeder";
 import { QuestionsSeeder } from "./QuestionsSeeder";
+import { RelacionsSeeder } from "./RelacionsSeeder";
 import { SongsSeeder } from "./SongsSeeder";
 import { UsersSeeder } from "./UsersSeeder";
 
@@ -17,6 +18,9 @@ export class MainSeeder implements Seeder {
         await runSeeder(dataSource, GenresSeeder);
         await runSeeder(dataSource, UsersSeeder);
         await runSeeder(dataSource, QuestionsSeeder);
+        await runSeeder(dataSource, RelacionsSeeder);
+
+        console.log("Seeds criada com sucesso.")
     }
 
 }
