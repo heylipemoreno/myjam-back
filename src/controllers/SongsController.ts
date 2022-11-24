@@ -1,6 +1,7 @@
 import { Request, Response } from 'express'
 import constants from '../config/constants/constants'
 import { SongsRepository } from '../repositories/SongsRepository'
+import { SongsToModel } from '../services/helpers/SongsToModel';
 
 export class SongsController {
 	async create(req: Request, res: Response) {
@@ -8,7 +9,7 @@ export class SongsController {
 		try {
 			const newSong = SongsRepository.create({ songName, songLink, songContent })
 			await SongsRepository.save(newSong)
-			return res.status(201).json(newSong)
+			return res.status(201).json(SongsToModel(newSong))
 		} catch (error) {
 			console.log(error)
 			return res.status(500).json(constants.CRUD.ERROR)
@@ -18,7 +19,8 @@ export class SongsController {
 	async list(req: Request, res: Response) {
 		try {
 			const songs = await SongsRepository.find()
-			res.status(200).json(songs);
+			const listSongs = songs.map(SongsToModel)
+			res.status(200).json(listSongs);
 		} catch (error) {
 			console.log(error)
 			return res.status(500).json(constants.CRUD.ERROR)
@@ -32,7 +34,7 @@ export class SongsController {
 			if (!song) {
 				return res.status(404).json(constants.CRUD.SONGS.NOT_FOUND)
 			} else {
-				res.status(200).json(song);
+				res.status(200).json(SongsToModel(song));
 			}
 		} catch (error) {
 			console.log(error)

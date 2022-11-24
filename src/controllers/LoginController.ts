@@ -5,6 +5,7 @@ import * as jtw from 'jsonwebtoken';
 import { secretKey } from "../config/secret/secret";
 import constants from "../config/constants/constants";
 import mail from "../services/mail/mail";
+import { UsersToModel } from "../services/helpers/UsersToModel";
 
 export class LoginController {
     async login(req: Request, res: Response) {
@@ -25,7 +26,7 @@ export class LoginController {
                 expiresIn: '1 day'
             })
             res.status(200).send({
-                User: user,
+                User: UsersToModel(user),
                 Token: token
             })
         } catch (error) {
