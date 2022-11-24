@@ -4,13 +4,15 @@ import bcrypt from 'bcryptjs'
 import constants from '../config/constants/constants';
 import { LessonsRepository } from '../repositories/LessonsRepository';
 import { UsersLessonsRepository } from '../repositories/UsersLessonsRepository';
+import { UsersToModel } from '../services/helpers/UsersToModel';
 
 export class UsersController {
 
 	async list(req: Request, res: Response) {
 		try {
 			const users = await UsersRepository.find()
-			res.status(200).json(users);
+			const listUsers = users.map(UsersToModel)
+			res.status(200).json(listUsers);
 		} catch (error) {
 			console.log(error)
 			return res.status(500).json(constants.CRUD.ERROR)
@@ -24,7 +26,7 @@ export class UsersController {
 			if (!user) {
 				return res.status(404).json(constants.CRUD.USERS.NOT_FOUND)
 			} else {
-				res.status(200).json(user);
+				res.status(200).json(UsersToModel(user));
 			}
 		} catch (error) {
 			console.log(error)
@@ -84,7 +86,7 @@ export class UsersController {
 				usersId: user?.id
 			})
 			res.status(200).send({
-				User: user,
+				User: UsersToModel(user!),
 				Status: relacion
 			})
 		} catch (error) {
@@ -113,8 +115,6 @@ export class UsersController {
 				lessonsId: Number(lesson?.id),
 				completedAt: new Date().toISOString().slice(0, 19).replace('T', ' ')
 			})
-
-			
 
 			const userUpdated = await UsersRepository.update(user!.id, {
 				totalPoints: user!.totalPoints! + relacion!.points!

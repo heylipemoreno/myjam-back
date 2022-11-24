@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
 import constants from "../config/constants/constants";
 import { QuestionsRepository } from "../repositories/QuestionsRepository";
+import { QuestionsToModel } from "../services/helpers/QuestionsToModel";
 
 export class QuestionsController {
     async create(req: Request, res: Response) {
@@ -8,7 +9,7 @@ export class QuestionsController {
         try {
             const newQuestion = QuestionsRepository.create({ questionTitle, questionImageLink, questionContent, questionOptions, questionOptionCorrect, questionTemplate, isExplanation, lessonsId, songsId });
             await QuestionsRepository.save(newQuestion);
-            res.status(201).send(newQuestion);
+            res.status(201).send(QuestionsToModel(newQuestion));
         } catch (error) {
             console.log(error)
             return res.status(500).send(constants.CRUD.ERROR)
@@ -18,7 +19,8 @@ export class QuestionsController {
     async list(req: Request, res: Response) {
         try {
             const questions = await QuestionsRepository.find();
-            res.status(200).send(questions);
+            const listQuestions = questions.map(QuestionsToModel)
+            res.status(200).send(listQuestions);
         } catch (error) {
             console.log(error)
             return res.status(500).send(constants.CRUD.ERROR)
@@ -32,7 +34,7 @@ export class QuestionsController {
             if (!question) {
                 return res.status(404).send(constants.CRUD.QUESTIONS.NOT_FOUND);
             }
-            res.status(200).send(question);
+            res.status(200).send(QuestionsToModel(question));
         } catch (error) {
             console.log(error)
             return res.status(500).send(constants.CRUD.ERROR)

@@ -1,6 +1,7 @@
 import { Request, Response } from 'express'
 import constants from '../config/constants/constants'
 import { ChordsRepository } from '../repositories/ChordsRepository'
+import { ChordsToModel } from '../services/helpers/ChordsToModel'
 
 export class ChordsController {
 	async create(req: Request, res: Response) {
@@ -8,7 +9,7 @@ export class ChordsController {
 		try {
 			const newChord = ChordsRepository.create({ chordName, chordImageLink, chordSoundLink })
 			await ChordsRepository.save(newChord)
-			return res.status(201).json(newChord)
+			return res.status(201).json(ChordsToModel(newChord))
 		} catch (error) {
 			console.log(error)
 			return res.status(500).json(constants.CRUD.ERROR)
@@ -18,7 +19,8 @@ export class ChordsController {
 	async list(req: Request, res: Response) {
 		try {
 			const chords = await ChordsRepository.find()
-			res.status(200).json(chords);
+			const listChords = chords.map(ChordsToModel)
+			res.status(200).json(listChords);
 		} catch (error) {
 			console.log(error)
 			return res.status(500).json(constants.CRUD.ERROR)
@@ -32,7 +34,7 @@ export class ChordsController {
 			if (!chord) {
 				return res.status(404).json(constants.CRUD.CHORDS.NOT_FOUND)
 			} else {
-				res.status(200).json(chord);
+				res.status(200).json(ChordsToModel(chord));
 			}
 		} catch (error) {
 			console.log(error)

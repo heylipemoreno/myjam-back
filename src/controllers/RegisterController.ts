@@ -5,6 +5,7 @@ import bcrypt from 'bcryptjs';
 import * as jtw from 'jsonwebtoken';
 import { secretKey } from "../config/secret/secret";
 import constants from "../config/constants/constants";
+import { UsersToModel } from "../services/helpers/UsersToModel";
 
 export class RegisterController {
     async register(request: Request, response: Response) {
@@ -16,11 +17,10 @@ export class RegisterController {
             const token = jtw.sign({
                 id: newUser.id
             }, secretKey, {
-                expiresIn: '1 day'
+                expiresIn: '2 day'
             });
-            newUser.password = '##############'
             response.status(201).send({
-                RegisteredUser: newUser,
+                RegisteredUser: UsersToModel(newUser),
                 Token: token
             })
         } catch (error) {

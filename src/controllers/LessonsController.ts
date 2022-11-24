@@ -6,6 +6,10 @@ import { QuestionsRepository } from '../repositories/QuestionsRepository';
 import { SongsChordsRepository } from '../repositories/SongsChordsRepository';
 import { SongsRepository } from '../repositories/SongsRepository';
 import { UsersLessonsRepository } from '../repositories/UsersLessonsRepository';
+import { ChordsToModel } from '../services/helpers/ChordsToModel';
+import { LessonsToModel } from '../services/helpers/LessonsToModel';
+import { QuestionsToModel } from '../services/helpers/QuestionsToModel';
+import { SongsToModel } from '../services/helpers/SongsToModel';
 
 export class LessonsController {
     async create(req: Request, res: Response) {
@@ -13,7 +17,7 @@ export class LessonsController {
         try {
             const newLesson = LessonsRepository.create({ lessonName, lessonImageLink });
             await LessonsRepository.save(newLesson);
-            return res.status(201).json(newLesson);
+            return res.status(201).json(LessonsToModel(newLesson));
         } catch (error) {
             console.log(error);
             return res.status(500).json(constants.CRUD.ERROR);
@@ -23,7 +27,8 @@ export class LessonsController {
     async list(req: Request, res: Response) {
         try {
             const lessons = await LessonsRepository.find();
-            res.status(200).json(lessons);
+            const listLessons = lessons.map(LessonsToModel)
+            res.status(200).json(listLessons);
         } catch (error) {
             console.log(error);
             return res.status(500).json(constants.CRUD.ERROR);
@@ -37,7 +42,7 @@ export class LessonsController {
             if (!lesson) {
                 return res.status(404).json(constants.CRUD.LESSONS.NOT_FOUND);
             } else {
-                res.status(200).json(lesson);
+                res.status(200).json(LessonsToModel(lesson));
             }
         } catch (error) {
             console.log(error);
@@ -105,6 +110,8 @@ export class LessonsController {
                 res.status(404).send(constants.CRUD.LESSONS.QUESTIONS.NOT_FOUND)
             }
 
+            const listQuestions = questions.map(QuestionsToModel)
+
             let questionOfMusic = [];
             let lessonContent;
 
@@ -121,26 +128,28 @@ export class LessonsController {
                     for (let count = 0; count < songsChords.length; count++) {
                         const element = songsChords[count];
                         const chords = await ChordsRepository.findOneBy({ id: Number(element.chordsId) })
-                        questionOfMusic[count] = chords
+                        if (chords) {
+                            questionOfMusic[count] = ChordsToModel(chords!)
+                        }
                     }
                     if (element.questionTemplate === 'lesson_chord') {
                         lessonContent = {
-                            Lesson: lesson,
-                            Questions: questions,
+                            Lesson: LessonsToModel(lesson),
+                            Questions: listQuestions,
                             Chords: questionOfMusic
                         }
                     } else if (element.questionTemplate === 'lesson_song') {
                         lessonContent = {
-                            Lesson: lesson,
-                            Questions: questions,
-                            Song: song,
+                            Lesson: LessonsToModel(lesson),
+                            Questions: listQuestions,
+                            Song: SongsToModel(song!),
                             Chords: questionOfMusic
                         }
                     }
                 } else {
                     lessonContent = {
-                        Lesson: lesson,
-                        Questions: questions
+                        Lesson: LessonsToModel(lesson),
+                        Questions: listQuestions
                     }
                 }
             }
