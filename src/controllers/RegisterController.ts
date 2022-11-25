@@ -5,7 +5,7 @@ import bcrypt from 'bcryptjs';
 import * as jtw from 'jsonwebtoken';
 import { secretKey } from "../config/secret/secret";
 import constants from "../config/constants/constants";
-import { UsersToModel } from "../services/helpers/UsersToModel";
+import { UsersToModel } from "../utils/helpers/UsersToModel";
 
 export class RegisterController {
     async register(request: Request, response: Response) {

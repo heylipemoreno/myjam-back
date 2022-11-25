@@ -6,10 +6,10 @@ import { QuestionsRepository } from '../repositories/QuestionsRepository';
 import { SongsChordsRepository } from '../repositories/SongsChordsRepository';
 import { SongsRepository } from '../repositories/SongsRepository';
 import { UsersLessonsRepository } from '../repositories/UsersLessonsRepository';
-import { ChordsToModel } from '../services/helpers/ChordsToModel';
-import { LessonsToModel } from '../services/helpers/LessonsToModel';
-import { QuestionsToModel } from '../services/helpers/QuestionsToModel';
-import { SongsToModel } from '../services/helpers/SongsToModel';
+import { ChordsToModel } from '../utils/helpers/ChordsToModel';
+import { LessonsToModel } from '../utils/helpers/LessonsToModel';
+import { QuestionsToModel } from '../utils/helpers/QuestionsToModel';
+import { SongsToModel } from '../utils/helpers/SongsToModel';
 
 export class LessonsController {
     async create(req: Request, res: Response) {

@@ -1,5 +1,5 @@
 export function recoverPasswordMail(userName: string, token: string) {
-    const mail = `<!doctype html>
+  const mail = `<!doctype html>
     <html>
       <head>
         <meta name="viewport" content="width=device-width" />
@@ -292,8 +292,8 @@ export function recoverPasswordMail(userName: string, token: string) {
                       <table border="0" cellpadding="0" cellspacing="0">
                         <tr>
                           <td>
-                            <p>E-mail de recuperação de senha!</p>
-                            <p>Caso não tenha feito está solicitação ignore.</p>
+                            <p>Olá ${userName}.</p>
+                            <p>Você solicitou o email pela troca de senha. Caso não tenha feito está solicitação ignore.</p>
                             <p>Clique no botão abaixo para prosseguir com a alteração de senha. </p>
                             <table border="0" cellpadding="0" cellspacing="0" class="btn btn-primary">
                               <tbody>
@@ -332,7 +332,7 @@ export function recoverPasswordMail(userName: string, token: string) {
                     </tr>
                     <tr>
                       <td class="content-block powered-by">
-                        Powered by <a href="http://htmlemail.io">HTML Email</a>.
+                        Powered by <a href="https://github.com/EuLuiiz">EuLuiiz</a>.
                       </td>
                     </tr>
                   </table>
@@ -347,11 +347,11 @@ export function recoverPasswordMail(userName: string, token: string) {
         </table>
       </body>
     </html>`
-    return mail
+  return mail
 }
 
 export function recoverPasswordText(userName: string, token: string) {
-    const text = `
+  const text = `
     
 
 
@@ -378,12 +378,12 @@ export function recoverPasswordText(userName: string, token: string) {
     
     
     
-    E-mail de recuperação de senha!
+    Olá ${userName}.
     
     
     
     
-    Caso não tenha feito está solicitação ignore.
+    Você solicitou o email pela troca de senha. Caso não tenha feito está solicitação ignore.
     
     
     
@@ -448,7 +448,7 @@ export function recoverPasswordText(userName: string, token: string) {
     
     
     
-    Powered by HTML Email [http://htmlemail.io].
+    Powered by EuLuiiz [https://github.com/EuLuiiz].
     
     
     
@@ -469,5 +469,5 @@ export function recoverPasswordText(userName: string, token: string) {
     
     
     `
-    return text
+  return text
 }

@@ -1,6 +1,6 @@
 import * as nodemailer from 'nodemailer';
-import { recoverPasswordMail, recoverPasswordText } from './viewes/recoveryPassMail';
-import { welcomeMail } from './viewes/welcomeMail';
+import { recoverPasswordMail, recoverPasswordText } from '../viewes/recoveryPassMail';
+import { welcomeMail } from '../viewes/welcomeMail';
 
 class Mail {
 

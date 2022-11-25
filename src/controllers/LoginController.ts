@@ -4,8 +4,8 @@ import bcrypt from 'bcryptjs';
 import * as jtw from 'jsonwebtoken';
 import { secretKey } from "../config/secret/secret";
 import constants from "../config/constants/constants";
-import mail from "../services/mail/mail";
-import { UsersToModel } from "../services/helpers/UsersToModel";
+import mail from "../utils/mail/mail";
+import { UsersToModel } from "../utils/helpers/UsersToModel";
 
 export class LoginController {
     async login(req: Request, res: Response) {
