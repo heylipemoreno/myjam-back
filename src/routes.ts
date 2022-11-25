@@ -36,14 +36,14 @@ routes.put('/users/lessons/:id/completed', Auth, new UsersController().completed
 
 //REGISTER
 routes.post('/users/register', validationMiddleware.register, new RegisterController().register);
-routes.post('/users/questions', Auth, validationMiddleware.registerQuestions, new RegisterController().question)
+routes.post('/users/questions', Auth,  new RegisterController().question)
 
 //LOGIN
 routes.post('/users/login', validationMiddleware.login, new LoginController().login)
 
 //RECOVERY PASS
 routes.post('/users/password/forgot', validationMiddleware.forgot, new LoginController().forgotPassword)
-routes.post('/users/password/recover', Auth, validationMiddleware.recover, new LoginController().recoverPassword)
+routes.post('/users/password/recover', Auth, new LoginController().recoverPassword)
 
 //LIST LESSON WITH ALL QUESTIONS
 routes.get('/lessons/:id/questions', Auth, new LessonsController().listWithQuestions)
