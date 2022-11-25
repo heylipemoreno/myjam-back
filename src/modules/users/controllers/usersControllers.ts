@@ -9,7 +9,7 @@ import updateUsersUsecase from '../usecases/updateUsersUsecase'
 export class UsersController {
     async create(request: express.Request, response: express.Response) {
         try {
-            const user = createUsersUseCase.execute(request.body)
+            const user = await createUsersUseCase.execute(request.body)
             response.status(201).send(user)
         } catch (error) {
             console.log(error)
@@ -19,7 +19,7 @@ export class UsersController {
 
     async list(request: express.Request, response: express.Response) {
         try {
-            const list = listUsersUsecase.execute();
+            const list = await listUsersUsecase.execute();
             response.status(200).json(list);
         } catch (error) {
             console.log(error)
@@ -29,7 +29,7 @@ export class UsersController {
 
     async listID(request: express.Request, response: express.Response) {
         try {
-            const user = listIDUsersUsecase.execute(Number(request.params.id))
+            const user = await listIDUsersUsecase.execute(Number(request.params.id))
             response.status(200).send(user)
         } catch (error) {
             console.log(error)
@@ -39,7 +39,7 @@ export class UsersController {
 
     async update(request: express.Request, response: express.Response) {
         try {
-            const updated = updateUsersUsecase.execute(request.body,Number(request.params.id))
+            const updated = await updateUsersUsecase.execute(request.body,Number(request.params.id))
             response.status(200).send(updated)
         } catch (error) {
             console.log(error)
@@ -49,7 +49,7 @@ export class UsersController {
 
     async delete(request: express.Request, response: express.Response) {
         try {
-            const deleted = deleteUsersUsecase.execute(Number(request.params.id))
+            const deleted = await deleteUsersUsecase.execute(Number(request.params.id))
             response.status(204).send()
         } catch (error) {
             console.log(error)
