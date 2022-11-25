@@ -10,7 +10,7 @@ export class UpdateUsersUseCase {
             if (!user) {
                 return constants.CRUD.USERS.NOT_FOUND;
             }
-            const userUpdated = await UsersRepository.update(dataID, {
+            const userUpdated = await UsersRepository.update({ id: dataID }, {
                 userName,
                 email,
                 password,
