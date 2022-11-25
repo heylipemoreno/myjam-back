@@ -4,7 +4,7 @@ import bcrypt from 'bcryptjs'
 import constants from '../config/constants/constants';
 import { LessonsRepository } from '../repositories/LessonsRepository';
 import { UsersLessonsRepository } from '../repositories/UsersLessonsRepository';
-import { UsersToModel } from '../services/helpers/UsersToModel';
+import { UsersToModel } from '../utils/helpers/UsersToModel';
 
 export class UsersController {
 

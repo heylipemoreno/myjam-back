@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import constants from "../config/constants/constants";
 import { QuestionsRepository } from "../repositories/QuestionsRepository";
-import { QuestionsToModel } from "../services/helpers/QuestionsToModel";
+import { QuestionsToModel } from "../utils/helpers/QuestionsToModel";
 
 export class QuestionsController {
     async create(req: Request, res: Response) {

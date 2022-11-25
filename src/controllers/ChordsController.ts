@@ -1,7 +1,7 @@
 import { Request, Response } from 'express'
 import constants from '../config/constants/constants'
 import { ChordsRepository } from '../repositories/ChordsRepository'
-import { ChordsToModel } from '../services/helpers/ChordsToModel'
+import { ChordsToModel } from '../utils/helpers/ChordsToModel'
 
 export class ChordsController {
 	async create(req: Request, res: Response) {

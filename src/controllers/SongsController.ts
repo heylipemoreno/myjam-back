@@ -1,7 +1,7 @@
 import { Request, Response } from 'express'
 import constants from '../config/constants/constants'
 import { SongsRepository } from '../repositories/SongsRepository'
-import { SongsToModel } from '../services/helpers/SongsToModel';
+import { SongsToModel } from '../utils/helpers/SongsToModel';
 
 export class SongsController {
 	async create(req: Request, res: Response) {
