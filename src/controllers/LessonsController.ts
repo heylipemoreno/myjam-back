@@ -94,12 +94,13 @@ export class LessonsController {
                 lessonsId: Number(lesson?.id)
             })
             if (!relacion) {
-                await UsersLessonsRepository.create({
+                const rel = await UsersLessonsRepository.create({
                     usersId: info.id,
                     lessonsId: lesson.id,
                     completedAt: null,
                     points: 100
                 })
+                await UsersLessonsRepository.save(rel)
             }
             const questions = await QuestionsRepository.find({
                 where: {
