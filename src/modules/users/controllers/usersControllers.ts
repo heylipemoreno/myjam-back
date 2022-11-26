@@ -1,13 +1,13 @@
 import express from 'express'
 import constants from '../../../config/constants/constants'
-import createUsersUseCase from '../usecases/createUsersUseCase'
-import deleteUsersUsecase from '../usecases/deleteUsersUseCase'
 import forgotPassUsersUseCase from '../usecases/forgotPassUsersUseCase'
-import listIDUsersUsecase from '../usecases/listIDUsersUseCase'
-import listUsersUsecase from '../usecases/listUsersUseCase'
 import loginUsersUseCase from '../usecases/loginUsersUseCase'
 import recoverPassUsersUseCase from '../usecases/recoverPassUsersUseCase'
+import createUsersUseCase from '../usecases/createUsersUseCase'
+import listUsersUseCase from '../usecases/listUsersUseCase'
+import listIDUsersUseCase from '../usecases/listIDUsersUseCase'
 import updateUsersUseCase from '../usecases/updateUsersUseCase'
+import deleteUsersUseCase from '../usecases/deleteUsersUseCase'
 
 
 export class UsersController {
@@ -23,7 +23,7 @@ export class UsersController {
 
     async list(request: express.Request, response: express.Response) {
         try {
-            const list = await listUsersUsecase.execute();
+            const list = await listUsersUseCase.execute();
             response.status(200).json(list);
         } catch (error) {
             console.log(error)
@@ -33,7 +33,7 @@ export class UsersController {
 
     async listID(request: express.Request, response: express.Response) {
         try {
-            const user = await listIDUsersUsecase.execute(Number(request.params.id))
+            const user = await listIDUsersUseCase.execute(Number(request.params.id))
             response.status(200).send(user)
         } catch (error) {
             console.log(error)
@@ -53,7 +53,7 @@ export class UsersController {
 
     async delete(request: express.Request, response: express.Response) {
         try {
-            const deleted = await deleteUsersUsecase.execute(Number(request.params.id))
+            const deleted = await deleteUsersUseCase.execute(Number(request.params.id))
             response.status(204).send()
         } catch (error) {
             console.log(error)
