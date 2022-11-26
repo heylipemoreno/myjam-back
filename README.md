@@ -14,16 +14,16 @@ Este projeto foi inteiramente desenvolvido como trabalho de conclusão do curso 
 
 <table align=center>
   <tr>
-   <td align="center" width=150> <img src="./Files/eduardo.png" width=100/></br><a href="https://github.com/EduQuaresimin"> Eduardo<br>Quaresimin </a>
+   <td align="center" width=150> <img src="./files/devs/eduardo.png" width=100/></br><a href="https://github.com/EduQuaresimin"> Eduardo<br>Quaresimin </a>
    </td>
 
-   <td align="center" width=150> <img src="./Files/felipe.png"  width=100/></br><a href="https://github.com/heylipemoreno"> Felipe<br>Moreno </a>
+   <td align="center" width=150> <img src="./files/devs/felipe.png"  width=100/></br><a href="https://github.com/heylipemoreno"> Felipe<br>Moreno </a>
    </td>
 
-   <td align="center" width=150> <img src="./Files/lorena.png" width=100/></br><a href="https://github.com/lorqrz"> Lorena<br>Queiroz </a>
+   <td align="center" width=150> <img src="./files/devs/lorena.png" width=100/></br><a href="https://github.com/lorqrz"> Lorena<br>Queiroz </a>
    </td>
 
- <td align="center" width=150> <img src="./Files/luiz.png" width=100/> </br><a href="https://github.com/EuLuiiz"> Victor<br>Luiz </a>
+ <td align="center" width=150> <img src="./files/devs/luiz.png" width=100/> </br><a href="https://github.com/EuLuiiz"> Victor<br>Luiz </a>
    </td>   
   </tr>
 </table>
