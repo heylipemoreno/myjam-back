@@ -15,10 +15,10 @@ export class LoginController {
                 where: { email }
             })
             if (!user) {
-                res.status(404).send(constants.LOGIN.CONTROLLER.EMAIL_INCORRECT)
+                res.status(404).send(constants.LOGIN.USECASE.EMAIL_INCORRECT)
             }
             if (!bcrypt.compareSync(password, user.password)) {
-                res.status(401).send(constants.LOGIN.CONTROLLER.PASSWORD_INCORRECT)
+                res.status(401).send(constants.LOGIN.USECASE.PASSWORD_INCORRECT)
             }
             const token = jtw.sign({
                 id: user.id

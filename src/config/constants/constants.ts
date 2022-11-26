@@ -56,7 +56,7 @@ export default {
             ERROR: 'Ocorreu um erro no processo de autenticação.',
             PROCESS_ERROR: 'Ocorreu um erro no processo de Decode do Token.'
         },
-        CONTROLLER: {
+        USECASE: {
             EMAIL_INCORRECT: 'O email informado está incorreto',
             PASSWORD_INCORRECT: 'A senha está incorreta'
         },

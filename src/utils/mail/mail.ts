@@ -16,7 +16,7 @@ class Mail {
                 content = welcomeMail(userName);
                 subject = `Bem Vindo, ${userName}.`;
                 break;
-            case 'recovery':
+            case 'recover':
                 content = recoverPasswordMail(userName, token);
                 subject = `Recuperar a senha.`;
                 text = recoverPasswordText(userName, token)
