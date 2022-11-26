@@ -8,7 +8,9 @@ export function QuestionsToModel(data: Questions) {
     let options;
     if (data.questionOptions === '') {
         options = "No options"
-    } else {
+    } else if(data.questionOptions === null){
+        options = ""
+    }else {
         options = JSON.parse(data.questionOptions)
     }
 

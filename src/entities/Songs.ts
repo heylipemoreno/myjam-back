@@ -2,6 +2,7 @@ import { Column, CreateDateColumn, Entity, OneToMany, PrimaryGeneratedColumn, Up
 import { GenresSongs } from "./GenresSongs";
 import { Questions } from "./Questions";
 import { SongsChords } from "./SongsChords";
+import { UsersSongs } from "./UsersSongs";
 
 @Entity("songs", { schema: "myjam_database" })
 export class Songs {
@@ -31,4 +32,7 @@ export class Songs {
 
   @OneToMany(() => SongsChords, (songsChords) => songsChords.songs)
   songsChords: SongsChords[];
+
+  @OneToMany(() => UsersSongs, (usersSongs) => usersSongs.songs)
+  usersSongs: UsersSongs[];
 }
