@@ -56,6 +56,10 @@ export default {
             NOT_FOUND: 'O opção requerida não existe',
             UPDATE: 'Os dados foram atualizados com sucesso'
         },
+        LEARN: {
+            NOT_FOUND: 'O opção requerida não existe',
+            UPDATE: 'Os dados foram atualizados com sucesso'
+        },
         ERROR: 'Houve um erro ao fazer requisição com o servidor, todas as informações se encontram nos Logs.'
     },
     LOGIN: {
