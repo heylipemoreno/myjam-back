@@ -39,7 +39,7 @@ export class UsersLessonsController {
 
     async update(request: express.Request, response: express.Response) {
         try {
-            const updated = await updateUsersLessonsUseCase.execute(request.body.lessonsId, request.body.info.id)
+            const updated = await updateUsersLessonsUseCase.execute(Number(request.params.id), request.body.info.id)
             response.status(200).send(updated)
         } catch (error) {
             console.log(error)
