@@ -4,10 +4,11 @@ import { UsersRepository } from "../../../repositories/UsersRepository";
 import bcrypt from 'bcryptjs';
 import * as jtw from 'jsonwebtoken';
 import { UsersToModel } from "../helpers/UsersToModel";
+import { cryptPassGenerate } from "../helpers/cryptPassGenerate";
 
 export class CreateUsersUseCase {
     async execute(data: Users) {
-        data.password = bcrypt.hashSync(data.password, 10)
+        data.password = cryptPassGenerate(data.password)
         try {
             const { userName, email, password } = data
             let newUser = UsersRepository.create({ userName, email, password });

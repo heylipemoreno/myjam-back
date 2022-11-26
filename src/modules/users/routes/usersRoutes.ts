@@ -12,6 +12,15 @@ export class UsersRoutes extends CommonRoutesConfig {
             .get(usersControllers.list)
             .post(usersControllers.create)
 
+        this.app.route('/users/login')
+            .post(usersControllers.login)
+
+        this.app.route('/users/forgot-pass')
+            .post(usersControllers.forgotPass)
+
+        this.app.route('/users/recover-pass')
+            .post(usersControllers.recoverPass)
+
         this.app.route('/users/:id')
             .get(usersControllers.listID)
             .put(usersControllers.update)

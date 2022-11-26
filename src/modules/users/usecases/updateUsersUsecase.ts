@@ -1,9 +1,11 @@
 import constants from "../../../config/constants/constants";
 import { Users } from "../../../entities/Users";
+import { cryptPassGenerate } from "../helpers/cryptPassGenerate";
 import { UsersRepository } from "../repositories/UsersRepository";
 
 export class UpdateUsersUseCase {
     async execute(data: Users, dataID: number) {
+        data.password = cryptPassGenerate(data.password)
         try {
             const { userName, email, password, totalPoints, qtdSongs, qtdChords, questionsCompleted } = data
             const user = await UsersRepository.findOneBy({ id: dataID })

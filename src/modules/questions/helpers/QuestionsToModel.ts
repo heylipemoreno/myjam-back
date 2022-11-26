@@ -6,6 +6,8 @@ export function QuestionsToModel(data: Questions) {
     }
 
     let options;
+
+    //Arrumar esse if
     if (data.questionOptions === '') {
         options = "No options"
     } else {
