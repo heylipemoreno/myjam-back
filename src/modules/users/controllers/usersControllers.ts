@@ -1,13 +1,13 @@
 import express from 'express'
 import constants from '../../../config/constants/constants'
-import createUsersUseCase from '../usecases/createUsersUsecase'
-import deleteUsersUsecase from '../usecases/deleteUsersUsecase'
+import createUsersUseCase from '../usecases/createUsersUseCase'
+import deleteUsersUsecase from '../usecases/deleteUsersUseCase'
 import forgotPassUsersUseCase from '../usecases/forgotPassUsersUseCase'
-import listIDUsersUsecase from '../usecases/listIDUsersUsecase'
-import listUsersUsecase from '../usecases/listUsersUsecase'
+import listIDUsersUsecase from '../usecases/listIDUsersUseCase'
+import listUsersUsecase from '../usecases/listUsersUseCase'
 import loginUsersUseCase from '../usecases/loginUsersUseCase'
 import recoverPassUsersUseCase from '../usecases/recoverPassUsersUseCase'
-import updateUsersUseCase from '../usecases/updateUsersUsecase'
+import updateUsersUseCase from '../usecases/updateUsersUseCase'
 
 
 export class UsersController {
