@@ -5,7 +5,7 @@ import * as jtw from 'jsonwebtoken';
 import { secretKey } from "../config/secret/secret";
 import constants from "../config/constants/constants";
 import mail from "../utils/mail/mail";
-import { UsersToModel } from "../utils/helpers/UsersToModel";
+import { UsersToModel } from "../utils/helpers/UsersToMode";
 
 export class LoginController {
     async login(req: Request, res: Response) {
