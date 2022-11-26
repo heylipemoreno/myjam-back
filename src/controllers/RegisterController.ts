@@ -5,13 +5,14 @@ import bcrypt from 'bcryptjs';
 import * as jtw from 'jsonwebtoken';
 import { secretKey } from "../config/secret/secret";
 import constants from "../config/constants/constants";
-import { UsersToModel } from "../utils/helpers/UsersToModel";
+import { cryptPassGenerate } from "../modules/users/helpers/cryptPassGenerate";
+import { UsersToModel } from "../utils/helpers/UsersToMode";
 
 export class RegisterController {
     async register(request: Request, response: Response) {
-        request.body.password = bcrypt.hashSync(request.body.password, 10);
-        const { userName, email, password } = request.body;
+        request.body.password = cryptPassGenerate(request.body.password);
         try {
+            const { userName, email, password } = request.body;
             let newUser = UsersRepository.create({ userName, email, password });
             await UsersRepository.save(newUser);
             const token = jtw.sign({
