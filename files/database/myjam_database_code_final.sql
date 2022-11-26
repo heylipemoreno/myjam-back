@@ -295,7 +295,7 @@ CREATE TABLE IF NOT EXISTS `myjam_database`.`questions` (
   `questionOptions` VARCHAR(300) NULL,
   `questionOptionCorrect` VARCHAR(100) NULL,
   `questionTemplate` VARCHAR(100) NOT NULL,
-  `isExplication` TINYINT NOT NULL,
+  `isExplanation` TINYINT NOT NULL,
   `createdAt` DATETIME NOT NULL,
   `updatedAt` DATETIME NOT NULL,
   `lessons_id` INT NOT NULL,

@@ -8,9 +8,9 @@ import {
   UpdateDateColumn,
 } from "typeorm";
 import { UsersChords } from "./UsersChords";
-import { UsersGenres } from "./UsersGenres";
 import { UsersLessons } from "./UsersLessons";
 import { UsersQuestions } from "./UsersQuestions";
+import { UsersSongs } from "./UsersSongs";
 
 @Index("email_UNIQUE", ["email"], { unique: true })
 @Entity("users", { schema: "myjam_database" })
@@ -48,12 +48,12 @@ export class Users {
   @OneToMany(() => UsersChords, (usersChords) => usersChords.users)
   usersChords: UsersChords[];
 
-  @OneToMany(() => UsersGenres, (usersGenres) => usersGenres.users)
-  usersGenres: UsersGenres[];
-
   @OneToMany(() => UsersLessons, (usersLessons) => usersLessons.users)
   usersLessons: UsersLessons[];
 
   @OneToMany(() => UsersQuestions, (usersQuestions) => usersQuestions.users)
   usersQuestions: UsersQuestions[];
+
+  @OneToMany(() => UsersSongs, (usersSongs) => usersSongs.users)
+  usersSongs: UsersSongs[];
 }

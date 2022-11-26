@@ -27,17 +27,21 @@ export class Questions {
   @Column("text", { name: "questionContent", nullable: true })
   questionContent: string | null;
 
-  @Column("varchar", { name: "questionOptions", length: 300 })
-  questionOptions: string;
+  @Column("varchar", { name: "questionOptions", nullable: true, length: 300 })
+  questionOptions: string | null;
 
-  @Column("varchar", { name: "questionOptionCorrect", length: 100 })
-  questionOptionCorrect: string;
+  @Column("varchar", {
+    name: "questionOptionCorrect",
+    nullable: true,
+    length: 100,
+  })
+  questionOptionCorrect: string | null;
 
   @Column("varchar", { name: "questionTemplate", length: 100 })
   questionTemplate: string;
 
-  @Column("tinyint", { name: "isExplanation", nullable: true })
-  isExplanation: number | null;
+  @Column("tinyint", { name: "isExplanation" })
+  isExplanation: number;
 
   @CreateDateColumn({ name: "createdAt" })
   createdAt: Date;

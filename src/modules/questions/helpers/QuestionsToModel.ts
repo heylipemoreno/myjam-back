@@ -5,21 +5,12 @@ export function QuestionsToModel(data: Questions) {
         return
     }
 
-    let options;
-
-    //Arrumar esse if
-    if (data.questionOptions === '') {
-        options = "No options"
-    } else {
-        options = JSON.parse(data.questionOptions)
-    }
-
     const question = {
         id: data.id,
         questionTitle: data.questionTitle,
         questionImageLink: data.questionImageLink,
         questionContent: data.questionContent,
-        questionOptions: options,
+        questionOptions: data.questionOptions,
         questionOptionCorrect: data.questionOptionCorrect,
         questionTemplate: data.questionTemplate,
         isExplanation: data.isExplanation,

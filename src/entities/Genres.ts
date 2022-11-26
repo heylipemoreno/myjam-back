@@ -1,6 +1,5 @@
 import { Column, CreateDateColumn, Entity, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
 import { GenresSongs } from "./GenresSongs";
-import { UsersGenres } from "./UsersGenres";
 
 @Entity("genres", { schema: "myjam_database" })
 export class Genres {
@@ -18,7 +17,4 @@ export class Genres {
 
   @OneToMany(() => GenresSongs, (genresSongs) => genresSongs.genres)
   genresSongs: GenresSongs[];
-
-  @OneToMany(() => UsersGenres, (usersGenres) => usersGenres.genres)
-  usersGenres: UsersGenres[];
 }
