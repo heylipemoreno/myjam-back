@@ -13,22 +13,22 @@ const routes = Router()
 //ROTAR PERSONALIZADAS PARA SERVIÇOS (CURTO TEMPO)
 
 //SERVICE BY TOKEN
-routes.get('/users/listlessons', Auth, new UsersController().listOnboarding)
-routes.put('/users/lessons/:id/completed', Auth, new UsersController().completedLesson)
+routes.get('/users/listlessons', new UsersController().listOnboarding)
+routes.put('/users/lessons/:id/completed', new UsersController().completedLesson)
 
 //REGISTER
-routes.post('/users/register', validationMiddleware.register, new RegisterController().register);
-routes.post('/users/questions', Auth,  new RegisterController().question)
+routes.post('/users/register', new RegisterController().register);
+routes.post('/users/questions', new RegisterController().question)
 
 //LOGIN
-routes.post('/users/login', validationMiddleware.login, new LoginController().login)
+routes.post('/users/login', new LoginController().login)
 
 //RECOVERY PASS
-routes.post('/users/password/forgot', validationMiddleware.forgot, new LoginController().forgotPassword)
-routes.post('/users/password/recover', Auth, new LoginController().recoverPassword)
+routes.post('/users/password/forgot', new LoginController().forgotPassword)
+routes.post('/users/password/recover', new LoginController().recoverPassword)
 
 //LIST LESSON WITH ALL QUESTIONS
-routes.get('/lessons/:id/questions', Auth, new LessonsController().listWithQuestions)
+routes.get('/lessons/:id/questions', new LessonsController().listWithQuestions)
 
 // ***********************************************
 
