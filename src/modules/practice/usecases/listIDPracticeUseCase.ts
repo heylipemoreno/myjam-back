@@ -1,6 +1,6 @@
 import constants from "../../../config/constants/constants";
-import { PracticeToModel } from "../helpers/PracticeToModel";
-import { PracticeRepository } from "../repositories/PracticeRepository";
+import {PracticeToModel} from "../helpers/PracticeToModel";
+import {PracticeRepository} from "../repositories/PracticeRepository";
 
 export class ListIDPracticeUseCase{
     async execute(dataID: number){

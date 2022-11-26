@@ -1,6 +1,6 @@
 import express from 'express';
 import {CommonRoutesConfig} from "../../common/routes/commonRoutes";
-import practiceControllers from '../controllers/practiceController';
+import practiceController from '../controllers/practiceController';
 
 export class PracticeRoutes extends CommonRoutesConfig{
     constructor(app:express.Application){
@@ -9,13 +9,13 @@ export class PracticeRoutes extends CommonRoutesConfig{
 
     configureRoutes():express.Application{
         this.app.route('/practice')
-            .get(practiceControllers.list)
-            .post(practiceControllers.create)
+            .get(practiceController.list)
+            .post(practiceController.create)
 
         this.app.route('/practice/:id')
-            .get(practiceControllers.listID)
-            .put(practiceControllers.update)
-            .delete(practiceControllers.delete)
+            .get(practiceController.listID)
+            .put(practiceController.update)
+            .delete(practiceController.delete)
 
         return this.app
     }

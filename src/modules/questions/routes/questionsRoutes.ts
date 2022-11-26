@@ -1,6 +1,6 @@
 import express from 'express';
 import { CommonRoutesConfig } from "../../common/routes/commonRoutes";
-import questionsControllers from '../controllers/questionsController';
+import questionsController from '../controllers/questionsController';
 
 export class QuestionsRoutes extends CommonRoutesConfig {
     constructor(app: express.Application) {
@@ -9,13 +9,13 @@ export class QuestionsRoutes extends CommonRoutesConfig {
 
     configureRoutes(): express.Application {
         this.app.route('/questions')
-            .get(questionsControllers.list)
-            .post(questionsControllers.create)
+            .get(questionsController.list)
+            .post(questionsController.create)
 
         this.app.route('/questions/:id')
-            .get(questionsControllers.listID)
-            .put(questionsControllers.update)
-            .delete(questionsControllers.delete)
+            .get(questionsController.listID)
+            .put(questionsController.update)
+            .delete(questionsController.delete)
 
         return this.app
     }
