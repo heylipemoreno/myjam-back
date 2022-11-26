@@ -2,10 +2,13 @@ import { UsersLessons } from "../../../entities/UsersLessons";
 import { UsersLessonsRepository } from "../repositories/UsersLessonsRepository";
 
 export class CreateUsersLessonsUseCase {
-    async execute(data: UsersLessons) {
+    async execute(data: UsersLessons, userID: number) {
         try {
-            const { usersId, lessonsId } = data;
-            const relacion = UsersLessonsRepository.create({ usersId, lessonsId })
+            const { lessonsId } = data;
+            const relacion = UsersLessonsRepository.create({
+                usersId: userID,
+                lessonsId: lessonsId
+            })
             await UsersLessonsRepository.save(relacion)
             return relacion
         } catch (error) {
