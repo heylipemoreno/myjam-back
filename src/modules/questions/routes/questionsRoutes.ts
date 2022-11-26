@@ -1,6 +1,6 @@
 import express from 'express';
 import { CommonRoutesConfig } from "../../common/routes/commonRoutes";
-import questionsControllers from '../controllers/questionsControllers';
+import questionsControllers from '../controllers/questionsController';
 
 export class QuestionsRoutes extends CommonRoutesConfig {
     constructor(app: express.Application) {
