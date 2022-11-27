@@ -53,7 +53,7 @@ export default {
             UPDATE: 'Os dados foram atualizados com sucesso'
         },
         STYLE: {
-            NOT_FOUND: 'O opção requerida não existe',
+            NOT_FOUND: 'O estilo musical não existe',
             UPDATE: 'Os dados foram atualizados com sucesso'
         },
         LEARN: {
