@@ -25,9 +25,10 @@ import { StyleRoutes } from './modules/style/routes/styleRoutes';
 import { UsersLessonsRoutes } from './modules/users_lessons/routes/usersLessonsRoutes';
 import { UsersSongsRoutes } from './modules/users_songs/routes/usersSongsRoutes';
 import { UsersQuestionsRoutes } from './modules/users_questions/routes/usersQuestionsRoutes';
-import { UsersChords } from './entities/UsersChords';
 import { UsersChordsRoutes } from './modules/users_chords/routes/usersChordsRoutes';
 import { UsersRoutes } from './modules/users/routes/usersRoutes';
+import { GenresSongsRoutes } from './modules/genres_songs/routes/genresSongsRoutes';
+import { SongsChordsRoutes } from './modules/songs_chords/routes/songsChordsRoutes'
 
 AppDataSource.initialize().then(() => {
     const app: express.Application = express();
@@ -69,6 +70,8 @@ AppDataSource.initialize().then(() => {
     routes.push(new UsersQuestionsRoutes(app))
     routes.push(new UsersChordsRoutes(app))
     routes.push(new UsersRoutes(app))
+    routes.push(new GenresSongsRoutes(app))
+    routes.push(new SongsChordsRoutes(app))
 
     app.use(errorsMiddleware)
 

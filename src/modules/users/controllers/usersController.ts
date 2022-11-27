@@ -89,6 +89,16 @@ export class UsersController {
             return response.status(500).json(constants.CRUD.ERROR)
         }
     }
+
+    async getByToken(request: express.Request, response: express.Response) {
+        try {
+            const { id } = request.body.info
+            response.status(200).send({ UserID: id })
+        } catch (error) {
+            console.log(error)
+            return response.status(500).json(constants.CRUD.ERROR)
+        }
+    }
 }
 
 export default new UsersController();
