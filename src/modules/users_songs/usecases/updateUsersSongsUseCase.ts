@@ -1,3 +1,4 @@
+import constants from "../../../config/constants/constants";
 import { UsersSongs } from "../../../entities/UsersSongs";
 import { UsersSongsRepository } from "../repositories/usersSongsRepositories";
 
@@ -9,12 +10,12 @@ export class UpdateUsersSongsUseCase {
                 songsId: data.songsId
             })
             if (!relacion) {
-                return 'Nao foi possivel encontrar a relação [Users_Songs]'
+                return constants.CRUD.USERS_SONGS.NOT_FOUND;
             }
             await UsersSongsRepository.update({ id: relacion.id }, {
                 learnedAt: new Date().toISOString().slice(0, 19).replace('T', ' ')
             })
-            return 'Tabela de relação atualizada com sucesso.'
+            return constants.CRUD.USERS_SONGS.UPDATE;
         } catch (error) {
             console.log(error)
         }

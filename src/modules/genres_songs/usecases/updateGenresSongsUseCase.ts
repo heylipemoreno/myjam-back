@@ -1,3 +1,4 @@
+import constants from "../../../config/constants/constants";
 import { GenresSongs } from "../../../entities/GenresSongs";
 import { GenresSongsRepository } from "../repositories/GenresSongsRepository";
 
@@ -9,9 +10,9 @@ export class UpdateGenresSongsUseCase {
                 genresId: data.genresId
             })
             if (!relacion) {
-                return 'Tabela de relação [Songs => Genres] não encontrada.'
+                return constants.CRUD.GENRES_SONGS.NOT_FOUND;
             }else{
-                return 'Tabela de relação [Songs => Genres] atualizada com sucesso.'
+                return constants.CRUD.GENRES_SONGS.UPDATE;
             }
         } catch (error) {
             console.log(error)

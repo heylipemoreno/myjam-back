@@ -1,3 +1,4 @@
+import constants from "../../../config/constants/constants";
 import { UsersQuestions } from "../../../entities/UsersQuestions";
 import { UsersQuestionsRepository } from "../repositories/usersQuestionsRepository";
 
@@ -9,7 +10,7 @@ export class UpdateUsersQuestionsUseCase {
                 usersId: dataID
             })
             if (!relacion) {
-                return 'O usuário não tem respostas cadastradas.'
+                return constants.CRUD.USERS_QUESTIONS.NOT_FOUND;
             }
             const updated = await UsersQuestionsRepository.update({ id: relacion.id }, {
                 instrumentId,
@@ -18,7 +19,7 @@ export class UpdateUsersQuestionsUseCase {
                 styleId,
                 learnId
             })
-            return 'Relação atualizada'
+            return constants.CRUD.USERS_QUESTIONS.UPDATE;
         } catch (error) {
             console.log(error)
         }

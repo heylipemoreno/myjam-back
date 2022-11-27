@@ -1,3 +1,4 @@
+import constants from "../../../config/constants/constants";
 import { SongsChords } from "../../../entities/SongsChords";
 import { SongsChordsRepository } from "../repositories/SongsChordsRepository";
 
@@ -9,9 +10,10 @@ export class UpdateSongsChordsUseCase {
                 chordsId: chordsID
             })
             if (!relacion) {
-                return 'Tabela de relação [Songs => chords] não encontrada.'
+                return constants.CRUD.SONGS_CHORDS.NOT_FOUND;
             }else{
-                return 'Tabela de relação [Songs => chords] atualizada com sucesso.'}
+                return constants.CRUD.SONGS_CHORDS.NOT_FOUND;
+            }
         } catch (error) {
             console.log(error)
         }
