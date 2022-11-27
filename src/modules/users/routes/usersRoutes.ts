@@ -4,7 +4,7 @@ import UsersController from '../controllers/usersController'
 
 export class UsersRoutes extends CommonRoutesConfig {
     constructor(app: express.Application) {
-        super(app)
+        super(app, 'Users Routes')
     }
 
     configureRoutes(): express.Application {

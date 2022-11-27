@@ -4,7 +4,7 @@ import { CommonRoutesConfig } from "./commonRoutes";
 
 export class TestRoutes extends CommonRoutesConfig {
     constructor(app: express.Application) {
-        super(app)
+        super(app, 'Test Routes')
     }
 
     configureRoutes(): express.Application {

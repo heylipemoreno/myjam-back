@@ -4,7 +4,7 @@ import practiceController from '../controllers/practiceController';
 
 export class PracticeRoutes extends CommonRoutesConfig{
     constructor(app:express.Application){
-        super(app)
+        super(app, 'Practice Routes')
     }
 
     configureRoutes():express.Application{

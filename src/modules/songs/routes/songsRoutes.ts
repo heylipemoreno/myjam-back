@@ -4,7 +4,7 @@ import songsController from '../controllers/songsController';
 
 export class SongsRoutes extends CommonRoutesConfig {
     constructor(app: express.Application) {
-        super(app)
+        super(app, 'Songs Routes')
     }
 
     configureRoutes(): express.Application {

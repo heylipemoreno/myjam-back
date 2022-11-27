@@ -4,7 +4,7 @@ import chordsControllers from "../controllers/chordsControllers";
 
 export class ChordsRoutes extends CommonRoutesConfig {
     constructor(app: express.Application) {
-        super(app)
+        super(app, 'Chords Routes')
     }
 
     configureRoutes(): express.Application {

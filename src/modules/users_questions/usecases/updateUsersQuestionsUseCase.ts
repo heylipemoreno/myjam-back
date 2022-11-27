@@ -6,12 +6,12 @@ export class UpdateUsersQuestionsUseCase {
         try {
             const { instrumentId, experienceId, practiceId, styleId, learnId } = data
             const relacion = await UsersQuestionsRepository.findOneBy({
-                usersId:dataID
+                usersId: dataID
             })
-            if(!relacion){
+            if (!relacion) {
                 return 'O usuário não tem respostas cadastradas.'
             }
-            const updated = await UsersQuestionsRepository.update({id:relacion.id},{
+            const updated = await UsersQuestionsRepository.update({ id: relacion.id }, {
                 instrumentId,
                 experienceId,
                 practiceId,

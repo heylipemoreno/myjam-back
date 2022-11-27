@@ -4,7 +4,7 @@ import instrumentController from '../controllers/instrumentController';
 
 export class InstrumentRoutes extends CommonRoutesConfig{
     constructor(app:express.Application){
-        super(app)
+        super(app, 'Instrument Routes')
     }
 
     configureRoutes():express.Application{

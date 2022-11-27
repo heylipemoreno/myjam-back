@@ -2,11 +2,11 @@ import { UsersLessons } from "../../../entities/UsersLessons";
 import { UsersLessonsRepository } from "../repositories/UsersLessonsRepository";
 
 export class UpdateUsersLessonsUseCase {
-    async execute(lessonID: number, userID: number) {
+    async execute(data: UsersLessons, userID: number) {
         try {
             const relacion = await UsersLessonsRepository.findOneBy({
                 usersId: userID,
-                lessonsId: lessonID
+                lessonsId: data.lessonsId
             })
             if (!relacion) {
                 return 'Tabela de relação [Users => Lessons] não encontrada.'

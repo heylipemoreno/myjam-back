@@ -5,7 +5,7 @@ import { QuestionsRepository } from "../repositories/QuestionsRepository";
 export class UpdateQuestiosnUseCase {
     async execute(data: Questions, dataID: number) {
         try {
-            const { questionTitle, questionImageLink, questionContent, questionOptions, questionOptionCorrect, questionTemplate, isExplanation, lessonsId, songsId } = data
+            const { questionTitle, questionImageLink, questionContent, questionOptions, questionOptionCorrect, questionTemplate, isExplanation, lessonsId } = data
             const question = await QuestionsRepository.findOneBy({ id: dataID });
             if (!question) {
                 return constants.CRUD.QUESTIONS.NOT_FOUND
@@ -18,8 +18,7 @@ export class UpdateQuestiosnUseCase {
                 questionOptionCorrect,
                 questionTemplate,
                 isExplanation,
-                lessonsId,
-                songsId
+                lessonsId
             })
             return constants.CRUD.QUESTIONS.UPDATE
         } catch (error) {

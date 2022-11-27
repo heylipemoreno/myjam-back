@@ -4,7 +4,7 @@ import questionsController from '../controllers/questionsController';
 
 export class QuestionsRoutes extends CommonRoutesConfig {
     constructor(app: express.Application) {
-        super(app)
+        super(app, 'Questions Routes')
     }
 
     configureRoutes(): express.Application {

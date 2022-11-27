@@ -14,8 +14,7 @@ export function QuestionsToModel(data: Questions) {
         questionOptionCorrect: data.questionOptionCorrect,
         questionTemplate: data.questionTemplate,
         isExplanation: data.isExplanation,
-        lessonsId: data.lessonsId,
-        songsId: data.songsId
+        lessonsId: data.lessonsId
     }
 
     return question;

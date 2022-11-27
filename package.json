@@ -10,7 +10,7 @@
   "scripts": {
     "build": "rm -rf ./dist && tsc",
     "start": "node --unhandled-rejections=strict -r dotenv/config ./dist/index.js",
-    "debug": "set DEBUG=* && npm run start",
+    "debug": "set DEBUG=* && tsc && npm run start",
     "migration:generate": "typeorm-ts-node-commonjs -d ./src/data-source.ts migration:generate ./src/migrations/myjam_database_generated",
     "migration:run": "typeorm-ts-node-commonjs -d ./src/data-source.ts migration:run"
   },

@@ -9,7 +9,7 @@ import updateUsersQuestionsUseCase from '../usecases/updateUsersQuestionsUseCase
 export class UsersQuestionsController {
     async create(request: express.Request, response: express.Response) {
         try {
-            const created = await createUsersQuestionsUseCase.execute(request.body, Number(request.body.info.id))
+            const created = await createUsersQuestionsUseCase.execute(request.body, Number(request.params.id))
             response.status(201).send(created)
         } catch (error) {
             console.log(error)
@@ -39,7 +39,7 @@ export class UsersQuestionsController {
 
     async update(request: express.Request, response: express.Response) {
         try {
-            const updated = await updateUsersQuestionsUseCase.execute(request.body, Number(request.body.info.id))
+            const updated = await updateUsersQuestionsUseCase.execute(request.body, Number(request.params.id))
             response.status(200).send(updated)
         } catch (error) {
             console.log(error)
