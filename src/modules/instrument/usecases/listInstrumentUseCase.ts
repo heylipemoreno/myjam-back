@@ -5,8 +5,7 @@ export class ListInstrumentUseCase{
     async execute(){
         try{
             const list=await InstrumentRepository.find()
-            const listInstrument=list.map(InstrumentToModel)
-            return listInstrument
+            return list
         }catch (error){
             console.log(error)
         }
