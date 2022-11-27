@@ -11,9 +11,8 @@ export class UpdateGenresSongsUseCase {
             })
             if (!relacion) {
                 return constants.CRUD.GENRES_SONGS.NOT_FOUND;
-            }else{
-                return constants.CRUD.GENRES_SONGS.UPDATE;
             }
+            return constants.CRUD.GENRES_SONGS.UPDATE;
         } catch (error) {
             console.log(error)
         }

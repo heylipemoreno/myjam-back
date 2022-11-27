@@ -1,3 +1,4 @@
+import constants from "../../../config/constants/constants";
 import { Users } from "../../../entities/Users";
 import { cryptPassGenerate } from "../helpers/cryptPassGenerate";
 import { JWTokenGenerate } from "../helpers/JWTokenGenerate";
@@ -9,6 +10,10 @@ export class CreateUsersUseCase {
         data.password = cryptPassGenerate(data.password)
         try {
             const { userName, email, password } = data
+            const user = await UsersRepository.findOneBy({ email: email })
+            if(user){
+                return constants.CRUD.USERS.EXISTS
+            }
             const newUser = UsersRepository.create({ userName, email, password })
             await UsersRepository.save(newUser)
             const token = JWTokenGenerate(newUser.id)
