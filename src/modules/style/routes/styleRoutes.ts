@@ -4,7 +4,7 @@ import styleController from '../controllers/styleController';
 
 export class StyleRoutes extends CommonRoutesConfig{
     constructor(app:express.Application){
-        super(app)
+        super(app, 'Style Routes')
     }
 
     configureRoutes():express.Application{

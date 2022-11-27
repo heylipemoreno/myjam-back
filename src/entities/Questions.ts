@@ -9,10 +9,8 @@ import {
   UpdateDateColumn,
 } from "typeorm";
 import { Lessons } from "./Lessons";
-import { Songs } from "./Songs";
 
 @Index("fk_questions_lessons1_idx", ["lessonsId"], {})
-@Index("fk_questions_songs1_idx", ["songsId"], {})
 @Entity("questions", { schema: "myjam_database" })
 export class Questions {
   @PrimaryGeneratedColumn({ type: "int", name: "id" })
@@ -52,20 +50,10 @@ export class Questions {
   @Column("int", { name: "lessons_id" })
   lessonsId: number;
 
-  @Column("int", { name: "songs_id" })
-  songsId: number;
-
   @ManyToOne(() => Lessons, (lessons) => lessons.questions, {
     onDelete: "NO ACTION",
     onUpdate: "NO ACTION",
   })
   @JoinColumn([{ name: "lessons_id", referencedColumnName: "id" }])
   lessons: Lessons;
-
-  @ManyToOne(() => Songs, (songs) => songs.questions, {
-    onDelete: "NO ACTION",
-    onUpdate: "NO ACTION",
-  })
-  @JoinColumn([{ name: "songs_id", referencedColumnName: "id" }])
-  songs: Songs;
 }

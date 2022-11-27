@@ -4,7 +4,7 @@ import lessonsControllers from '../controllers/lessonsControllers';
 
 export class LessonsRoutes extends CommonRoutesConfig {
     constructor(app: express.Application) {
-        super(app)
+        super(app, 'Lessons Routes')
     }
 
     configureRoutes(): express.Application {

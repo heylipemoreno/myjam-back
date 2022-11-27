@@ -1,6 +1,5 @@
 import { Column, CreateDateColumn, Entity, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
 import { GenresSongs } from "./GenresSongs";
-import { Questions } from "./Questions";
 import { SongsChords } from "./SongsChords";
 import { UsersSongs } from "./UsersSongs";
 
@@ -26,9 +25,6 @@ export class Songs {
 
   @OneToMany(() => GenresSongs, (genresSongs) => genresSongs.songs)
   genresSongs: GenresSongs[];
-
-  @OneToMany(() => Questions, (questions) => questions.songs)
-  questions: Questions[];
 
   @OneToMany(() => SongsChords, (songsChords) => songsChords.songs)
   songsChords: SongsChords[];

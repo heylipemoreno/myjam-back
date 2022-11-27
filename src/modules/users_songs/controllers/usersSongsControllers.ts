@@ -9,7 +9,7 @@ import updateUsersSongsUseCase from '../usecases/updateUsersSongsUseCase'
 export class UsersSongsControllers {
     async create(request: express.Request, response: express.Response) {
         try {
-            const relacion = await createUsersSongsUseCase.execute(request.body, Number(request.body.info.id))
+            const relacion = await createUsersSongsUseCase.execute(request.body, Number(request.params.id))
             response.status(201).send(relacion)
         } catch (error) {
             console.log(error)
@@ -39,7 +39,7 @@ export class UsersSongsControllers {
 
     async update(request: express.Request, response: express.Response) {
         try {
-            const updated = await updateUsersSongsUseCase.execute(Number(request.params.id), request.body.info.id)
+            const updated = await updateUsersSongsUseCase.execute(request.body, Number(request.params.id))
             response.status(200).send(updated)
         } catch (error) {
             console.log(error)

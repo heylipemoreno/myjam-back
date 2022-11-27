@@ -4,7 +4,7 @@ import genresControllers from "../controllers/genresControllers";
 
 export class GenresRoutes extends CommonRoutesConfig {
     constructor(app: express.Application) {
-        super(app)
+        super(app, 'Genres Routes')
     }
 
     configureRoutes(): express.Application {

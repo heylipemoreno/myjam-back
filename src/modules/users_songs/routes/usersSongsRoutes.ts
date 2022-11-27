@@ -4,16 +4,16 @@ import usersSongsControllers from "../controllers/usersSongsControllers";
 
 export class UsersSongsRoutes extends CommonRoutesConfig {
     constructor(app: express.Application) {
-        super(app)
+        super(app, 'Users_Songs Routes')
     }
 
     configureRoutes(): express.Application {
         this.app.route('/users_songs')
             .get(usersSongsControllers.list)
-            .post(usersSongsControllers.create)
 
         this.app.route('/users_songs/:id')
             .get(usersSongsControllers.listID)
+            .post(usersSongsControllers.create)
             .put(usersSongsControllers.update)
             .delete(usersSongsControllers.delete)
 

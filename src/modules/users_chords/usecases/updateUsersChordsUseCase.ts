@@ -2,11 +2,11 @@ import { UsersChords } from "../../../entities/UsersChords";
 import { UsersChordsRepository } from "../repositories/UsersChordsRepository";
 
 export class UpdateUsersChordsUseCase {
-    async execute(chordsD: number, userID: number) {
+    async execute(data:UsersChords, userID: number) {
         try {
             const relacion = await UsersChordsRepository.findOneBy({
                 usersId: userID,
-                chordsId: chordsD
+                chordsId: data.chordsId
             })
             if (!relacion) {
                 return 'Tabela de relação [Users => Chords] não encontrada.'

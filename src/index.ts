@@ -72,5 +72,11 @@ AppDataSource.initialize().then(() => {
 
     app.use(errorsMiddleware)
 
-    return server.listen(port)
+    return server.listen(port, () => {
+        routes.forEach((route: CommonRoutesConfig) => {
+            debugLog(`${route.getName()} - Status: OK`)
+        })
+        debugLog(`Starting server...`)
+        debugLog(`Server started on port ${port}`)
+    })
 })

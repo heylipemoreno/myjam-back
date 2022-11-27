@@ -1,13 +1,13 @@
 import express from 'express';
-import {CommonRoutesConfig} from "../../common/routes/commonRoutes";
+import { CommonRoutesConfig } from "../../common/routes/commonRoutes";
 import experienceController from '../controllers/experienceController';
 
-export class ExperienceRoutes extends CommonRoutesConfig{
-    constructor(app:express.Application){
-        super(app)
+export class ExperienceRoutes extends CommonRoutesConfig {
+    constructor(app: express.Application) {
+        super(app, 'Experience Routes')
     }
 
-    configureRoutes():express.Application{
+    configureRoutes(): express.Application {
         this.app.route('/experience')
             .get(experienceController.list)
             .post(experienceController.create)

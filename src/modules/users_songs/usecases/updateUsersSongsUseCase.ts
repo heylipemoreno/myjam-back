@@ -2,11 +2,11 @@ import { UsersSongs } from "../../../entities/UsersSongs";
 import { UsersSongsRepository } from "../repositories/usersSongsRepositories";
 
 export class UpdateUsersSongsUseCase {
-    async execute(songID: number, userID: number) {
+    async execute(data: UsersSongs, userID: number) {
         try {
             const relacion = await UsersSongsRepository.findOneBy({
                 usersId: userID,
-                songsId: songID
+                songsId: data.songsId
             })
             if (!relacion) {
                 return 'Nao foi possivel encontrar a relação [Users_Songs]'

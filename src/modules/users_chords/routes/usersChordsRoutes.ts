@@ -4,16 +4,16 @@ import usersChordsControllers from "../controllers/usersChordsControllers";
 
 export class UsersChordsRoutes extends CommonRoutesConfig{
     constructor(app:express.Application){
-        super(app)
+        super(app, 'Users_Chords Routes')
     }
 
     configureRoutes():express.Application{
         this.app.route('/users_chords')
             .get(usersChordsControllers.list)
-            .post(usersChordsControllers.create)
 
         this.app.route('/users_chords/:id')
             .get(usersChordsControllers.listID)
+            .post(usersChordsControllers.create)
             .put(usersChordsControllers.update)
             .delete(usersChordsControllers.delete)
 

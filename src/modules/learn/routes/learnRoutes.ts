@@ -4,7 +4,7 @@ import learnController from '../controllers/learnController';
 
 export class LearnRoutes extends CommonRoutesConfig{
     constructor(app:express.Application){
-        super(app)
+        super(app, 'Learn Routes')
     }
 
     configureRoutes():express.Application{
