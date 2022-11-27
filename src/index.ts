@@ -27,6 +27,7 @@ import { UsersSongsRoutes } from './modules/users_songs/routes/usersSongsRoutes'
 import { UsersQuestionsRoutes } from './modules/users_questions/routes/usersQuestionsRoutes';
 import { UsersChords } from './entities/UsersChords';
 import { UsersChordsRoutes } from './modules/users_chords/routes/usersChordsRoutes';
+import { UsersRoutes } from './modules/users/routes/usersRoutes';
 
 AppDataSource.initialize().then(() => {
     const app: express.Application = express();
@@ -67,6 +68,7 @@ AppDataSource.initialize().then(() => {
     routes.push(new UsersSongsRoutes(app))
     routes.push(new UsersQuestionsRoutes(app))
     routes.push(new UsersChordsRoutes(app))
+    routes.push(new UsersRoutes(app))
 
     app.use(errorsMiddleware)
 
