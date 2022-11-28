@@ -17,9 +17,6 @@ export class UsersChordsRoutes extends CommonRoutesConfig {
             .put(usersChordsControllers.update)
             .delete(usersChordsControllers.delete)
 
-        this.app.route('/users_chords/:id/all')
-            .get(usersChordsControllers.listIDAll)
-
         return this.app
     }
 }

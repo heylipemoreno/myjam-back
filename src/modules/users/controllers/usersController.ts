@@ -3,7 +3,11 @@ import constants from '../../../config/constants/constants'
 import createUsersUseCase from '../usecases/createUsersUseCase'
 import deleteUsersUsecase from '../usecases/deleteUsersUseCase'
 import forgotPassUsersUseCase from '../usecases/forgotPassUsersUseCase'
+import listChordsRelacionUseCase from '../usecases/listChordsRelacionUseCase'
 import listIDUsersUsecase from '../usecases/listIDUsersUseCase'
+import listLessonsRelacionUseCase from '../usecases/listLessonsRelacionUseCase'
+import listQuestionsRelacionUseCase from '../usecases/listQuestionsRelacionUseCase'
+import listSongsRelacionUseCase from '../usecases/listSongsRelacionUseCase'
 import listUsersUsecase from '../usecases/listUsersUseCase'
 import loginUsersUseCase from '../usecases/loginUsersUseCase'
 import recoverPassUsersUseCase from '../usecases/recoverPassUsersUseCase'
@@ -94,6 +98,46 @@ export class UsersController {
         try {
             const { id } = request.body.info
             response.status(200).send({ UserID: id })
+        } catch (error) {
+            console.log(error)
+            return response.status(500).json(constants.CRUD.ERROR)
+        }
+    }
+
+    async chordsRelacion(request: express.Request, response: express.Response) {
+        try {
+            const list = await listChordsRelacionUseCase.execute(Number(request.params.id))
+            response.status(200).send(list)
+        } catch (error) {
+            console.log(error)
+            return response.status(500).json(constants.CRUD.ERROR)
+        }
+    }
+
+    async lessonsRelacion(request: express.Request, response: express.Response) {
+        try {
+            const list = await listLessonsRelacionUseCase.execute(Number(request.params.id))
+            response.status(200).send(list)
+        } catch (error) {
+            console.log(error)
+            return response.status(500).json(constants.CRUD.ERROR)
+        }
+    }
+
+    async questionsRelacion(request: express.Request, response: express.Response) {
+        try {
+            const list = await listQuestionsRelacionUseCase.execute(Number(request.params.id))
+            response.status(200).send(list)
+        } catch (error) {
+            console.log(error)
+            return response.status(500).json(constants.CRUD.ERROR)
+        }
+    }
+
+    async songsRelacion(request: express.Request, response: express.Response) {
+        try {
+            const list = await listSongsRelacionUseCase.execute(Number(request.params.id))
+            response.status(200).send(list)
         } catch (error) {
             console.log(error)
             return response.status(500).json(constants.CRUD.ERROR)

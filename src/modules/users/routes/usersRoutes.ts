@@ -26,6 +26,19 @@ export class UsersRoutes extends CommonRoutesConfig {
             .put(UsersController.update)
             .delete(UsersController.delete)
 
+        this.app.route('/users/:id/questions')
+        .get(UsersController.questionsRelacion)
+
+        this.app.route('/users/:id/lessons')
+        .get(UsersController.lessonsRelacion)
+
+        this.app.route('/users/:id/songs')
+        .get(UsersController.songsRelacion)
+
+        this.app.route('/users/:id/chords')
+        .get(UsersController.chordsRelacion)
+
+
         return this.app
     }
 
