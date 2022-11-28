@@ -5,11 +5,7 @@ export class RecoverPasswordUsersUseCase {
     async execute(password: string, userID: number) {
         password = cryptPassGenerate(password)
         try {
-            const user = await UsersRepository.findOneOrFail({
-                where: { id: userID }
-            })
-
-            await UsersRepository.update({ id: userID },{
+            await UsersRepository.update({ id: userID }, {
                 password
             })
             return 'Senha atualizada com sucesso.'

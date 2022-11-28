@@ -67,6 +67,9 @@ export class UsersController {
     async login(request: express.Request, response: express.Response) {
         try {
             const login = await loginUsersUseCase.execute(request.body)
+            if (!login) {
+                response.status(404).send(constants.LOGIN.CONTROLLER.INCORRECT)
+            }
             response.status(200).send(login)
         } catch (error) {
             console.log(error)
@@ -76,8 +79,11 @@ export class UsersController {
 
     async forgotPass(request: express.Request, response: express.Response) {
         try {
-            const forgotPass = await forgotPassUsersUseCase.execute(request.body)
-            return forgotPass
+            const forgotPass = await forgotPassUsersUseCase.execute(request.body.email)
+            if(!forgotPass){
+                response.status(404).send('O usuário não está cadastrado no sistema.')
+            }
+            response.status(200).send(forgotPass)
         } catch (error) {
             console.log(error)
             return response.status(500).json(constants.CRUD.ERROR)
@@ -86,8 +92,8 @@ export class UsersController {
 
     async recoverPass(request: express.Request, response: express.Response) {
         try {
-            const recoverPass = await recoverPassUsersUseCase.execute(request.body, request.body.info.id)
-            return recoverPass
+            const recoverPass = await recoverPassUsersUseCase.execute(request.body.password, request.body.info.id)
+            response.status(200).send(recoverPass)
         } catch (error) {
             console.log(error)
             return response.status(500).json(constants.CRUD.ERROR)

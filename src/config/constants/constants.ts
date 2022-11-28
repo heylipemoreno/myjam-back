@@ -25,7 +25,7 @@ export default {
         SONGS: {
             NOT_FOUND: 'A música não está registrada.',
             UPDATE: 'Os dados da música foram atualizados com sucesso.',
-            EXISTS: 'A música já existe'
+            EXISTS: 'A música já existe.'
         },
         QUESTIONS: {
             NOT_FOUND: 'Não foi encontrada nenhuma questão com esse ID.',
@@ -72,7 +72,7 @@ export default {
         EXPERIENCE: {
             NOT_FOUND: 'Não foi encontrada nenhuma opção com o ID informado.',
             UPDATE: 'A experiência foi atualizada com sucesso.',
-            EXISTS:'A experiência já foi incluída para o ID informado'
+            EXISTS:'A experiência já foi incluída para o ID informado.'
         },
         INSTRUMENT: {
             NOT_FOUND: 'O instrumento não está registrado.',
@@ -113,10 +113,9 @@ export default {
             ERROR: 'Ocorreu um erro no processo de autenticação.',
             PROCESS_ERROR: 'Ocorreu um erro no processo de Decode do Token.'
         },
-        USECASE: {
-            EMAIL_INCORRECT: 'O email informado está incorreto',
-            PASSWORD_INCORRECT: 'A senha está incorreta'
+        CONTROLLER: {
+            INCORRECT:'E-mail ou senha estão incorretos.'
         },
-        ERROR: 'Ocorreu um erro com o servidor na tentativa de logar e criar um Token'
+        ERROR: 'Ocorreu um erro com o servidor na tentativa de logar e criar um Token.'
     }
 }
