@@ -8,7 +8,7 @@ export class UpdateQuestiosnUseCase {
             const { questionTitle, questionImageLink, questionContent, questionOptions, questionOptionCorrect, questionTemplate, isExplanation, lessonsId } = data
             const question = await QuestionsRepository.findOneBy({ id: dataID });
             if (!question) {
-                return constants.CRUD.QUESTIONS.NOT_FOUND
+                return 
             }
             const updated = await QuestionsRepository.update({ id: dataID }, {
                 questionTitle,

@@ -40,6 +40,9 @@ export class GenresSongsController {
     async update(request: express.Request, response: express.Response) {
         try {
             const updated = await updateGenresSongsUseCase.execute(request.body, Number(request.params.id))
+            if(!updated){
+                response.status(404).send(constants.CRUD.GENRES_SONGS.NOT_FOUND)
+            }
             response.status(200).send(updated)
         } catch (error) {
             console.log(error)

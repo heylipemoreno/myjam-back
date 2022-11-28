@@ -294,7 +294,7 @@ export function recoverPasswordMail(userName: string, token: string) {
                           <td>
                             <p>Olá ${userName}.</p>
                             <p>Você solicitou o email pela troca de senha. Caso não tenha feito está solicitação ignore.</p>
-                            <p>Clique no botão abaixo para prosseguir com a alteração de senha. </p>
+                            <p>Clique no botão abaixo para prosseguir com a alteração de senha. O link é válido por 15 minutos. </p>
                             <table border="0" cellpadding="0" cellspacing="0" class="btn btn-primary">
                               <tbody>
                                 <tr>
@@ -388,7 +388,7 @@ export function recoverPasswordText(userName: string, token: string) {
     
     
     
-    Clique no botão abaixo para prosseguir com a alteração de senha.
+    Clique no botão abaixo para prosseguir com a alteração de senha. O link é válido por 15 minutos.
     
     
     

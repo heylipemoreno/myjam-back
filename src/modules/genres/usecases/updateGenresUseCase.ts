@@ -8,7 +8,7 @@ export class UpdateGenresUseCase {
             const { genreName } = data
             const genre = await GenresRepository.findOneBy({ id: dataID })
             if (!genre) {
-                return constants.CRUD.GENRES.NOT_FOUND
+                return
             }
             await GenresRepository.update({ id: dataID }, {
                 genreName

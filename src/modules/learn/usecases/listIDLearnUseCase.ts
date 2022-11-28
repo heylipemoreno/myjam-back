@@ -7,7 +7,7 @@ export class ListIDLearnUseCase{
         try{
             const learn=await LearnRepository.findOneBy({id:dataID});
             if (!learn){
-                return constants.CRUD.LEARN.NOT_FOUND;
+                return
             }
             return LearnToModel(learn);
         } catch (error){

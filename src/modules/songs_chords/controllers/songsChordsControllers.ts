@@ -40,6 +40,9 @@ export class SongsChordsController{
     async update(request: express.Request, response: express.Response) {
         try {
             const updated = await updateSongsChordsUseCase.execute(Number(request.params.id), request.body.info.id)
+            if(!updated){
+                response.status(404).send(constants.CRUD.SONGS_CHORDS.NOT_FOUND)
+            }
             response.status(200).send(updated)
         } catch (error) {
             console.log(error)

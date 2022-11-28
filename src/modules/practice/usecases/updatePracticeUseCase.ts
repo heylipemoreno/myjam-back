@@ -8,7 +8,7 @@ export class UpdatePracticeUseCase{
             const{practiceOption}=data
             const practice=await PracticeRepository.findOneBy({id:dataID});
             if(!practice){
-                return constants.CRUD.PRACTICE.NOT_FOUND;
+                return 
             }
             const updated=await PracticeRepository.update({id:dataID},{
                 practiceOption,

@@ -40,6 +40,9 @@ export class UsersController {
     async listID(request: express.Request, response: express.Response) {
         try {
             const user = await listIDUsersUsecase.execute(Number(request.params.id))
+            if(!user){
+                response.status(404).send(constants.CRUD.USERS.NOT_FOUND)
+            }
             response.status(200).send(user)
         } catch (error) {
             console.log(error)
@@ -50,6 +53,9 @@ export class UsersController {
     async update(request: express.Request, response: express.Response) {
         try {
             const updated = await updateUsersUseCase.execute(request.body, Number(request.params.id))
+            if(!updated){
+                response.status(404).send(constants.CRUD.USERS.NOT_FOUND)
+            }
             response.status(200).send(updated)
         } catch (error) {
             console.log(error)

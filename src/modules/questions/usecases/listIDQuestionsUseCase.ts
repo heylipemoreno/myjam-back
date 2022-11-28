@@ -7,7 +7,7 @@ export class ListIDQuestionsUseCase {
         try {
             const question = await QuestionsRepository.findOneBy({ id: dataID })
             if (!question) {
-                return constants.CRUD.QUESTIONS.NOT_FOUND
+                return 
             }
             return QuestionsToModel(question)
         } catch (error) {

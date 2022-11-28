@@ -10,7 +10,7 @@ export class UpdateUsersSongsUseCase {
                 songsId: data.songsId
             })
             if (!relacion) {
-                return constants.CRUD.USERS_SONGS.NOT_FOUND;
+                return 
             }
             await UsersSongsRepository.update({ id: relacion.id }, {
                 learnedAt: new Date().toISOString().slice(0, 19).replace('T', ' ')

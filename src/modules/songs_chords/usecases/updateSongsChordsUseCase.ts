@@ -10,7 +10,7 @@ export class UpdateSongsChordsUseCase {
                 chordsId: chordsID
             })
             if (!relacion) {
-                return constants.CRUD.SONGS_CHORDS.NOT_FOUND;
+                return 
             }
             return constants.CRUD.SONGS_CHORDS.UPDATE;
         } catch (error) {

@@ -7,7 +7,7 @@ export class ListIDGenresUseCase{
         try {
             const genre = await GenresRepository.findOneBy({id:dataID})
             if(!genre){
-                return constants.CRUD.GENRES.NOT_FOUND
+                return 
             }
             return genresToModels(genre)
         } catch (error) {

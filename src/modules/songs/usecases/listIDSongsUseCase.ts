@@ -7,7 +7,7 @@ export class ListIDSongsUseCase {
         try {
             const song = await SongsRepository.findOneBy({ id: dataID })
             if (!song) {
-                return constants.CRUD.SONGS.NOT_FOUND
+                return 
             }
             return SongsToModel(song)
         } catch (error) {

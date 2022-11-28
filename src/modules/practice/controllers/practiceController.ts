@@ -30,6 +30,9 @@ export class PracticeController{
     async listID(request:express.Request,response:express.Response){
         try{
             const practice=listIDPracticeUseCase.execute(Number(request.params.id));
+            if(!practice){
+                response.status(404).send(constants.CRUD.PRACTICE.NOT_FOUND)
+            }
             response.status(200).send(practice);
         }catch(error){
             console.log(error);
@@ -40,6 +43,9 @@ export class PracticeController{
     async update(request:express.Request,response:express.Response){
         try{
             const updated=updatePracticeUseCase.execute(request.body,Number(request.params.id))
+            if(!updated){
+                response.status(404).send(constants.CRUD.PRACTICE.NOT_FOUND)
+            }
             response.status(200).send(updated)
         }catch(error){
             console.log(error)

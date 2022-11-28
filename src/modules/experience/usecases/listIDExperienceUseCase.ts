@@ -7,7 +7,7 @@ export class ListIDExperienceUseCase{
         try {
             const experience=await ExperienceRepository.findOneBy({id:dataID});
             if (!experience) {
-                return constants.CRUD.EXPERIENCE.NOT_FOUND;
+                return 
             }
             return ExperienceToModel(experience);
         } catch (error) {

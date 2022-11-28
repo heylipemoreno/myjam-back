@@ -8,7 +8,7 @@ export class UpdateSongsUseCase {
             const { songName, songLink, songContent } = data
             const song = await SongsRepository.findOneBy({ id: dataID })
             if (!song) {
-                return constants.CRUD.SONGS.NOT_FOUND
+                return 
             }
             await SongsRepository.update(dataID, {
                 songName,

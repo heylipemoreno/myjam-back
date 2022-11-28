@@ -7,7 +7,7 @@ export class ListIDStyleUseCase{
         try {
             const style=await StyleRepository.findOneBy({id:dataID});
             if (!style) {
-                return constants.CRUD.STYLE.NOT_FOUND;
+                return 
             }
             return StyleToModel(style);
         } catch (error) {

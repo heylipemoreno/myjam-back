@@ -10,7 +10,7 @@ export class UpdateUsersQuestionsUseCase {
                 usersId: dataID
             })
             if (!relacion) {
-                return constants.CRUD.USERS_QUESTIONS.NOT_FOUND;
+                return 
             }
             const updated = await UsersQuestionsRepository.update({ id: relacion.id }, {
                 instrumentId,

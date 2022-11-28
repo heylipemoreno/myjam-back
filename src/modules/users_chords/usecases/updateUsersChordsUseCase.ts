@@ -10,7 +10,7 @@ export class UpdateUsersChordsUseCase {
                 chordsId: data.chordsId
             })
             if (!relacion) {
-                return constants.CRUD.USERS_CHORDS.NOT_FOUND;
+                return 
             }
             const updated = await UsersChordsRepository.update({ id: relacion.id }, {
                 learnedAt: new Date().toISOString().slice(0, 19).replace('T', ' ')
