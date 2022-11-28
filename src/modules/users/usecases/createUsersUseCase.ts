@@ -11,8 +11,8 @@ export class CreateUsersUseCase {
         try {
             const { userName, email, password } = data
             const user = await UsersRepository.findOneBy({ email: email })
-            if(user){
-                return constants.CRUD.USERS.EXISTS
+            if (user) {
+                return 
             }
             const newUser = UsersRepository.create({ userName, email, password })
             await UsersRepository.save(newUser)

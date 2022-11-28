@@ -17,6 +17,9 @@ export class UsersController {
     async create(request: express.Request, response: express.Response) {
         try {
             const user = await createUsersUseCase.execute(request.body)
+            if(!user){
+                response.status(400).send(constants.CRUD.USERS.EXISTS)
+            }
             response.status(201).send(user)
         } catch (error) {
             console.log(error)
