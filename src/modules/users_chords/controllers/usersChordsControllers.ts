@@ -2,7 +2,6 @@ import express from 'express'
 import constants from '../../../config/constants/constants'
 import createUsersChordsUseCase from '../usecases/createUsersChordsUseCase'
 import deleteUsersChordsUseCase from '../usecases/deleteUsersChordsUseCase'
-import listIDAllUsersChordsUseCase from '../usecases/listIDAllUsersChordsUseCase'
 import listIDUsersChordsUseCase from '../usecases/listIDUsersChordsUseCase'
 import listUsersChordsUseCase from '../usecases/listUsersChordsUseCase'
 import updateUsersChordsUseCase from '../usecases/updateUsersChordsUseCase'
@@ -52,16 +51,6 @@ export class UsersChordsController {
         try {
             const deleted = await deleteUsersChordsUseCase.execute(Number(request.params.id))
             response.status(204).send();
-        } catch (error) {
-            console.log(error);
-            response.status(500).send(constants.CRUD.ERROR);
-        }
-    }
-
-    async listIDAll(request: express.Request, response: express.Response) {
-        try {
-            const list = await listIDAllUsersChordsUseCase.execute(Number(request.body.info.id))
-            response.status(200).send(list)
         } catch (error) {
             console.log(error);
             response.status(500).send(constants.CRUD.ERROR);
