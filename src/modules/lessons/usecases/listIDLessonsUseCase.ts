@@ -7,7 +7,7 @@ export class ListIDLessonsUseCase {
         try {
             const lesson = await LessonsRepository.findOneBy({ id: dataID });
             if (!lesson) {
-                return constants.CRUD.LESSONS.NOT_FOUND;
+                return 
             }
             return LessonsToModel(lesson);
         } catch (error) {

@@ -9,11 +9,11 @@ export class ForgotPasswordUsersUseCase {
                 email: email
             })
             if (!user) {
-                return 
+                return
             }
-            const token = JWTokenGenerate(user.id, '600000')
+            const token = JWTokenGenerate(user.id, '900000')
             mail.sendMail(user.userName, user.email, 'recover', token)
-            return 'E-mail enviado! Pode ter caido na caixa de spam ou no lixo eletrônico.'
+            return 'E-mail enviado! Verifique sua caixa de spam ou no lixo eletrônico.'
         } catch (error) {
             console.log(error)
         }

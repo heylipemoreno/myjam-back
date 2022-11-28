@@ -7,7 +7,7 @@ export class ListIDInstrumentUseCase{
         try {
             const instrument=await InstrumentRepository.findOneBy({id:dataID});
             if (!instrument) {
-                return constants.CRUD.INSTRUMENT.NOT_FOUND;
+                return 
             }
             return InstrumentToModel(instrument);
         } catch (error) {

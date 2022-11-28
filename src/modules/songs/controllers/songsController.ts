@@ -30,6 +30,9 @@ export class SongsController {
     async listID(request:express.Request,response:express.Response){
         try {
             const song = listIDSongsUseCase.execute(Number(request.params.id))
+            if(!song){
+                response.status(404).send(constants.CRUD.SONGS.NOT_FOUND)
+            }
             response.status(200).send(song)
         } catch (error) {
             console.log(error)
@@ -40,6 +43,9 @@ export class SongsController {
     async update(request:express.Request,response:express.Response){
         try {
             const updated = updateSongsUseCase.execute(request.body,Number(request.params.id))
+            if(!updated){
+                response.status(404).send(constants.CRUD.SONGS.NOT_FOUND)
+            }
             response.status(200).send(updated)
         } catch (error) {
             console.log(error)

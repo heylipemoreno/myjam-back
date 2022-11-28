@@ -8,7 +8,7 @@ export class UpdateStyleUseCase{
             const{styleOption}=data
             const style=await StyleRepository.findOneBy({id:dataID});
             if(!style){
-                return constants.CRUD.STYLE.NOT_FOUND;
+                return 
             }
             const updated=await StyleRepository.update({id:dataID},{
                 styleOption,

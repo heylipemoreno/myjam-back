@@ -10,7 +10,7 @@ export class UpdateGenresSongsUseCase {
                 genresId: data.genresId
             })
             if (!relacion) {
-                return constants.CRUD.GENRES_SONGS.NOT_FOUND;
+                return 
             }
             return constants.CRUD.GENRES_SONGS.UPDATE;
         } catch (error) {

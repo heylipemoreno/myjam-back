@@ -7,7 +7,7 @@ export class ListIDUsersUseCase {
 		try {
 			const user = await UsersRepository.findOneBy({ id: dataID })
 			if (!user) {
-				return constants.CRUD.USERS.NOT_FOUND
+				return 
 			} else {
 				return UsersToModel(user);
 			}

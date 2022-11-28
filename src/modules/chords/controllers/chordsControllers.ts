@@ -30,6 +30,9 @@ export class ChordsController {
     async listID(request: express.Request, response: express.Response) {
         try {
             const chord = await listIDChordUseCase.execute(Number(request.params.id))
+            if(!chord){
+                response.status(404).send(constants.CRUD.CHORDS.NOT_FOUND)
+            }
             response.status(200).send(chord)
         } catch (error) {
             console.log(error)
@@ -40,6 +43,9 @@ export class ChordsController {
     async update(request: express.Request, response: express.Response) {
         try {
             const updated = await updateChordsUseCase.execute(request.body, Number(request.params.id))
+            if(!updated){
+                response.status(404).send(constants.CRUD.CHORDS.NOT_FOUND)
+            }
             response.status(200).send(updated)
         } catch (error) {
             console.log(error)

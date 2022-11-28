@@ -8,7 +8,7 @@ export class UpdateLearnUseCase{
             const{learnOption}=data
             const learn=await LearnRepository.findOneBy({id:dataID});
             if(!learn){
-                return constants.CRUD.LEARN.NOT_FOUND;
+                return
             }
             const updated=await LearnRepository.update({id:dataID},{
                 learnOption,

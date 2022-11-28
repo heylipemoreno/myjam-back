@@ -8,7 +8,7 @@ export class UpdateExperienceUseCase{
             const{experienceOption}=data
             const experience=await ExperienceRepository.findOneBy({id:dataID});
             if(!experience){
-                return constants.CRUD.EXPERIENCE.NOT_FOUND;
+                return 
             }
             const updated=await ExperienceRepository.update({id:dataID},{
                 experienceOption,

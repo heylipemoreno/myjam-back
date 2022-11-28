@@ -30,6 +30,9 @@ export class GenresControllers {
     async listID(request: express.Request, response: express.Response) {
         try {
             const list = await listIDGenresUseCase.execute(Number(request.params.id))
+            if(!list){
+                response.status(404).send(constants.CRUD.GENRES.NOT_FOUND)
+            }
             response.status(200).send(list)
         } catch (error) {
             console.log(error)
@@ -40,6 +43,9 @@ export class GenresControllers {
     async update(request: express.Request, response: express.Response) {
         try {
             const updated = await updateGenresUseCase.execute(request.body, Number(request.params.id))
+            if(!updated){
+                response.status(404).send(constants.CRUD.GENRES.NOT_FOUND)
+            }
             response.status(200).send(updated)
         } catch (error) {
             console.log(error)

@@ -8,7 +8,7 @@ export class UpdateLessonsUseCase {
             const { lessonName, lessonImageLink } = data
             const lesson = await LessonsRepository.findOneBy({ id: dataID });
             if (!lesson) {
-                return constants.CRUD.LESSONS.NOT_FOUND;
+                return 
             }
             await LessonsRepository.update({ id: dataID }, {
                 lessonName,

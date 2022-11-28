@@ -8,7 +8,7 @@ export class UpdateChordsUseCase {
             const { chordName, chordImageLink, chordSoundLink } = data
             const chord = await ChordsRepository.findOneBy({ id: dataID })
             if (!chord) {
-                return constants.CRUD.CHORDS.NOT_FOUND
+                return
             }
             await ChordsRepository.update({ id: dataID }, {
                 chordName,

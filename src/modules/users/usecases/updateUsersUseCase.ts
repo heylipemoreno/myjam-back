@@ -10,7 +10,7 @@ export class UpdateUsersUseCase {
             const { userName, email, password, totalPoints, qtdSongs, qtdChords, questionsCompleted } = data
             const user = await UsersRepository.findOneBy({ id: dataID })
             if (!user) {
-                return constants.CRUD.USERS.NOT_FOUND;
+                return 
             }
             const userUpdated = await UsersRepository.update({ id: dataID }, {
                 userName,

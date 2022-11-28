@@ -8,7 +8,7 @@ export class UpdateInstrumentUseCase{
             const{instrumentOption,instrumentImageLink,instrumentHoverImageLink}=data
             const instrument=await InstrumentRepository.findOneBy({id:dataID});
             if(!instrument){
-                return constants.CRUD.INSTRUMENT.NOT_FOUND;
+                return
             }
             const updated=await InstrumentRepository.update({id:dataID},{
                 instrumentOption,

@@ -30,6 +30,9 @@ export class LessonsController {
     async listID(request: express.Request, response: express.Response) {
         try {
             const lesson = await listIDLessonsUseCase.execute(Number(request.params.id));
+            if(!lesson){
+                response.status(404).send(constants.CRUD.LESSONS.NOT_FOUND)
+            }
             response.status(200).send(lesson);
         } catch (error) {
             console.log(error);
@@ -40,6 +43,9 @@ export class LessonsController {
     async update(request: express.Request, response: express.Response) {
         try {
             const updated = await updateLessonsUseCase.execute(request.body, Number(request.params.id))
+            if(!updated){
+                response.status(404).send(constants.CRUD.LESSONS.NOT_FOUND)
+            }
             response.status(200).send(updated)
         } catch (error) {
             console.log(error);

@@ -1,4 +1,6 @@
 import express from 'express';
+import { Auth } from '../../common/middlewares/authMiddleware';
+import validationMiddleware from '../../common/middlewares/validationMiddleware';
 import { CommonRoutesConfig } from '../../common/routes/commonRoutes';
 import lessonsControllers from '../controllers/lessonsControllers';
 
@@ -9,12 +11,14 @@ export class LessonsRoutes extends CommonRoutesConfig {
 
     configureRoutes(): express.Application {
         this.app.route('/lessons')
+            .all(Auth)
             .get(lessonsControllers.list)
-            .post(lessonsControllers.create)
+            .post(validationMiddleware.lessons, lessonsControllers.create)
 
         this.app.route('/lessons/:id')
+            .all(Auth)
             .get(lessonsControllers.listID)
-            .put(lessonsControllers.update)
+            .put(validationMiddleware.lessons, lessonsControllers.update)
             .delete(lessonsControllers.delete)
 
         return this.app

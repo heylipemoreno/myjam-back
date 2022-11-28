@@ -7,7 +7,7 @@ export class ListIDChordsUseCase {
         try {
             const chord = await ChordsRepository.findOneBy({ id: dataID })
             if (!chord) {
-                return constants.CRUD.CHORDS.NOT_FOUND
+                return 
             }
             return ChordsToModel(chord)
         } catch (error) {

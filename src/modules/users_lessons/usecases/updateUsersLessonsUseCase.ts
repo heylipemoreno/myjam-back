@@ -10,7 +10,7 @@ export class UpdateUsersLessonsUseCase {
                 lessonsId: data.lessonsId
             })
             if (!relacion) {
-                return constants.CRUD.USERS_LESSONS.NOT_FOUND;
+                return 
             }
             const updated = await UsersLessonsRepository.update({ id: relacion.id }, {
                 completedAt: new Date().toISOString().slice(0, 19).replace('T', ' ')

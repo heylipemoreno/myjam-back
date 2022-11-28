@@ -7,7 +7,7 @@ export class ListIDPracticeUseCase{
         try {
             const practice=await PracticeRepository.findOneBy({id:dataID});
             if (!practice) {
-                return constants.CRUD.PRACTICE.NOT_FOUND;
+                return 
             }
             return PracticeToModel(practice);
         } catch (error) {

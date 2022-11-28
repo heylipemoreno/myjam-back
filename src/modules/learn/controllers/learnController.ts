@@ -30,6 +30,9 @@ export class LearnController{
     async listID(request:express.Request,response:express.Response){
         try{
             const learn=listIDLearnUseCase.execute(Number(request.params.id));
+            if(!learn){
+                response.status(404).send(constants.CRUD.LEARN.NOT_FOUND)
+            }
             response.status(200).send(learn);
         }catch(error){
             console.log(error);
@@ -40,6 +43,9 @@ export class LearnController{
     async update(request:express.Request,response:express.Response){
         try{
             const updated=updateLearnUseCase.execute(request.body,Number(request.params.id))
+            if(!updated){
+                response.status(404).send(constants.CRUD.LEARN.NOT_FOUND)
+            }
             response.status(200).send(updated)
         }catch(error){
             console.log(error)
