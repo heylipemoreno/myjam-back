@@ -14,19 +14,19 @@ Este projeto foi inteiramente desenvolvido como trabalho de conclusão do curso 
 
 <table align=center>
   <tr>
-   <td align="center" width=150> <img src="./files/devs/eduardo.png" width=100/></br><a href="https://github.com/EduQuaresimin"> Eduardo<br>Quaresimin </a>
+   <td align="center" width=150> <img src="https://avatars.githubusercontent.com/u/109425683?v=4" width=100/></br><a href="https://github.com/EduQuaresimin"> Eduardo<br>Quaresimin </a>
    </td>
    
-   <td align="center" width=150> <img src="./files/devs/evanilson.jpg" width=100/></br><a href="https://github.com/EvanilsonP"> Evanilson<br>Pereira </a>
+   <td align="center" width=150> <img src="https://avatars.githubusercontent.com/u/109234914?v=4" width=100/></br><a href="https://github.com/EvanilsonP"> Evanilson<br>Pereira </a>
    </td>
 
-   <td align="center" width=150> <img src="./files/devs/felipe.png"  width=100/></br><a href="https://github.com/heylipemoreno"> Felipe<br>Moreno </a>
+   <td align="center" width=150> <img src="https://avatars.githubusercontent.com/u/108702071?v=4"  width=100/></br><a href="https://github.com/heylipemoreno"> Felipe<br>Moreno </a>
    </td>
 
-   <td align="center" width=150> <img src="./files/devs/lorena.png" width=100/></br><a href="https://github.com/lorqrz"> Lorena<br>Queiroz </a>
+   <td align="center" width=150> <img src="https://avatars.githubusercontent.com/u/95054811?v=4" width=100/></br><a href="https://github.com/lorqrz"> Lorena<br>Queiroz </a>
    </td>
 
- <td align="center" width=150> <img src="./files/devs/luiz.png" width=100/> </br><a href="https://github.com/EuLuiiz"> Victor<br>Luiz </a>
+ <td align="center" width=150> <img src="https://avatars.githubusercontent.com/u/109249044?v=4" width=100/> </br><a href="https://github.com/EuLuiiz"> EuLuiiz </a>
    </td>   
   </tr>
 </table>
@@ -71,8 +71,6 @@ Crie o arquivo **.env** a partir do **.env.example** e substitua o conteúdo ent
 >DB_NAME = "Nome do banco de dados (ex.: myjam_database_code)"<br>
 >PORT = "Número da porta para rodar a API (ex.: 8000)"<br>
 
-Transpile o código:<br>
-`$ tsc`
 
 Faça a migration:<br>
 `$ npm run migration:generate`
@@ -81,4 +79,4 @@ Crie o banco de dados:<br>
 `$ npm run migration:run`
 
 Rode a API:<br>
-`$ npm run dev`
+`$ npm run debug`
