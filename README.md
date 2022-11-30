@@ -48,7 +48,7 @@ Você pode conferir o repositório dos alunos front-end [clicando aqui](https://
 
 <br>
 
-Você também pode analisar o modelo de banco de dados utilizado [clicando aqui](https://raw.githubusercontent.com/heylipemoreno/myjam-back/main/Files/imageDer_v0.11.png).
+Você também pode analisar o modelo de banco de dados utilizado [clicando aqui](https://raw.githubusercontent.com/heylipemoreno/myjam-back/main/files/database/imageDer_v0.12.png).
 
 ---
 
@@ -82,9 +82,3 @@ Crie o banco de dados:<br>
 
 Rode a API:<br>
 `$ npm run dev`
-
----
-
-## 📄 **Documentação**
-
-Acesse a documentação completa da aplicação clicando aqui.
