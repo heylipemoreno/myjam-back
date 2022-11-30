@@ -17,7 +17,7 @@ Este projeto foi inteiramente desenvolvido como trabalho de conclusão do curso 
    <td align="center" width=150> <img src="./files/devs/eduardo.png" width=100/></br><a href="https://github.com/EduQuaresimin"> Eduardo<br>Quaresimin </a>
    </td>
    
-   <td align="center" width=150> <img src="./files/devs/evanilson.png" width=100/></br><a href="https://github.com/EvanilsonP"> Evanilson<br>Pereira </a>
+   <td align="center" width=150> <img src="./files/devs/evanilson.jpg" width=100/></br><a href="https://github.com/EvanilsonP"> Evanilson<br>Pereira </a>
    </td>
 
    <td align="center" width=150> <img src="./files/devs/felipe.png"  width=100/></br><a href="https://github.com/heylipemoreno"> Felipe<br>Moreno </a>
