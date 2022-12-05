@@ -2,6 +2,7 @@ import { CommonRoutesConfig } from "../../common/routes/commonRoutes";
 import express from 'express'
 import genresSongsControllers from "../controllers/genresSongsController";
 import { Auth } from "../../common/middlewares/authMiddleware";
+import chords from "../../chords/middlewares/chordsValidation";
 
 export class GenresSongsRoutes extends CommonRoutesConfig {
     constructor(app: express.Application) {
@@ -16,8 +17,8 @@ export class GenresSongsRoutes extends CommonRoutesConfig {
         this.app.route('/genres_songs/:id')
             .all(Auth)
             .get(genresSongsControllers.listID)
-            .post(genresSongsControllers.create)
-            .put(genresSongsControllers.update)
+            .post(chords, genresSongsControllers.create)
+            .put(chords, genresSongsControllers.update)
             .delete(genresSongsControllers.delete)
 
         return this.app

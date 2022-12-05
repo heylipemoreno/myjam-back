@@ -1,8 +1,8 @@
 import { CommonRoutesConfig } from "../../common/routes/commonRoutes";
 import express from 'express'
 import usersLessonsControllers from "../controllers/usersLessonsControllers";
-import validationMiddleware from "../../common/middlewares/validationMiddleware";
 import { Auth } from "../../common/middlewares/authMiddleware";
+import users_lessons from "../middlewares/usersLessonsValidation";
 
 export class UsersLessonsRoutes extends CommonRoutesConfig {
     constructor(app: express.Application) {
@@ -17,8 +17,8 @@ export class UsersLessonsRoutes extends CommonRoutesConfig {
         this.app.route('/users_lessons/:id')
             .all(Auth)
             .get(usersLessonsControllers.listID)
-            .post(validationMiddleware.users_lessons, usersLessonsControllers.create)
-            .put(validationMiddleware.users_lessons, usersLessonsControllers.update)
+            .post(users_lessons, usersLessonsControllers.create)
+            .put(users_lessons, usersLessonsControllers.update)
             .delete(usersLessonsControllers.delete)
 
         return this.app

@@ -1,8 +1,8 @@
 import express from 'express';
 import { Auth } from '../../common/middlewares/authMiddleware';
-import validationMiddleware from '../../common/middlewares/validationMiddleware';
 import { CommonRoutesConfig } from "../../common/routes/commonRoutes";
 import styleController from '../controllers/styleController';
+import style from '../middlewares/styleValidation';
 
 export class StyleRoutes extends CommonRoutesConfig {
     constructor(app: express.Application) {
@@ -13,12 +13,12 @@ export class StyleRoutes extends CommonRoutesConfig {
         this.app.route('/style')
             .all(Auth)
             .get(styleController.list)
-            .post(validationMiddleware.style, styleController.create)
+            .post(style, styleController.create)
 
         this.app.route('/style/:id')
             .all(Auth)
             .get(styleController.listID)
-            .put(validationMiddleware.style, styleController.update)
+            .put(style, styleController.update)
             .delete(styleController.delete)
 
         return this.app;

@@ -1,0 +1,294 @@
+Aqui são as rotas e seu exemplo de retono:
+
+/chords
+GET [
+    {
+        "id": 1,
+        "chordName": "C (Dó Maior)",
+        "chordImageLink": "https://i.imgur.com/JFzAj59.png",
+        "chordSoundLink": "https://d7d3471nr939s.cloudfront.net/PureAcousticGuitar_Noiiz/MP3/One+Shots/Acoustic+Guitar/C_add9StrumGuitar_01_526.mp3?cb=afb9abe4-05c9-439a-a501-785da02a0c8c"
+    },
+    {
+        "id": 2,
+        "chordName": "G (Sol Maior)",
+        "chordImageLink": "https://i.imgur.com/Gd6H6Qv.png",
+        "chordSoundLink": "https://d7d3471nr939s.cloudfront.net/PureAcousticGuitar_Noiiz/MP3/One+Shots/Acoustic+Guitar/C_add9StrumGuitar_01_526.mp3?cb=afb9abe4-05c9-439a-a501-785da02a0c8c"
+    },
+    {
+        "id": 3,
+        "chordName": "Am (Lá Menor)",
+        "chordImageLink": "https://i.imgur.com/tf6YAD0.png",
+        "chordSoundLink": "https://d7d3471nr939s.cloudfront.net/PureAcousticGuitar_Noiiz/MP3/One+Shots/Acoustic+Guitar/C_add9StrumGuitar_01_526.mp3?cb=afb9abe4-05c9-439a-a501-785da02a0c8c"
+    },
+    {
+        "id": 4,
+        "chordName": "F (Fá Maior)",
+        "chordImageLink": "https://i.imgur.com/2KpXhDE.png",
+        "chordSoundLink": "https://d7d3471nr939s.cloudfront.net/PureAcousticGuitar_Noiiz/MP3/One+Shots/Acoustic+Guitar/C_add9StrumGuitar_01_526.mp3?cb=afb9abe4-05c9-439a-a501-785da02a0c8c"
+    }
+]
+POST {
+    "id": 5,
+    "chordName": "Dó",
+    "chordImageLink": "www.image.com/chord_do",
+    "chordSoundLink": "www.sound.com/chord_do"
+}
+
+/chords/:id
+GET {
+    "id": 5,
+    "chordName": "Dó",
+    "chordImageLink": "www.image.com/chord_do",
+    "chordSoundLink": "www.sound.com/chord_do"
+}
+
+
+/experience
+Não funciona devidamente
+/experience/:id
+Não funciona devidamente
+
+
+/genres
+GET: [
+    {
+        "id": 1,
+        "genreName": "Eletrônica"
+    },
+    {
+        "id": 2,
+        "genreName": "Batida"
+    }
+]
+POST: {
+    "id": 1,
+    "genreName": "Eletrônica"
+}
+
+/genres/:id
+GET{
+    "id": 2,
+    "genreName": "Batida"
+}
+
+
+/instrument
+Não funciona devidamente
+/instrument/:id
+Não funciona devidamente
+
+
+/learn
+Não funciona devidamente
+/learn/:id
+Não funciona devidamente
+
+
+/practice
+Não funciona devidamente
+/practice/:id
+Não funciona devidamente
+
+
+/questions
+Não funciona devidamente
+/questions/:id
+Não funciona devidamente
+
+
+/songs
+GET: [
+    {
+        "id": 1,
+        "songName": "BAP U - Party Favor",
+        "songLink": "www.song.com/music_party$favor$bapU",
+        "songContent": "You / You, You, You / You / You Bap U"
+    },
+    {
+        "id": 2,
+        "songName": "BAP U 2 - Party Favor TWO",
+        "songLink": "www.song.com/music_party$favor$bapU$2",
+        "songContent": "You / You, You, You / You / You Bap U two"
+    }
+]
+POST: {
+    "id": 1,
+    "songName": "BAP U - Party Favor",
+    "songLink": "www.song.com/music_party$favor$bapU",
+    "songContent": "You / You, You, You / You / You Bap U"
+}
+
+/songs/:id
+GET{
+    "id": 1,
+    "songName": "BAP U - Party Favor",
+    "songLink": "www.song.com/music_party$favor$bapU",
+    "songContent": "You / You, You, You / You / You Bap U"
+}
+
+
+/style
+Não funciona devidamente
+/style/:id
+Não funciona devidamente
+
+
+/users
+GET [
+    {
+        "id": 1,
+        "userName": "Tarik",
+        "email": "tarik.wakalyapi@gmail.com",
+        "qtdChords": 0,
+        "qtdSongs": 0,
+        "totalPoints": 0,
+        "questionsCompleted": 0
+    },
+    {
+        "id": 2,
+        "userName": "Thais",
+        "email": "teste@gmail.com",
+        "qtdChords": 0,
+        "qtdSongs": 0,
+        "totalPoints": 0,
+        "questionsCompleted": 0
+    },
+    {
+        "id": 3,
+        "userName": "teste",
+        "email": "teste@teste.com",
+        "qtdChords": 0,
+        "qtdSongs": 0,
+        "totalPoints": 0,
+        "questionsCompleted": 0
+    },
+    {
+        "id": 4,
+        "userName": "teste",
+        "email": "davi1512@hotmail.com",
+        "qtdChords": 0,
+        "qtdSongs": 0,
+        "totalPoints": 0,
+        "questionsCompleted": 0
+    },
+    {
+        "id": 5,
+        "userName": "Victor",
+        "email": "victor@email.com",
+        "qtdChords": 0,
+        "qtdSongs": 0,
+        "totalPoints": 0,
+        "questionsCompleted": 0
+    }
+]
+POST {
+    "RegistedUser": {
+        "id": 5,
+        "userName": "Victor",
+        "email": "victor@email.com",
+        "qtdChords": 0,
+        "qtdSongs": 0,
+        "totalPoints": 0,
+        "questionsCompleted": 0
+    },
+    "Token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NSwiaWF0IjoxNjY5ODE5ODkxLCJleHAiOjE2NzAwNzkwOTF9.vS9GRuKpHAVsPklxjF7p29Nw-IWc6ztSlN5SXZ19PI4"
+}
+
+/users/:id
+GET {
+    "id": 5,
+    "userName": "Victor",
+    "email": "victor@email.com",
+    "qtdChords": 0,
+    "qtdSongs": 0,
+    "totalPoints": 0,
+    "questionsCompleted": 0
+}
+
+/users/token
+GET {
+    "UserID": 5
+}
+
+/users/login
+POST {
+    "User": {
+        "id": 5,
+        "userName": "Victor",
+        "email": "victor@email.com",
+        "password": "$2a$10$xM5do9qfF2M72uWPGJPcf.cy/fu0UvsxKU7ubWr.yZr3XuyEdUlve",
+        "createdAt": "2022-11-30T17:51:30.848Z",
+        "updatedAt": "2022-11-30T17:51:30.848Z",
+        "totalPoints": 0,
+        "qtdSongs": 0,
+        "qtdChords": 0,
+        "questionsCompleted": 0
+    },
+    "Token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NSwiaWF0IjoxNjY5ODIwNjEwLCJleHAiOjE2NzAwNzk4MTB9.0bwpfhXmrcMdJMRxHtXlNhaRiKMXcPFS6yQF4DPYPMg"
+}
+
+
+/users/forgot-pass
+POST {
+    "E-mail enviado! Verifique sua caixa de spam ou no lixo eletrônico."
+}
+
+
+/users/recover-pass
+POST {
+    "Senha atualizada com sucesso."
+}
+
+
+/users/:id/questions
+GET
+
+
+/users/:id/lessons
+GET
+
+
+/users/:id/songs
+GET
+
+
+/users/:id/chords
+GET
+
+
+/users_chords
+GET
+
+/users_chords/:id
+GET
+POST
+
+
+/users_lessons
+GET
+
+/users_lessons/:id
+GET
+POST
+PUT
+DELETE
+
+
+/users_questions
+GET
+
+/users_questions/:id
+GET
+POST
+PUT
+DELETE
+
+
+/users_songs
+GET
+
+/users_songs/:id
+GET
+POST
+PUT
+DELETE

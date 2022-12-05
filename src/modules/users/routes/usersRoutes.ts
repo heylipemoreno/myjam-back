@@ -1,8 +1,11 @@
 import { CommonRoutesConfig } from "../../common/routes/commonRoutes";
 import express from 'express';
 import UsersController from '../controllers/usersController';
-import validationMiddleware from "../../common/middlewares/validationMiddleware";
 import { Auth } from "../../common/middlewares/authMiddleware";
+import users from "../middlewares/usersValidation";
+import users_login from "../middlewares/usersLoginValidation";
+import users_forgotPass from "../middlewares/usersForgotValidation";
+import users_recoverPass from "../middlewares/usersRecoverValidation";
 
 export class UsersRoutes extends CommonRoutesConfig {
     constructor(app: express.Application) {
@@ -12,16 +15,16 @@ export class UsersRoutes extends CommonRoutesConfig {
     configureRoutes(): express.Application {
         this.app.route('/users')
             .get(Auth, UsersController.list)
-            .post(validationMiddleware.users, UsersController.create)
+            .post(users, UsersController.create)
 
         this.app.route('/users/login')
-            .post(UsersController.login)
+            .post(users_login, UsersController.login)
 
         this.app.route('/users/forgot-pass')
-            .post(validationMiddleware.users_login, UsersController.forgotPass)
+            .post(users_forgotPass, UsersController.forgotPass)
 
         this.app.route('/users/recover-pass')
-            .post(Auth, validationMiddleware.users_recoverPass, UsersController.recoverPass)
+            .post(Auth, users_recoverPass, UsersController.recoverPass)
 
         this.app.route('/users/token')
             .all(Auth)
@@ -30,7 +33,7 @@ export class UsersRoutes extends CommonRoutesConfig {
         this.app.route('/users/:id')
             .all(Auth)
             .get(UsersController.listID)
-            .put(validationMiddleware.users, UsersController.update)
+            .put(users, UsersController.update)
             .delete(UsersController.delete)
 
         this.app.route('/users/:id/questions')
@@ -48,7 +51,6 @@ export class UsersRoutes extends CommonRoutesConfig {
         this.app.route('/users/:id/chords')
             .all(Auth)
             .get(UsersController.chordsRelacion)
-
 
         return this.app
     }
