@@ -8,6 +8,6 @@ export default (error: express.ErrorRequestHandler, request: express.Request, re
     }
 
     if (error.name === constants.ERROR.TYPE.VALIDATION_ERROR) {
-        response.status(400).send({ error: constants.ERROR.MESSAGE.VALIDATION })
+        response.status(400).send({ error: constants.ERROR.MESSAGE.VALIDATION, desc: error })
     }
 }
