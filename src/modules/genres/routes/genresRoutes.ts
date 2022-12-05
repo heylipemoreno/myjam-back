@@ -1,8 +1,8 @@
 import express from "express";
 import { Auth } from "../../common/middlewares/authMiddleware";
-import validationMiddleware from "../../common/middlewares/validationMiddleware";
 import { CommonRoutesConfig } from "../../common/routes/commonRoutes";
 import genresControllers from "../controllers/genresControllers";
+import genres from "../middlewares/genresValidation";
 
 export class GenresRoutes extends CommonRoutesConfig {
     constructor(app: express.Application) {
@@ -13,12 +13,12 @@ export class GenresRoutes extends CommonRoutesConfig {
         this.app.route('/genres')
             .all(Auth)
             .get(genresControllers.list)
-            .post(validationMiddleware.genres, genresControllers.create)
+            .post(genres, genresControllers.create)
 
         this.app.route('/genres/:id')
             .all(Auth)
             .get(genresControllers.listID)
-            .put(validationMiddleware.genres, genresControllers.update)
+            .put(genres, genresControllers.update)
             .delete(genresControllers.delete)
 
         return this.app

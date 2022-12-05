@@ -1,8 +1,8 @@
 import express from 'express';
 import { Auth } from '../../common/middlewares/authMiddleware';
-import validationMiddleware from '../../common/middlewares/validationMiddleware';
 import { CommonRoutesConfig } from "../../common/routes/commonRoutes";
 import practiceController from '../controllers/practiceController';
+import practice from '../middlewares/practiceValidation';
 
 export class PracticeRoutes extends CommonRoutesConfig {
     constructor(app: express.Application) {
@@ -13,12 +13,12 @@ export class PracticeRoutes extends CommonRoutesConfig {
         this.app.route('/practice')
             .all(Auth)
             .get(practiceController.list)
-            .post(validationMiddleware.practice, practiceController.create)
+            .post(practice, practiceController.create)
 
         this.app.route('/practice/:id')
             .all(Auth)
             .get(practiceController.listID)
-            .put(validationMiddleware.practice, practiceController.update)
+            .put(practice, practiceController.update)
             .delete(practiceController.delete)
 
         return this.app
