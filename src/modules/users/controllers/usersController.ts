@@ -1,5 +1,6 @@
 import express from 'express'
 import constants from '../../../config/constants/constants'
+import decodeToken from '../../common/helpers/decodeToken'
 import createUsersUseCase from '../usecases/createUsersUseCase'
 import deleteUsersUsecase from '../usecases/deleteUsersUseCase'
 import forgotPassUsersUseCase from '../usecases/forgotPassUsersUseCase'
@@ -17,7 +18,7 @@ export class UsersController {
     async create(request: express.Request, response: express.Response) {
         try {
             const user = await createUsersUseCase.execute(request.body)
-            if(!user){
+            if (!user) {
                 response.status(400).send(constants.CRUD.USERS.EXISTS)
             }
             response.status(201).send(user)
@@ -40,7 +41,7 @@ export class UsersController {
     async listID(request: express.Request, response: express.Response) {
         try {
             const user = await listIDUsersUsecase.execute(Number(request.params.id))
-            if(!user){
+            if (!user) {
                 response.status(404).send(constants.CRUD.USERS.NOT_FOUND)
             }
             response.status(200).send(user)
@@ -53,7 +54,7 @@ export class UsersController {
     async update(request: express.Request, response: express.Response) {
         try {
             const updated = await updateUsersUseCase.execute(request.body, Number(request.params.id))
-            if(!updated){
+            if (!updated) {
                 response.status(404).send(constants.CRUD.USERS.NOT_FOUND)
             }
             response.status(200).send(updated)
@@ -89,7 +90,7 @@ export class UsersController {
     async forgotPass(request: express.Request, response: express.Response) {
         try {
             const forgotPass = await forgotPassUsersUseCase.execute(request.body.email)
-            if(!forgotPass){
+            if (!forgotPass) {
                 response.status(404).send('O usuário não está cadastrado no sistema.')
             }
             response.status(200).send(forgotPass)
@@ -111,7 +112,7 @@ export class UsersController {
 
     async getByToken(request: express.Request, response: express.Response) {
         try {
-            const { id } = request.body.info
+            const id = decodeToken(request.headers.authorization!)
             response.status(200).send({ UserID: id })
         } catch (error) {
             console.log(error)

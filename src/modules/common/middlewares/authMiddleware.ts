@@ -13,7 +13,6 @@ export const Auth = async (request: express.Request, response: express.Response,
             if (typeof decode === 'string') {
                 response.status(401).send(constants.LOGIN.MESSAGE.PROCESS_ERROR);
             } else {
-                request.body.info = decode;
                 next();
             }
         }
